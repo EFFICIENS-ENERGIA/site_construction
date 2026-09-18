@@ -1,0 +1,374 @@
+/**
+ * 🏛️ Design System BÂTI-EXCELLENCE Architecture & Ingénierie
+ * Inspiré directement de l'identité Unanime Architectes (unanime.fr/le-groupe)
+ * Typographie Suisse / Neue Haas Grotesk, grille géométrique rigoureuse,
+ * palette monochrome minérale & bordures filaires 1px de haute précision.
+ * Conforme WCAG 2.1 AA/AAA, Mobile-First.
+ */
+
+:root {
+    /* Palette Monochrome & Minérale Unanime (Mode Clair) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #fbfbfb;
+    --bg-tertiary: #f4f4f5;
+    --bg-elevated: #ffffff;
+    --bg-inverse: #111215;
+
+    --text-primary: #111215;
+    --text-secondary: #4a4d55;
+    --text-muted: #787d89;
+    --text-inverse: #ffffff;
+    --text-on-accent: #ffffff;
+
+    /* Teintes Architecturales Nobles */
+    --color-primary: #111215;        /* Noir d'encre d'architecte */
+    --color-primary-light: #22242a;
+    --color-accent: #111215;         /* Accentuation monochrome sobre */
+    --color-accent-hover: #2b2d35;
+    --color-accent-dark: #000000;
+    --color-copper: #b58d59;         /* Bronze / Laiton architectural discret */
+    --color-success: #15803d;
+    --color-info: #0f172a;
+    --color-border: rgba(17, 18, 21, 0.12);
+    --color-border-hover: rgba(17, 18, 21, 0.35);
+    --color-border-strong: #111215;
+
+    /* Ombres Ultra-Subtiles & Réflectance Minérale */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.06);
+    --shadow-xl: 0 20px 32px -6px rgba(0, 0, 0, 0.08);
+
+    /* Typographie Géométrique Suisse & Espacements */
+    --font-family: "Neue Haas Grotesk", "Suisse Int'l", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
+
+    --border-radius-xs: 2px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 8px;
+    --border-radius-full: 9999px;    /* Boutons pilules signature Unanime */
+
+    --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme=dark] {
+    --bg-primary: #0b0c0e;
+    --bg-secondary: #121317;
+    --bg-tertiary: #191a20;
+    --bg-elevated: #16181e;
+    --bg-inverse: #ffffff;
+
+    --text-primary: #f5f6f8;
+    --text-secondary: #a3a8b5;
+    --text-muted: #6f7482;
+    --text-inverse: #0b0c0e;
+    --text-on-accent: #0b0c0e;
+
+    --color-primary: #f5f6f8;
+    --color-primary-light: #ffffff;
+    --color-accent: #ffffff;
+    --color-accent-hover: #e4e6eb;
+    --color-border: rgba(255, 255, 255, 0.12);
+    --color-border-hover: rgba(255, 255, 255, 0.3);
+    --color-border-strong: #ffffff;
+
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 32px rgba(0, 0, 0, 0.7);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typographie Monumentale & Épurée (Codes Unanime) */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+}
+
+h1 {
+    font-size: clamp(2.8rem, 5.8vw, 4.8rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+}
+
+h2 {
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+}
+
+h3 {
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h4 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-copper);
+}
+
+/* Conteneurs & Grille Modulaire */
+.container {
+    width: 100%;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.section {
+    padding: 6.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* En-tête de Section Numéroté Éditorial (Unanime Style) */
+.section-header {
+    text-align: left;
+    max-width: 880px;
+    margin: 0 0 4rem 0;
+}
+
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.25rem;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.section-tag::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+}
+
+.section-desc {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-top: 1.25rem;
+}
+
+/* Boutons Pilules Signature Unanime */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.9rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    position: relative;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    box-shadow: none;
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+[data-theme=dark] .btn-primary {
+    background: #ffffff;
+    color: #0b0c0e;
+    border-color: #ffffff;
+}
+
+[data-theme=dark] .btn-primary:hover {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-outline:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+/* Badges & Tags Architecturaux */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.badge-success {
+    background: rgba(21, 128, 61, 0.1);
+    color: var(--color-success);
+    border: 1px solid rgba(21, 128, 61, 0.25);
+}
+
+.badge-warning {
+    background: rgba(17, 18, 21, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+}
+
+/* Chiffres Clés XXL Éditoriaux (Signature Unanime) */
+.key-figure-xxl {
+    font-size: clamp(3.2rem, 5.5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.key-figure-label {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Lignes Séparatrices 1px d'Atelier */
+.divider-hairline {
+    width: 100%;
+    height: 1px;
+    background: var(--color-border);
+    border: none;
+    margin: 2.5rem 0;
+}
+
+/* Focus Clavier Neutre & Accessible */
+:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 3px;
+}
+
+/* Boutons Réseaux Sociaux Professionnels (Facebook & LinkedIn) */
+.social-links-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--color-border);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all var(--transition-fast);
+}
+
+.btn-social:hover {
+    background: var(--text-primary);
+    color: var(--text-inverse);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.btn-social.social-fb:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+    color: #ffffff;
+}
+
+.btn-social.social-in:hover {
+    background: #0a66c2;
+    border-color: #0a66c2;
+    color: #ffffff;
+}

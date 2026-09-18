@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFFICIENS ENERGIA — Conseil en Rénovation Énergétique & Audit Thermique</title>
+    <meta name="description" content="Cabinet de conseil en rénovation énergétique, audit thermique certifié, assistance à maîtrise d'ouvrage (AMO) et optimisation des aides MaPrimeRénov' en Auvergne-Rhône-Alpes.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#059669">
+    <link rel="icon" type="image/png" href="assets/logo_efficiens_energia.png">
+    <link rel="apple-touch-icon" href="assets/logo_efficiens_energia.png">
+    <link rel="stylesheet" href="css/design_system.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <a href="#hero" class="logo-brand" aria-label="Accueil EFFICIENS ENERGIA">
+                <img src="assets/logo_efficiens_energia.png" alt="Logo EFFICIENS ENERGIA" class="logo-img">
+                <div class="logo-text">EFFICIENS · <strong>ENERGIA</strong><span>CONSEIL EN RÉNOVATION & AUDIT ÉNERGÉTIQUE</span></div>
+            </a>
+            <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+                <a href="#services">Expertises</a>
+                <a href="#simulateur">Simulateur d'Aides</a>
+                <a href="#avant-apres">Rénovations DPE</a>
+                <a href="#suivi-chantier">Suivi de Chantier</a>
+                <a href="#engagements">Garanties & RGE</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <div class="social-links-group">
+                    <a href="https://www.facebook.com/efficiens.energia" target="_blank" rel="noopener noreferrer" class="btn-social social-fb" aria-label="Page Facebook Pro EFFICIENS ENERGIA" title="Facebook Pro">f</a>
+                    <a href="https://www.linkedin.com/in/s%C3%A9bastien-mathe-b04446113/" target="_blank" rel="noopener noreferrer" class="btn-social social-in" aria-label="Profil LinkedIn Sébastien Mathe" title="LinkedIn">in</a>
+                </div>
+                <button type="button" class="btn-theme-toggle" id="themeToggleBtn" aria-label="Basculer le thème">🌙 Sombre</button>
+                <a href="#simulateur" class="btn btn-primary" style="padding: 0.55rem 1.35rem; font-size: 0.85rem;">Simuler mes Aides</a>
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-label="Ouvrir le menu">☰</button>
+            </div>
+        </div>
+    </header>
+    <main role="main">
+        <!-- 2. Hero Section (Inspiration Unanime / Haute Performance) -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge-trust">
+                        <span>Assistance à Maîtrise d'Ouvrage (AMO)</span>
+                        <span>•</span>
+                        <span>Partenaires Artisans RGE</span>
+                        <span>•</span>
+                        <span>Aides MaPrimeRénov' 2026</span>
+                    </div>
+                    <h1 class="hero-title">Optimiser Votre Énergie, <span>Concrétiser Votre Rénovation.</span></h1>
+                    <p class="hero-subtitle">
+                        Cabinet de conseil indépendant fondé par <strong>Sébastien Mathe</strong>. De l'audit énergétique certifié à la coordination complète de vos chantiers, nous orchestrons votre transition thermique, sélectionnons les meilleurs artisans qualifiés RGE et maximisons vos subventions d'État dans l'Ain, le Rhône et toute la région Auvergne-Rhône-Alpes.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#simulateur" class="btn btn-primary">Calculer mes aides et devis →</a>
+                        <a href="#avant-apres" class="btn btn-secondary">Découvrir nos rénovations DPE</a>
+                    </div>
+                    <div class="hero-stats-row">
+                        <div class="hero-stat-card">
+                            <h3>Jusqu'à -70%</h3>
+                            <p>D'économies d'énergie</p>
+                        </div>
+                        <div class="hero-stat-card">
+                            <h3>100%</h3>
+                            <p>Dossiers aides optimisés</p>
+                        </div>
+                        <div class="hero-stat-card">
+                            <h3>Ain & Rhône</h3>
+                            <p>Ancrage de proximité</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual-card">
+                        <div class="hero-visual-badge">Étude Énergétique & Chantier Livré</div>
+                        <div class="blueprint-preview">
+                            <div class="blueprint-grid"></div>
+                            <div class="blueprint-header">
+                                <h4>Rénovation Globale BBC — Classe A</h4>
+                                <p>Hautecourt-Romaneche (01) • Gain Énergétique : 68% • MaPrimeRénov' Validée</p>
+                            </div>
+                            <div style="text-align: center; margin: 1.25rem 0; z-index: 1;">
+                                <img src="assets/logo_efficiens_energia.png" alt="Emblème Officiel EFFICIENS ENERGIA" style="height: 86px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));">
+                            </div>
+                            <div class="blueprint-metrics">
+                                <div class="metric-item">
+                                    <span>Bilan Énergétique</span>
+                                    <strong>Classe F → Classe A</strong>
+                                </div>
+                                <div class="metric-item">
+                                    <span>Équipements</span>
+                                    <strong>PAC Air/Eau + Solaire</strong>
+                                </div>
+                                <div class="metric-item">
+                                    <span>Financement</span>
+                                    <strong>Aides Déduites</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 3. Prestations & Savoir-Faire EFFICIENS ENERGIA -->
+        <section class="section" id="services" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">01 / Expertises Métiers & Accompagnement</span>
+                    <h2>L'Ingénierie Complète de Votre Transition Énergétique</h2>
+                    <p class="section-desc">EFFICIENS ENERGIA vous guide de bout en bout : du diagnostic technique initial jusqu'à la réception des travaux, en mobilisant les artisans RGE de référence et en sécurisant vos primes d'État.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🔍</div>
+                        <h3>Audit Énergétique & Bilan DPE</h3>
+                        <p>Analyse thermique approfondie de l'enveloppe bâtie, thermographie infrarouge et modélisation de scénarios de travaux personnalisés.</p>
+                        <ul>
+                            <li>Audit réglementaire certifié pour vente/rénovation</li>
+                            <li>Identification précise des ponts thermiques</li>
+                            <li>Plan d'action chiffré vers l'étiquette A ou B</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📐</div>
+                        <h3>Assistance à Maîtrise d'Ouvrage (AMO)</h3>
+                        <p>Conseil neutre et indépendant. Nous concevons vos plans, réalisons les démarches administratives et pilotons votre projet en toute sérénité.</p>
+                        <ul>
+                            <li>Élaboration des dossiers de permis & déclarations</li>
+                            <li>Rédaction des cahiers des charges techniques</li>
+                            <li>Contrôle de conformité et suivi des jalons</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🤝</div>
+                        <h3>Réseau Partenaires Artisans RGE</h3>
+                        <p>Sélection rigoureuse d'entreprises locales certifiées RGE Qualibat pour vos pompes à chaleur, isolation par l'extérieur et panneaux solaires.</p>
+                        <ul>
+                            <li>Mise en concurrence et analyse des devis</li>
+                            <li>Garantie décennale et certifications vérifiées</li>
+                            <li>Coordination des corps d'état sur chantier</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💶</div>
+                        <h3>Optimisation des Aides de l'État</h3>
+                        <p>Prise en charge intégrale du montage de vos dossiers de subventions pour réduire au maximum votre reste à charge réel.</p>
+                        <ul>
+                            <li>Montage MaPrimeRénov' Parcours Accompagné 2026</li>
+                            <li>Valorisation des Certificats d'Économie d'Énergie (CEE)</li>
+                            <li>Éco-prêt à taux zéro (Éco-PTZ) et TVA réduite à 5.5%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 4. Simulateur de Devis Déterministe en 4 Étapes -->
+        <section class="section" id="simulateur">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">02 / Estimateur Budgétaire d'Atelier</span>
+                    <h2>Simulez Votre Enveloppe Budgétaire en Temps Réel</h2>
+                    <p class="section-desc">Une estimation déterministe et transparente, décomposée par lot technique, fondée sur les barèmes d'ingénierie 2026 et les exigences bioclimatiques RE2020.</p>
+                </div>
+                <div class="simulator-wrapper">
+                    <div class="simulator-header-bar">
+                        <div class="sim-steps-nav">
+                            <div class="sim-step-indicator active" data-step="1">
+                                <span class="step-num">1</span>
+                                <span>Type de projet</span>
+                            </div>
+                            <div class="sim-step-indicator" data-step="2">
+                                <span class="step-num">2</span>
+                                <span>Surface & Gamme</span>
+                            </div>
+                            <div class="sim-step-indicator" data-step="3">
+                                <span class="step-num">3</span>
+                                <span>Estimation chiffrée</span>
+                            </div>
+                            <div class="sim-step-indicator" data-step="4">
+                                <span class="step-num">4</span>
+                                <span>Synthèse & Export</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulator-body">
+                        <!-- Étape 1 : Choix du Projet -->
+                        <div class="sim-step-panel" data-step="1">
+                            <h3 class="step-instruction">Sélectionnez la nature de vos travaux :</h3>
+                            <div class="project-types-grid">
+                                <div class="project-type-card active" data-type="new_build">
+                                    <div class="type-icon">🏡</div>
+                                    <div class="type-title">Construction Neuve</div>
+                                    <p class="text-sm">Maison individuelle sur plan</p>
+                                    <div class="type-base-price">Dès 1 850 € HT / m²</div>
+                                </div>
+                                <div class="project-type-card" data-type="renovation">
+                                    <div class="type-icon">🔨</div>
+                                    <div class="type-title">Rénovation Globale</div>
+                                    <p class="text-sm">Réhabilitation complète</p>
+                                    <div class="type-base-price">Dès 1 200 € HT / m²</div>
+                                </div>
+                                <div class="project-type-card" data-type="extension">
+                                    <div class="type-icon">📐</div>
+                                    <div class="type-title">Extension / Surélévation</div>
+                                    <p class="text-sm">Création de surface habitable</p>
+                                    <div class="type-base-price">Dès 2 100 € HT / m²</div>
+                                </div>
+                                <div class="project-type-card" data-type="thermal_eco">
+                                    <div class="type-icon">🌿</div>
+                                    <div class="type-title">Rénovation Thermique</div>
+                                    <p class="text-sm">Isolation & pompe à chaleur</p>
+                                    <div class="type-base-price">Dès 650 € HT / m²</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Étape 2 : Surface & Options -->
+                        <div class="sim-step-panel hidden" data-step="2">
+                            <h3 class="step-instruction">Définissez la surface et le niveau d'exigence :</h3>
+                            <div class="form-group-slider">
+                                <div class="slider-header">
+                                    <label for="surfaceRange" style="font-weight: 700; font-size: 1.1rem;">Surface totale à bâtir ou rénover :</label>
+                                    <span class="slider-val-badge" id="surfaceDisplay">120 m²</span>
+                                </div>
+                                <input type="range" id="surfaceRange" class="custom-range" min="20" max="500" step="5" value="120" aria-label="Surface en mètres carrés">
+                            </div>
+                            <h4 style="margin: 1.5rem 0 1rem 0;">Niveau de finitions et prestations :</h4>
+                            <div class="options-group">
+                                <label class="option-radio-card">
+                                    <input type="radio" name="finishLevel" value="standard">
+                                    <strong>Gamme Essentielle</strong>
+                                    <p class="text-sm" style="margin-top: 0.25rem;">Matériaux certifiés NF, finitions sobres et soignées (Standard).</p>
+                                </label>
+                                <label class="option-radio-card">
+                                    <input type="radio" name="finishLevel" value="signature" checked>
+                                    <strong>Gamme Signature (Recommandé)</strong>
+                                    <p class="text-sm" style="margin-top: 0.25rem;">Menuiseries alu, carrelage grand format 80x80, domotique connectée (+25%).</p>
+                                </label>
+                                <label class="option-radio-card">
+                                    <input type="radio" name="finishLevel" value="prestige">
+                                    <strong>Gamme Prestige</strong>
+                                    <p class="text-sm" style="margin-top: 0.25rem;">Matériaux nobles, parquets massifs, pierre naturelle, architecte dédié (+60%).</p>
+                                </label>
+                            </div>
+                            <h4 style="margin: 1.5rem 0 1rem 0;">Exigences de performance énergétique :</h4>
+                            <div class="options-group">
+                                <label class="option-radio-card">
+                                    <input type="radio" name="ecoStandard" value="rt2012">
+                                    <strong>Standard RT2012</strong>
+                                    <p class="text-sm" style="margin-top: 0.25rem;">Conformité réglementaire classique.</p>
+                                </label>
+                                <label class="option-radio-card">
+                                    <input type="radio" name="ecoStandard" value="re2020" checked>
+                                    <strong>Haute Performance RE2020</strong>
+                                    <p class="text-sm" style="margin-top: 0.25rem;">Empreinte carbone réduite, éligible aux primes MaPrimeRénov'.</p>
+                                </label>
+                                <label class="option-radio-card">
+                                    <input type="radio" name="ecoStandard" value="passive">
+                                    <strong>Bâtiment Passif / BEPOS</strong>
+                                    <p class="text-sm" style="margin-top: 0.25rem;">Maison à énergie positive, triple vitrage et étanchéité à l'air maximale.</p>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Étape 3 : Estimation Chiffrée & Ventilation -->
+                        <div class="sim-step-panel hidden" data-step="3">
+                            <h3 class="step-instruction">Votre estimation budgétaire détaillée :</h3>
+                            <div class="results-dashboard">
+                                <div class="quote-highlight-card">
+                                    <span class="badge badge-warning" style="background: rgba(255,255,255,0.2); color: #fff;">Chiffrage Déterministe 2026</span>
+                                    <div class="quote-amount-main" id="simTotalTTC">313 200 €</div>
+                                    <p id="simTotalHT" style="color: #cbd5e1; font-weight: 700; margin-bottom: 0;">261 000 € HT</p>
+                                    <div class="quote-sub-amounts">
+                                        <div>
+                                            <span style="font-size: 0.8rem; color: #94a3b8; display: block;">Aides d'État estimées</span>
+                                            <strong id="simSubsidies" style="color: #4ade80; font-size: 1.25rem;">- 7 560 €</strong>
+                                        </div>
+                                        <div>
+                                            <span style="font-size: 0.8rem; color: #94a3b8; display: block;">Reste à charge net</span>
+                                            <strong id="simNetRemaining" style="color: #ffffff; font-size: 1.25rem;">305 640 €</strong>
+                                        </div>
+                                        <div>
+                                            <span style="font-size: 0.8rem; color: #94a3b8; display: block;">Délai prévisionnel</span>
+                                            <strong id="simDuration" style="color: var(--color-accent); font-size: 1.25rem;">12 mois</strong>
+                                        </div>
+                                    </div>
+                                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 1rem;">
+                                        * Estimation indicative hors achat de terrain et taxes d'aménagement. Soumise à visite technique sur site.
+                                    </p>
+                                </div>
+                                <div class="breakdown-bars-container">
+                                    <h4 style="margin-bottom: 1.25rem;">Répartition des 4 postes travaux :</h4>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-header">
+                                            <span>1. Gros Œuvre & Fondations (35%)</span>
+                                            <strong id="breakdownStructural">91 350 €</strong>
+                                        </div>
+                                        <div class="progress-track"><div class="progress-fill fill-struct" id="barStructural"></div></div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-header">
+                                            <span>2. Clos & Couvert, Toiture (25%)</span>
+                                            <strong id="breakdownEnvelope">65 250 €</strong>
+                                        </div>
+                                        <div class="progress-track"><div class="progress-fill fill-env" id="barEnvelope"></div></div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-header">
+                                            <span>3. Second Œuvre & Finitions (22%)</span>
+                                            <strong id="breakdownFinishes">57 420 €</strong>
+                                        </div>
+                                        <div class="progress-track"><div class="progress-fill fill-fin" id="barFinishes"></div></div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-header">
+                                            <span>4. CVC, Isolation & Énergie (18%)</span>
+                                            <strong id="breakdownEcoEnergy">46 980 €</strong>
+                                        </div>
+                                        <div class="progress-track"><div class="progress-fill fill-eco" id="barEcoEnergy"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Étape 4 : Synthèse & Export -->
+                        <div class="sim-step-panel hidden" data-step="4">
+                            <h3 class="step-instruction">Récapitulatif & Exportation de votre Devis :</h3>
+                            <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--border-radius-md); border: 1px solid var(--color-border); margin-bottom: 2rem;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                                    <div>
+                                        <span class="text-sm text-muted">Projet retenu</span>
+                                        <h4 id="summaryProjectType" style="margin-top: 0.25rem;">Construction Neuve</h4>
+                                    </div>
+                                    <div>
+                                        <span class="text-sm text-muted">Surface habitable</span>
+                                        <h4 id="summarySurface" style="margin-top: 0.25rem;">120 m²</h4>
+                                    </div>
+                                    <div>
+                                        <span class="text-sm text-muted">Finition sélectionnée</span>
+                                        <h4 id="summaryFinish" style="margin-top: 0.25rem;">Gamme Signature</h4>
+                                    </div>
+                                    <div>
+                                        <span class="text-sm text-muted">Norme thermique</span>
+                                        <h4 id="summaryEco" style="margin-top: 0.25rem;">RE2020 Éco-Performance</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                                <button type="button" class="btn btn-primary" id="exportQuoteBtn">🖨️ Télécharger / Imprimer en PDF</button>
+                                <a href="#contact" class="btn btn-secondary">Prendre RDV avec Sébastien Mathe (Conseiller AMO)</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulator-footer-bar">
+                        <button type="button" class="btn btn-secondary" id="simPrevBtn" style="display: none;">← Étape précédente</button>
+                        <div></div>
+                        <button type="button" class="btn btn-primary" id="simNextBtn">Étape suivante →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 5. Comparateur Visuel Avant / Après Split-Screen -->
+        <section class="section" id="avant-apres" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">03 / Réhabilitations Contemporaines</span>
+                    <h2>La Précision de la Transformation Architecturale</h2>
+                    <p class="section-desc">Glissez le curseur pour apprécier le dialogue entre bâti historique préservé et performance thermique RE2020 contemporaine.</p>
+                </div>
+                <div class="before-after-wrapper">
+                    <div class="before-after-container">
+                        <!-- Couche Après (Rénové) -->
+                        <div class="ba-layer ba-after-layer">
+                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #ffffff; background: #111318; text-align: center; padding: 2rem;">
+                                <span style="font-size: 3.5rem;">🏛️</span>
+                                <h3 style="color: #ffffff; margin: 1rem 0 0.5rem 0; font-weight: 300;">RÉHABILITATION CONTEMPORAINE — PRESTIGE</h3>
+                                <p style="color: #8c92a0; max-width: 540px; font-weight: 300;">Isolation biosourcée par l'extérieur, menuiseries aluminium triple vitrage, toiture zinc joint debout et géothermie.</p>
+                            </div>
+                        </div>
+                        <!-- Couche Avant (Origine) -->
+                        <div class="ba-layer ba-before-layer">
+                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #ffffff; background: #1a1c22; text-align: center; padding: 2rem; width: 100%;">
+                                <span style="font-size: 3.5rem; filter: grayscale(100%);">🏚️</span>
+                                <h3 style="color: #ffffff; margin: 1rem 0 0.5rem 0; font-weight: 300;">ÉTAT INITIAL — BÂTISSE ANCIENNE 1970</h3>
+                                <p style="color: #8c92a0; max-width: 540px; font-weight: 300;">Passoire thermique classe F, affaissement structurel, toiture dégradée et menuiseries simple vitrage vétustes.</p>
+                            </div>
+                        </div>
+                        <span class="ba-tag tag-before">01. État Initial</span>
+                        <span class="ba-tag tag-after">02. Réception Livrée</span>
+                        <!-- Poignée interactive -->
+                        <div class="ba-handle">
+                            <div class="ba-handle-btn">⬄</div>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="ba-slider" aria-label="Curseur de comparaison avant/après">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 6. Espace Suivi de Chantier en Direct -->
+        <section class="section" id="suivi-chantier">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">04 / Direction de Travaux & Cockpit en Direct</span>
+                    <h2>Espace Maître d'Ouvrage : Supervision en Temps Réel</h2>
+                    <p class="section-desc">Consultez en toute transparence l'état d'avancement des jalons constructifs, les procès-verbaux de contrôle technique et les rapports d'inspection.</p>
+                </div>
+                <div style="background: var(--bg-primary); border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); padding: 1.75rem 2.25rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span class="badge badge-success">Chantier Témoin Ouvert</span>
+                        <h3 style="margin-top: 0.35rem; font-weight: 400;">Rénovation Globale BBC & PAC • Réf. EE-2026-AIN-LUMIERE</h3>
+                        <p class="text-sm text-muted" style="margin-bottom: 0;">Hautecourt-Romaneche (01) • Suivi & AMO : Sébastien Mathe</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="text-sm text-muted" style="text-transform: uppercase; letter-spacing: 0.05em;">Avancement Global</span>
+                        <div style="font-size: 2.2rem; font-weight: 300; color: var(--text-primary); letter-spacing: -0.03em;">65% Terminé</div>
+                    </div>
+                </div>
+                <div class="tracker-container">
+                    <div class="tracker-phases-list" id="trackerPhasesList">
+                        <!-- Généré dynamiquement par js/tracker.js -->
+                    </div>
+                    <div class="tracker-phase-details" id="trackerPhaseDetails">
+                        <!-- Détails de la phase sélectionnée -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 7. Engagements, Assurances & Conformité -->
+        <section class="section" id="engagements" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">05 / Rigueur, Sécurité & Certifications</span>
+                    <h2>Vos Travaux Sécurisés au Plus Haut Niveau</h2>
+                    <p class="section-desc">Chaque mission confiée à EFFICIENS ENERGIA s'appuie sur une neutralité totale de conseil, le respect strict des réglementations thermiques et un réseau d'artisans certifiés RGE.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;">
+                    <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
+                        <h4>Assurance RC Pro & Décennale</h4>
+                        <p class="text-sm">Conseil couvert par une assurance responsabilité civile professionnelle et contrôle des décennales de chaque artisan partenaire.</p>
+                    </div>
+                    <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏅</div>
+                        <h4>Partenaires RGE Qualibat</h4>
+                        <p class="text-sm">Intervention exclusive d'entreprises Reconnues Garantes de l'Environnement ouvrant droit aux subventions MaPrimeRénov'.</p>
+                    </div>
+                    <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+                        <h4>Audit Thermique Certifié</h4>
+                        <p class="text-sm">Études énergétiques conformes aux exigences réglementaires et validées par les organismes accrédités.</p>
+                    </div>
+                    <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">💶</div>
+                        <h4>Optimisation Budgétaire</h4>
+                        <p class="text-sm">Montage rigoureux des dossiers CEE, MaPrimeRénov' et éco-PTZ pour un reste à charge minimal garanti sans surprise.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Formulaire de Contact & Prise de Rendez-Vous -->
+        <section class="section" id="contact">
+            <div class="container contact-grid">
+                <div>
+                    <span class="section-tag">06 / Contact & Permanence</span>
+                    <h2>Concrétiser Votre Projet Énergétique</h2>
+                    <p class="section-desc">Sébastien Mathe et l'équipe d'EFFICIENS ENERGIA étudient votre logement, vos factures actuelles et votre projet sous 24h ouvrées.</p>
+                    <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.85rem;">
+                        <p style="margin-bottom: 0;">📍 <strong style="color: var(--text-primary);">Siège & Bureau :</strong> 480 Route du Belvédère, 01250 Hautecourt-Romaneche</p>
+                        <p style="margin-bottom: 0;">📞 <strong style="color: var(--text-primary);">Ligne Directe :</strong> <a href="tel:0778246567" style="color: var(--text-primary); font-weight: 700; text-decoration: none;">07 78 24 65 67</a></p>
+                        <p style="margin-bottom: 0;">✉️ <strong style="color: var(--text-primary);">Email Professionnel :</strong> contact@efficiens-energia.fr</p>
+                        <p style="margin-bottom: 0;">🏛️ <strong style="color: var(--text-primary);">SIRET :</strong> 827 694 498 00011</p>
+                    </div>
+                    <div style="margin-top: 1.75rem; display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary);">Retrouvez-nous :</span>
+                        <a href="https://www.facebook.com/efficiens.energia" target="_blank" rel="noopener noreferrer" class="btn-social social-fb" aria-label="Page Facebook Pro EFFICIENS ENERGIA" title="Facebook Pro">f</a>
+                        <a href="https://www.linkedin.com/in/s%C3%A9bastien-mathe-b04446113/" target="_blank" rel="noopener noreferrer" class="btn-social social-in" aria-label="Profil LinkedIn Sébastien Mathe" title="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div style="background: var(--bg-primary); padding: 2.75rem; border-radius: var(--border-radius-sm); border: 1px solid var(--color-border); box-shadow: var(--shadow-xl);">
+                    <div id="formAlertBox" class="form-alert"></div>
+                    <form id="contactForm" novalidate>
+                        <label for="contactName" style="display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--text-primary);">Nom & Prénom *</label>
+                        <input type="text" id="contactName" class="form-control" placeholder="Ex: Jean Dupont" required>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="contactEmail" style="display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--text-primary);">Email *</label>
+                                <input type="email" id="contactEmail" class="form-control" placeholder="jean.dupont@email.com" required>
+                            </div>
+                            <div>
+                                <label for="contactPhone" style="display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--text-primary);">Téléphone *</label>
+                                <input type="tel" id="contactPhone" class="form-control" placeholder="06 12 34 56 78">
+                            </div>
+                        </div>
+                        <label for="contactProject" style="display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--text-primary);">Nature de votre besoin</label>
+                        <select id="contactProject" class="form-control">
+                            <option value="Audit Énergétique Réglementaire">Audit Énergétique & Bilan DPE</option>
+                            <option value="Rénovation Globale Énergétique">Rénovation Globale & Remplacement Chaudière</option>
+                            <option value="Pompe à Chaleur & Solaire">Pompe à Chaleur (Air/Eau) & Solaire Photovoltaïque</option>
+                            <option value="Assistance Maîtrise Ouvrage AMO">Assistance à Maîtrise d'Ouvrage (AMO & Permis)</option>
+                            <option value="Montage Dossier Aides">Montage Dossier MaPrimeRénov' 2026 & CEE</option>
+                        </select>
+                        <label for="contactMessage" style="display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--text-primary);">Détails de votre logement (surface, année, chauffage actuel...)</label>
+                        <textarea id="contactMessage" class="form-control" rows="4" placeholder="Précisez votre commune, type de bâtisse, consommation actuelle..."></textarea>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Demander mon étude préliminaire gratuite →</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 9. Footer Officiel EFFICIENS ENERGIA -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3.5rem; margin-bottom: 4rem;">
+                <div>
+                    <div class="logo-brand" style="color: #fff; margin-bottom: 1.25rem;">
+                        <img src="assets/logo_efficiens_energia.png" alt="Logo EFFICIENS ENERGIA" class="logo-img logo-img-footer">
+                        <div class="logo-text" style="color: #ffffff;">EFFICIENS · <strong>ENERGIA</strong><span style="color: #8c92a0;">CONSEIL EN RÉNOVATION ÉNERGÉTIQUE</span></div>
+                    </div>
+                    <p style="font-size: 0.88rem; color: #8c92a0; font-weight: 300; line-height: 1.6;">Conseil indépendant en rénovation énergétique, audit thermique réglementaire, assistance à maîtrise d'ouvrage (AMO) et valorisation des aides d'État dans l'Ain, le Rhône et la région Auvergne-Rhône-Alpes.</p>
+                    <div style="margin-top: 1.25rem; display: flex; gap: 0.65rem;">
+                        <a href="https://www.facebook.com/efficiens.energia" target="_blank" rel="noopener noreferrer" class="btn-social social-fb" aria-label="Page Facebook Pro EFFICIENS ENERGIA" title="Facebook Pro">f</a>
+                        <a href="https://www.linkedin.com/in/s%C3%A9bastien-mathe-b04446113/" target="_blank" rel="noopener noreferrer" class="btn-social social-in" aria-label="Profil LinkedIn Sébastien Mathe" title="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Expertises & Conseil</h4>
+                    <ul style="list-style: none; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.65rem;">
+                        <li><a href="#services">Audit Énergétique & Diagnostic DPE</a></li>
+                        <li><a href="#services">Assistance à Maîtrise d'Ouvrage (AMO)</a></li>
+                        <li><a href="#services">Pompes à Chaleur & Solaire Photovoltaïque</a></li>
+                        <li><a href="#services">Isolation Thermique Biosourcée (ITE)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Outils & Simulateur</h4>
+                    <ul style="list-style: none; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.65rem;">
+                        <li><a href="#simulateur">Simulateur d'Aides MaPrimeRénov' 2026</a></li>
+                        <li><a href="#avant-apres">Comparateur DPE Avant / Après</a></li>
+                        <li><a href="#suivi-chantier">Cockpit de Suivi de Chantier</a></li>
+                        <li><a href="#engagements">Artisans Partenaires Certifiés RGE</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Siège & Contact</h4>
+                    <p style="font-size: 0.88rem; color: #a2a8b7; line-height: 1.6;">
+                        <strong>EFFICIENS ENERGIA</strong><br>
+                        Dirigeant : Sébastien Mathe<br>
+                        480 Route du Belvédère<br>
+                        01250 Hautecourt-Romaneche<br>
+                        Téléphone : <a href="tel:0778246567" style="color: #ffffff; text-decoration: none;">07 78 24 65 67</a><br>
+                        SIRET : 827 694 498 00011
+                    </p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2.25rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.82rem; color: #6f7482;">
+                <p>© 2026 EFFICIENS ENERGIA. Tous droits réservés. SIRET : 827 694 498 00011 — Hautecourt-Romaneche (Ain).</p>
+                <p>Développé avec rigueur & certifié par l'équipe Multi-Agents Antigravity.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Applicatifs -->
+    <script src="js/security.js"></script>
+    <script src="js/simulator.js"></script>
+    <script src="js/before_after.js"></script>
+    <script src="js/tracker.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
