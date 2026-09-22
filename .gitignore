@@ -1,0 +1,12 @@
+﻿.env*.local
+.env
+.next/
+node_modules/
+*.log
+.DS_Store
+.github/
+*.exe
+*.msix
+*.iso
+*.fdmdownload
+*.zip
