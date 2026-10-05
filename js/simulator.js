@@ -1,31 +1,31 @@
-/**
- * 📐 Simulateur Déterministe de Devis & Aides Rénovation — EFFICIENS ENERGIA
- * Conforme aux barèmes réels de rénovation énergétique 2026, normes RE2020 et calculs d'aides.
+﻿/**
+ * ðŸ“ Simulateur DÃ©terministe de Devis & Aides RÃ©novation â€” EFFICIENS ENERGIA
+ * Conforme aux barÃ¨mes rÃ©els de rÃ©novation Ã©nergÃ©tique 2026, normes RE2020 et calculs d'aides.
  */
 const BatiSimulator = {
-    // Barèmes de base au m² (€ HT)
+    // BarÃ¨mes de base au mÂ² (â‚¬ HT)
     RATES: {
         new_build: { baseM2: 1850, label: 'Construction Maison Individuelle', tva: 0.20, monthsPer100m2: 10 },
-        renovation: { baseM2: 1200, label: 'Rénovation Globale / Réhabilitation', tva: 0.10, monthsPer100m2: 6 },
-        extension: { baseM2: 2100, label: 'Extension & Surélévation', tva: 0.20, monthsPer100m2: 5 },
-        thermal_eco: { baseM2: 650, label: 'Rénovation Énergétique & Isolation', tva: 0.055, monthsPer100m2: 3 }
+        renovation: { baseM2: 1200, label: 'RÃ©novation Globale / RÃ©habilitation', tva: 0.10, monthsPer100m2: 6 },
+        extension: { baseM2: 2100, label: 'Extension & SurÃ©lÃ©vation', tva: 0.20, monthsPer100m2: 5 },
+        thermal_eco: { baseM2: 650, label: 'RÃ©novation Ã‰nergÃ©tique & Isolation', tva: 0.055, monthsPer100m2: 3 }
     },
 
     // Multiplicateurs de gamme de finitions
     FINISH_MULTIPLIERS: {
-        standard: { factor: 1.00, label: 'Gamme Essentielle (Matériaux éprouvés, finitions soignées)' },
+        standard: { factor: 1.00, label: 'Gamme Essentielle (MatÃ©riaux Ã©prouvÃ©s, finitions soignÃ©es)' },
         signature: { factor: 1.25, label: 'Gamme Signature (Menuiseries alu, carrelage grand format, domotique)' },
-        prestige: { factor: 1.60, label: 'Gamme Prestige (Architecte dédié, parquets nobles, pierre naturelle, sur-mesure)' }
+        prestige: { factor: 1.60, label: 'Gamme Prestige (Architecte dÃ©diÃ©, parquets nobles, pierre naturelle, sur-mesure)' }
     },
 
-    // Multiplicateurs thermiques & aides d'État
+    // Multiplicateurs thermiques & aides d'Ã‰tat
     ECO_STANDARDS: {
         rt2012: { factor: 1.00, label: 'Conforme RT2012 (Standard)', subsidyPerM2: 0, maxSubsidy: 0 },
-        re2020: { factor: 1.08, label: 'Haute Performance RE2020 (Éco-responsable)', subsidyPerM2: 45, maxSubsidy: 15000 },
-        passive: { factor: 1.20, label: 'Maison Passive / Bepos (Autonome en énergie)', subsidyPerM2: 95, maxSubsidy: 28000 }
+        re2020: { factor: 1.08, label: 'Haute Performance RE2020 (Ã‰co-responsable)', subsidyPerM2: 45, maxSubsidy: 15000 },
+        passive: { factor: 1.20, label: 'Maison Passive / Bepos (Autonome en Ã©nergie)', subsidyPerM2: 95, maxSubsidy: 28000 }
     },
 
-    // État courant du devis
+    // Ã‰tat courant du devis
     state: {
         currentStep: 1,
         projectType: 'new_build',
@@ -39,7 +39,7 @@ const BatiSimulator = {
     },
 
     /**
-     * Calcule le devis détaillé complet.
+     * Calcule le devis dÃ©taillÃ© complet.
      */
     calculateQuote(params) {
         const pType = params.projectType || this.state.projectType;
@@ -48,27 +48,27 @@ const BatiSimulator = {
         const finish = this.FINISH_MULTIPLIERS[params.finishLevel] || this.FINISH_MULTIPLIERS.standard;
         const eco = this.ECO_STANDARDS[params.ecoStandard] || this.ECO_STANDARDS.re2020;
 
-        // Calcul du coût de base HT
+        // Calcul du coÃ»t de base HT
         const baseCostHT = surface * rateInfo.baseM2 * finish.factor * eco.factor;
         const totalHT = Math.round(baseCostHT);
 
-        // Ventilation des 4 postes métiers BTP
+        // Ventilation des 4 postes mÃ©tiers BTP
         const structural = Math.round(totalHT * 0.35); // Gros oeuvre & terrassement (35%)
-        const envelope = Math.round(totalHT * 0.25);   // Clos & couvert, toiture, fenêtres (25%)
+        const envelope = Math.round(totalHT * 0.25);   // Clos & couvert, toiture, fenÃªtres (25%)
         const finishes = Math.round(totalHT * 0.22);   // Second oeuvre, sols, peintures (22%)
-        const ecoEnergy = Math.round(totalHT * 0.18);  // CVC, pompe à chaleur, isolation (18%)
+        const ecoEnergy = Math.round(totalHT * 0.18);  // CVC, pompe Ã  chaleur, isolation (18%)
 
         // Calcul TVA
         const totalTTC = Math.round(totalHT * (1 + rateInfo.tva));
 
-        // Calcul des aides écologiques (MaPrimeRénov' + CEE)
+        // Calcul des aides Ã©cologiques (MaPrimeRÃ©nov' + CEE)
         const rawSubsidy = surface * eco.subsidyPerM2;
         const maPrimeRenov = Math.min(rawSubsidy, eco.maxSubsidy);
-        const ceeBonus = Math.round(surface * 18); // Primes CEE fournisseurs énergie
+        const ceeBonus = Math.round(surface * 18); // Primes CEE fournisseurs Ã©nergie
         const totalSubsidies = maPrimeRenov + ceeBonus;
         const netRemaining = Math.max(0, totalTTC - totalSubsidies);
 
-        // Durée prévisionnelle en mois
+        // DurÃ©e prÃ©visionnelle en mois
         const durationMonths = Math.max(2, Math.round((surface / 100) * rateInfo.monthsPer100m2));
 
         return {
@@ -133,7 +133,7 @@ const BatiSimulator = {
     },
 
     /**
-     * Branchement des écouteurs d'événements.
+     * Branchement des Ã©couteurs d'Ã©vÃ©nements.
      */
     bindEvents() {
         // Choix du type de projet (Cartes cliquables)
@@ -153,17 +153,17 @@ const BatiSimulator = {
         const surfaceVal = document.getElementById('surfaceDisplay');
         if (surfaceInput && surfaceVal) {
             surfaceInput.value = this.state.surfaceM2;
-            surfaceVal.textContent = this.state.surfaceM2 + ' m²';
+            surfaceVal.textContent = this.state.surfaceM2 + ' mÂ²';
             surfaceInput.addEventListener('input', (e) => {
                 const val = parseInt(e.target.value, 10);
                 this.state.surfaceM2 = val;
-                surfaceVal.textContent = val + ' m²';
+                surfaceVal.textContent = val + ' mÂ²';
                 this.saveState();
                 this.renderCalculation();
             });
         }
 
-        // Sélecteur de finition
+        // SÃ©lecteur de finition
         const finishInputs = document.querySelectorAll('input[name=finishLevel]');
         finishInputs.forEach(input => {
             if (input.value === this.state.finishLevel) input.checked = true;
@@ -174,7 +174,7 @@ const BatiSimulator = {
             });
         });
 
-        // Sélecteur de norme énergétique
+        // SÃ©lecteur de norme Ã©nergÃ©tique
         const ecoInputs = document.querySelectorAll('input[name=ecoStandard]');
         ecoInputs.forEach(input => {
             if (input.value === this.state.ecoStandard) input.checked = true;
@@ -185,7 +185,7 @@ const BatiSimulator = {
             });
         });
 
-        // Boutons de navigation étapes
+        // Boutons de navigation Ã©tapes
         const nextBtn = document.getElementById('simNextBtn');
         const prevBtn = document.getElementById('simPrevBtn');
         if (nextBtn) {
@@ -219,7 +219,7 @@ const BatiSimulator = {
     },
 
     updateStepView() {
-        // MAJ des onglets d'étape
+        // MAJ des onglets d'Ã©tape
         const stepIndicators = document.querySelectorAll('.sim-step-indicator');
         stepIndicators.forEach(ind => {
             const stepNum = parseInt(ind.dataset.step, 10);
@@ -243,7 +243,7 @@ const BatiSimulator = {
                 nextBtn.style.display = 'none';
             } else {
                 nextBtn.style.display = 'inline-flex';
-                nextBtn.textContent = this.state.currentStep === 3 ? 'Finaliser & Exporter' : 'Étape suivante →';
+                nextBtn.textContent = this.state.currentStep === 3 ? 'Finaliser & Exporter' : 'Ã‰tape suivante â†’';
             }
         }
 
@@ -253,15 +253,15 @@ const BatiSimulator = {
     },
 
     /**
-     * Rendu dynamique des résultats de calcul.
+     * Rendu dynamique des rÃ©sultats de calcul.
      */
     renderCalculation() {
         const res = this.calculateQuote(this.state);
 
-        // Formatage monétaire
+        // Formatage monÃ©taire
         const fmt = (n) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
 
-        // Éléments du DOM
+        // Ã‰lÃ©ments du DOM
         const elTotalTTC = document.getElementById('simTotalTTC');
         const elTotalHT = document.getElementById('simTotalHT');
         const elDuration = document.getElementById('simDuration');
@@ -274,7 +274,7 @@ const BatiSimulator = {
         if (elSubsidies) elSubsidies.textContent = '- ' + fmt(res.subsidies.totalSubsidies);
         if (elNetRemaining) elNetRemaining.textContent = fmt(res.subsidies.netRemaining);
 
-        // Détail des 4 postes
+        // DÃ©tail des 4 postes
         const elBreakdownStruct = document.getElementById('breakdownStructural');
         const elBreakdownEnv = document.getElementById('breakdownEnvelope');
         const elBreakdownFin = document.getElementById('breakdownFinishes');
@@ -285,7 +285,7 @@ const BatiSimulator = {
         if (elBreakdownFin) elBreakdownFin.textContent = fmt(res.breakdown.finishes);
         if (elBreakdownEco) elBreakdownEco.textContent = fmt(res.breakdown.ecoEnergy);
 
-        // Barres de pourcentage de répartition
+        // Barres de pourcentage de rÃ©partition
         const barStruct = document.getElementById('barStructural');
         const barEnv = document.getElementById('barEnvelope');
         const barFin = document.getElementById('barFinishes');
@@ -296,20 +296,20 @@ const BatiSimulator = {
         if (barFin) barFin.style.width = '22%';
         if (barEco) barEco.style.width = '18%';
 
-        // Récapitulatif texte
+        // RÃ©capitulatif texte
         const elSummaryType = document.getElementById('summaryProjectType');
         const elSummarySurface = document.getElementById('summarySurface');
         const elSummaryFinish = document.getElementById('summaryFinish');
         const elSummaryEco = document.getElementById('summaryEco');
 
         if (elSummaryType) elSummaryType.textContent = res.projectLabel;
-        if (elSummarySurface) elSummarySurface.textContent = res.surfaceM2 + ' m²';
+        if (elSummarySurface) elSummarySurface.textContent = res.surfaceM2 + ' mÂ²';
         if (elSummaryFinish) elSummaryFinish.textContent = res.finishLabel;
         if (elSummaryEco) elSummaryEco.textContent = res.ecoLabel;
     },
 
     /**
-     * Impression native / export PDF de la synthèse devis.
+     * Impression native / export PDF de la synthÃ¨se devis.
      */
     printOrExportPDF() {
         window.print();

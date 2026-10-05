@@ -1,13 +1,15 @@
-/**
- * ⚡ Service Worker Offline-First — BÂTI-EXCELLENCE Pro
+﻿/**
+ * âš¡ Service Worker Offline-First â€” BÃ‚TI-EXCELLENCE Pro
  * Met en cache l'ensemble des fichiers critiques pour fonctionnement hors-ligne total.
  */
-const CACHE_NAME = 'bati-pro-cache-v1';
+const CACHE_NAME = 'bati-pro-cache-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './css/design_system.css',
     './css/components.css',
+    './js/libs/supabase.js',
+    './js/supabase_config.js',
     './js/security.js',
     './js/simulator.js',
     './js/before_after.js',
@@ -22,7 +24,7 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            console.log('[SW] Mise en cache des assets BÂTI-EXCELLENCE...');
+            console.log('[SW] Mise en cache des assets BÃ‚TI-EXCELLENCE...');
             return cache.addAll(ASSETS_TO_CACHE);
         }).then(() => self.skipWaiting())
     );
