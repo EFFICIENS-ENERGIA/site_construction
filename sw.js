@@ -1,8 +1,8 @@
-﻿/**
- * âš¡ Service Worker Offline-First â€” BÃ‚TI-EXCELLENCE Pro
- * Met en cache l'ensemble des fichiers critiques pour fonctionnement hors-ligne total.
+/**
+ * ⚡ Service Worker Offline-First — BÂTI-EXCELLENCE Pro
+ * Conforme Règle 33 Network-First Anti-Zombie Cache
  */
-const CACHE_NAME = 'bati-pro-cache-v2';
+const CACHE_NAME = 'bati-pro-cache-v3';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -24,7 +24,7 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            console.log('[SW] Mise en cache des assets BÃ‚TI-EXCELLENCE...');
+            console.log('[SW] Mise en cache des assets BÂTI-EXCELLENCE...');
             return cache.addAll(ASSETS_TO_CACHE);
         }).then(() => self.skipWaiting())
     );
@@ -46,26 +46,25 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+    if (event.request.method !== 'GET') return;
+
+    // Network-First obligatoire (Règle 33 Anti-Zombie Cache)
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                return cachedResponse;
-            }
-            return fetch(event.request).then((networkResponse) => {
-                if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-                    return networkResponse;
+        fetch(event.request)
+            .then((networkResponse) => {
+                if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                    const responseToCache = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, responseToCache);
+                    });
                 }
-                const responseToCache = networkResponse.clone();
-                caches.open(CACHE_NAME).then((cache) => {
-                    cache.put(event.request, responseToCache);
-                });
                 return networkResponse;
-            }).catch(() => {
-                // Fallback hors-ligne
+            })
+            .catch(() => {
                 if (event.request.mode === 'navigate') {
                     return caches.match('./index.html');
                 }
-            });
-        })
+                return caches.match(event.request);
+            })
     );
 });

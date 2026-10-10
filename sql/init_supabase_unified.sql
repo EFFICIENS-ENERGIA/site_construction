@@ -1,4 +1,4 @@
-﻿-- ==============================================================================
+-- ==============================================================================
 -- SCRIPT SQL UNIFIÉ D'INITIALISATION SUPABASE CLOUD (DIRECTIVE 7 & RÈGLE 21)
 -- Table public.profiles + RLS + Trigger d'Inscription + Storage Bucket Avatars
 -- ==============================================================================
@@ -14,11 +14,12 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 -- 2. Activation de la Sécurité RLS (Row Level Security)
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
--- 3. Politiques RLS sur public.profiles
+-- 3. Politiques RLS sur public.profiles (Verrouillage Zero-Trust - Règles 2 & 47)
 DROP POLICY IF EXISTS "Les profils sont consultables par tout le monde" ON public.profiles;
-CREATE POLICY "Les profils sont consultables par tout le monde"
+DROP POLICY IF EXISTS "Les profils sont consultables par les utilisateurs authentifies" ON public.profiles;
+CREATE POLICY "Les profils sont consultables par les utilisateurs authentifies"
   ON public.profiles FOR SELECT
-  USING (true);
+  USING (auth.uid() IS NOT NULL);
 
 DROP POLICY IF EXISTS "Les utilisateurs peuvent insérer leur propre profil" ON public.profiles;
 CREATE POLICY "Les utilisateurs peuvent insérer leur propre profil"
@@ -46,17 +47,20 @@ BEGIN
     updated_at = now();
   RETURN new;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 
--- 5. Configuration Supabase Storage (Bucket "avatars")
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('avatars', 'avatars', true)
-ON CONFLICT (id) DO NOTHING;
+-- 5. Configuration Supabase Storage Sécurisée (Bucket "avatars" Private - Règle 78)
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES ('avatars', 'avatars', false, 5242880, ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+ON CONFLICT (id) DO UPDATE SET
+  public = false,
+  file_size_limit = 5242880,
+  allowed_mime_types = ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 
 -- Politiques RLS sur storage.objects pour le bucket "avatars"
 DROP POLICY IF EXISTS "Les avatars sont publiquement consultables" ON storage.objects;
