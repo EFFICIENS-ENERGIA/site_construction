@@ -1,14 +1,14 @@
 /**
  * Service Worker Network-First — EFFICIENS ENERGIA
  */
-const CACHE_NAME = 'efficiens-expertise-cache-v39';
+const CACHE_NAME = 'efficiens-expertise-cache-v40';
 const ASSETS_TO_CACHE = [
     './',
-    './index.html?v=30',
+    './index.html?v=31',
     './prestation.html',
     './informations-legales.html',
     './css/design_system.css?v=20',
-    './css/components.css?v=29',
+    './css/components.css?v=30',
     './js/app.js?v=20',
     './js/prestation.js?v=31',
     './manifest.webmanifest?v=15',
@@ -74,7 +74,7 @@ self.addEventListener('fetch', (event) => {
                 if (request.mode === 'navigate') {
                     const offlinePage = requestUrl.pathname.endsWith('/prestation.html')
                         ? await caches.match('./prestation.html')
-                        : await caches.match('./index.html?v=30');
+                        : await caches.match('./index.html?v=31');
                     if (offlinePage) {
                         return offlinePage;
                     }

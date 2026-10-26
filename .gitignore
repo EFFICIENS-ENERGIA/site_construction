@@ -10,3 +10,5 @@ node_modules/
 *.iso
 *.fdmdownload
 *.zip
+
+CNAME
