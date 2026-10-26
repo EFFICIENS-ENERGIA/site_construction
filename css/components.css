@@ -3079,3 +3079,25 @@
         padding-bottom: 74px;
     }
 }
+
+/* ==========================================================================
+   MISE EN VALEUR DU LIEN "NOS EXPERTISES" DANS LE MENU
+   ========================================================================== */
+.main-nav .nav-highlight {
+    color: #38bdf8 !important;
+    font-weight: 700 !important;
+    position: relative;
+    padding: 0.35rem 0.85rem !important;
+    background: rgba(14, 165, 233, 0.12);
+    border-radius: 8px;
+    border: 1px solid rgba(14, 165, 233, 0.35);
+    transition: all 0.2s ease;
+    box-shadow: 0 0 12px rgba(14, 165, 233, 0.15);
+}
+
+.main-nav .nav-highlight:hover {
+    background: rgba(14, 165, 233, 0.22);
+    border-color: rgba(14, 165, 233, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(14, 165, 233, 0.25);
+}
