@@ -1,155 +1,152 @@
-/**
- * 🚀 Contrôleur Général de l'Application — BÂTI-EXCELLENCE Pro
- * Orchestre les composants interactifs, la navigation, le thème sombre/clair
- * et l'expérience utilisateur globale.
- */
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialisation du thème (Sombre / Clair)
-    initTheme();
-
-    // 2. Initialisation des modules applicatifs
-    if (typeof BatiSimulator !== 'undefined') {
-        BatiSimulator.initUI();
-    }
-    if (typeof BatiBeforeAfter !== 'undefined') {
-        BatiBeforeAfter.init();
-    }
-    if (typeof BatiTracker !== 'undefined') {
-        BatiTracker.init();
-    }
-
-    // 3. Navigation réactive & Menu mobile
-    initNavigation();
-
-    // 4. Formulaire de contact sécurisé
-    initContactForm();
-
-    // 5. Enregistrement PWA Service Worker
-    initServiceWorker();
-});
-
-/**
- * Gestion du Thème Sombre / Clair avec mémorisation
- */
-function initTheme() {
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
+function initApplication() {
+    const themeButton = document.getElementById('themeToggleBtn');
+    const mobileMenuButton = document.getElementById('mobileMenuBtn');
+    const mainNavigation = document.getElementById('mainNav');
     const root = document.documentElement;
-
-    // Détection préférence système ou stockée
-    const currentAttr = root.getAttribute('data-theme');
-    const initialTheme = savedTheme || currentAttr || (prefersDark ? 'dark' : 'light');
+    const contactForm = document.getElementById('contactForm');
+    const storedTheme = localStorage.getItem('bati_theme');
+    const initialTheme = storedTheme === 'dark' || storedTheme === 'light'
+        ? storedTheme
+        : root.getAttribute('data-theme') || 'light';
 
     applyTheme(initialTheme);
+    initScrollAnimations();
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            applyTheme(currentTheme);
-            localStorage.setItem('bati_theme', currentTheme);
+    themeButton?.addEventListener('click', () => {
+        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        localStorage.setItem('bati_theme', nextTheme);
+    });
+
+    mobileMenuButton?.addEventListener('click', () => {
+        if (!mainNavigation) {
+            return;
+        }
+
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+        mobileMenuButton.setAttribute('aria-label', isExpanded ? 'Ouvrir le menu' : 'Fermer le menu');
+        mainNavigation.classList.toggle('nav-open', !isExpanded);
+    });
+
+    mainNavigation?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            mainNavigation.classList.remove('nav-open');
+            mobileMenuButton?.setAttribute('aria-expanded', 'false');
+            mobileMenuButton?.setAttribute('aria-label', 'Ouvrir le menu');
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && mainNavigation?.classList.contains('nav-open')) {
+            mainNavigation.classList.remove('nav-open');
+            mobileMenuButton?.setAttribute('aria-expanded', 'false');
+            mobileMenuButton?.setAttribute('aria-label', 'Ouvrir le menu');
+            mobileMenuButton?.focus();
+        }
+    });
+
+    contactForm?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!(contactForm instanceof HTMLFormElement) || !contactForm.reportValidity()) {
+            return;
+        }
+
+        const status = document.getElementById('contactFormStatus');
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const formData = new URLSearchParams();
+
+        new FormData(contactForm).forEach((value, key) => {
+            formData.append(key, String(value));
+        });
+
+        if (submitButton instanceof HTMLButtonElement) {
+            submitButton.disabled = true;
+        }
+        if (status) {
+            status.textContent = 'Envoi de votre demande…';
+        }
+
+        try {
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            });
+            if (!response.ok) {
+                throw new Error(`Netlify Forms rejected the request with status ${response.status}`);
+            }
+
+            contactForm.reset();
+            if (status) {
+                status.textContent = 'Votre demande a bien été transmise. Nous vous recontacterons sous 24 heures ouvrées.';
+            }
+        } catch (error) {
+            console.error('Impossible de transmettre le formulaire de contact.', error);
+            if (status) {
+                status.textContent = 'Le formulaire n’a pas pu être envoyé. Réessayez ou contactez-nous directement par e-mail à contact@efficiens-energia.fr.';
+            }
+        } finally {
+            if (submitButton instanceof HTMLButtonElement) {
+                submitButton.disabled = false;
+            }
+        }
+    });
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then((registration) => registration.update())
+                .catch((error) => console.error('Impossible de mettre à jour le service worker.', error));
         });
     }
 
     function applyTheme(theme) {
         root.setAttribute('data-theme', theme);
-        if (themeToggleBtn) {
-            themeToggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre');
-            themeToggleBtn.innerHTML = theme === 'dark' ? '☀️ Mode Clair' : '🌙 Mode Sombre';
+
+        if (themeButton) {
+            const isDark = theme === 'dark';
+            themeButton.textContent = isDark ? 'Mode clair' : 'Mode sombre';
+            themeButton.setAttribute('aria-label', isDark ? 'Passer en mode clair' : 'Passer en mode sombre');
         }
     }
-}
 
-/**
- * Gestion de la navigation et scroll fluide
- */
-function initNavigation() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
+    function initScrollAnimations() {
+        const revealTargets = document.querySelectorAll(
+            '.expertise-intro, .expertise-section-heading, .expertise-card, .principle-item, ' +
+            '.sinistre-detail-item, .service-details-grid > *, .method-steps > li, .intervention-area-card, ' +
+            '.expertise-contact-panel, .site-footer'
+        );
 
-    if (mobileMenuBtn && mainNav) {
-        mobileMenuBtn.addEventListener('click', () => {
-            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-            mainNav.classList.toggle('nav-open');
-        });
+        if (
+            revealTargets.length === 0 ||
+            !('IntersectionObserver' in window) ||
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+            return;
+        }
 
-        // Fermer le menu lors du clic sur un lien
-        const navLinks = mainNav.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('nav-open');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
             });
+        }, { rootMargin: '0px 0px -48px 0px', threshold: 0.08 });
+
+        revealTargets.forEach((element, index) => {
+            element.classList.add('motion-reveal');
+            element.style.setProperty('--reveal-delay', `${(index % 6) * 70}ms`);
+            observer.observe(element);
         });
+
+        root.classList.add('motion-ready');
     }
 }
 
-/**
- * Formulaire de contact sécurisé avec désinfection
- */
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    const alertBox = document.getElementById('formAlertBox');
-
-    if (!form) return;
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const nameInput = document.getElementById('contactName');
-        const emailInput = document.getElementById('contactEmail');
-        const phoneInput = document.getElementById('contactPhone');
-        const projectInput = document.getElementById('contactProject');
-        const messageInput = document.getElementById('contactMessage');
-
-        const name = nameInput ? nameInput.value.trim() : '';
-        const email = emailInput ? emailInput.value.trim() : '';
-        const phone = phoneInput ? phoneInput.value.trim() : '';
-        const project = projectInput ? projectInput.value : '';
-        const message = messageInput ? messageInput.value.trim() : '';
-
-        // Validations
-        if (!name || name.length < 2) {
-            showAlert('Veuillez renseigner votre nom complet.', 'error');
-            return;
-        }
-        if (typeof BatiSecurity !== 'undefined' && !BatiSecurity.isValidEmail(email)) {
-            showAlert('Veuillez renseigner une adresse email valide.', 'error');
-            return;
-        }
-
-        // Échappement anti-XSS
-        const safeName = typeof BatiSecurity !== 'undefined' ? BatiSecurity.escapeHtml(name) : name;
-        const safeProject = typeof BatiSecurity !== 'undefined' ? BatiSecurity.escapeHtml(project) : project;
-
-        showAlert('Merci ' + safeName + ' ! Votre demande pour un projet \"' + safeProject + '\" a été transmise à notre bureau d\'études. Vous serez recontacté sous 24h ouvrées.', 'success');
-
-        form.reset();
-    });
-
-    function showAlert(msg, type) {
-        if (!alertBox) {
-            alert(msg);
-            return;
-        }
-        alertBox.className = 'form-alert alert-' + type;
-        alertBox.innerHTML = msg;
-        alertBox.style.display = 'block';
-
-        setTimeout(() => {
-            alertBox.style.display = 'none';
-        }, 8000);
-    }
-}
-
-/**
- * Enregistrement Service Worker PWA
- */
-function initServiceWorker() {
- if ('serviceWorker' in navigator) {
- window.addEventListener('load', () => {
- navigator.serviceWorker.register('./sw.js')
- .then(reg => console.log('BÂTI PWA ServiceWorker actif :', reg.scope))
- .catch(err => console.log('Erreur SW :', err));
- });
- }
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApplication, { once: true });
+} else {
+    initApplication();
 }

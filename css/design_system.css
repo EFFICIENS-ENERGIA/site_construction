@@ -1,13 +1,12 @@
 /**
- * 🏛️ Design System BÂTI-EXCELLENCE Architecture & Ingénierie
- * Inspiré directement de l'identité Unanime Architectes (unanime.fr/le-groupe)
+ * 🏛️ Design System EFFICIENS ENERGIA — Expertise technique & énergétique
  * Typographie Suisse / Neue Haas Grotesk, grille géométrique rigoureuse,
  * palette monochrome minérale & bordures filaires 1px de haute précision.
  * Conforme WCAG 2.1 AA/AAA, Mobile-First.
  */
 
 :root {
-    /* Palette Monochrome & Minérale Unanime (Mode Clair) */
+    /* Palette monochrome et minérale (mode clair) */
     --bg-primary: #ffffff;
     --bg-secondary: #fbfbfb;
     --bg-tertiary: #f4f4f5;
@@ -20,13 +19,17 @@
     --text-inverse: #ffffff;
     --text-on-accent: #ffffff;
 
-    /* Teintes Architecturales Nobles */
+    /* Palette de marque EFFICIENS ENERGIA */
     --color-primary: #111215;        /* Noir d'encre d'architecte */
     --color-primary-light: #22242a;
-    --color-accent: #111215;         /* Accentuation monochrome sobre */
-    --color-accent-hover: #2b2d35;
+    --color-accent: #2f6534;
+    --color-accent-hover: #24512a;
     --color-accent-dark: #000000;
-    --color-copper: #b58d59;         /* Bronze / Laiton architectural discret */
+    --color-brand-green: #2f6534;
+    --color-brand-lime: #a2bd30;
+    --color-brand-yellow: #e6b82e;
+    --color-brand-blue: #2f78b7;
+    --color-brand-red: #c94b45;
     --color-success: #15803d;
     --color-info: #0f172a;
     --color-border: rgba(17, 18, 21, 0.12);
@@ -47,7 +50,7 @@
     --border-radius-sm: 4px;
     --border-radius-md: 6px;
     --border-radius-lg: 8px;
-    --border-radius-full: 9999px;    /* Boutons pilules signature Unanime */
+    --border-radius-full: 9999px;
 
     --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -69,8 +72,9 @@
 
     --color-primary: #f5f6f8;
     --color-primary-light: #ffffff;
-    --color-accent: #ffffff;
-    --color-accent-hover: #e4e6eb;
+    --color-accent: #a2bd30;
+    --color-accent-hover: #b7ce61;
+    --color-brand-green: #a2bd30;
     --color-border: rgba(255, 255, 255, 0.12);
     --color-border-hover: rgba(255, 255, 255, 0.3);
     --color-border-strong: #ffffff;
@@ -101,7 +105,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typographie Monumentale & Épurée (Codes Unanime) */
+/* Typographie éditoriale et épurée */
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
     font-weight: 300;
@@ -149,7 +153,7 @@ a {
 }
 
 a:hover {
-    color: var(--color-copper);
+    color: var(--color-brand-green);
 }
 
 /* Conteneurs & Grille Modulaire */
@@ -167,7 +171,7 @@ a:hover {
     border-bottom: 1px solid var(--color-border);
 }
 
-/* En-tête de Section Numéroté Éditorial (Unanime Style) */
+/* En-tête de section numéroté */
 .section-header {
     text-align: left;
     max-width: 880px;
@@ -192,9 +196,14 @@ a:hover {
 .section-tag::before {
     content: "";
     display: inline-block;
-    width: 18px;
-    height: 1px;
-    background: currentColor;
+    width: 24px;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--color-brand-yellow) 0 33.33%,
+        var(--color-brand-blue) 33.33% 66.66%,
+        var(--color-brand-red) 66.66% 100%
+    );
 }
 
 .section-desc {
@@ -205,7 +214,7 @@ a:hover {
     margin-top: 1.25rem;
 }
 
-/* Boutons Pilules Signature Unanime */
+/* Boutons arrondis */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -225,16 +234,16 @@ a:hover {
 }
 
 .btn-primary {
-    background: var(--text-primary);
-    color: var(--bg-primary);
-    border-color: var(--text-primary);
+    background: var(--color-brand-green);
+    color: #ffffff;
+    border-color: var(--color-brand-green);
     box-shadow: none;
 }
 
 .btn-primary:hover {
     background: transparent;
-    color: var(--text-primary);
-    border-color: var(--text-primary);
+    color: var(--color-brand-green);
+    border-color: var(--color-brand-green);
     transform: translateY(-2px);
 }
 
@@ -298,7 +307,7 @@ a:hover {
     border: 1px solid var(--color-border);
 }
 
-/* Chiffres Clés XXL Éditoriaux (Signature Unanime) */
+/* Chiffres clés éditoriaux */
 .key-figure-xxl {
     font-size: clamp(3.2rem, 5.5vw, 4.8rem);
     font-weight: 300;

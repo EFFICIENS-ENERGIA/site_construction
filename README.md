@@ -1,36 +1,44 @@
-# 🌿 EFFICIENS ENERGIA — Vitrine Digitale & Plateforme de Conseil en Rénovation Énergétique
+# EFFICIENS ENERGIA — Expertise technique & énergétique
 
-Plateforme web officielle, vitrine et applicative pour **EFFICIENS ENERGIA**, cabinet de conseil en rénovation énergétique, audit thermique certifié et assistance à maîtrise d'ouvrage (AMO) dirigé par **Sébastien Mathe**.  
-Développée et homologuée par l'équipe Multi-Agents Antigravity (**@CE**, **@AUD**, **@DEV**, **@UIX**, **@OPS**, **@DOC**).
+Site vitrine statique présentant EFFICIENS ENERGIA comme expert indépendant sollicité directement par le client. Les domaines affichés couvrent les sinistres et désordres de construction, l'expertise technique dans le cadre d'une protection juridique, l'industrie, les énergies renouvelables, la performance énergétique des bâtiments, l'incendie et l'analyse technique de diagnostics immobiliers contestés par un tiers.
 
----
+## Structure
 
-## 🌟 Fonctionnalités Implémentées
+- `index.html` : page d'accueil et présentation des missions.
+- `informations-legales.html` : mentions et informations de confidentialité ; les informations éditeur/hébergeur encore inconnues y sont signalées sans être inventées.
+- `css/design_system.css` : palette, typographie et fondations du design system.
+- `css/components.css` : composants, mise en page, adaptation mobile et accessibilité.
+- `js/app.js` : menu mobile, thème clair/sombre, envoi du formulaire Netlify et mise à jour du service worker.
+- `sw.js` : stratégie Network-First avec repli cache uniquement hors ligne.
+- `manifest.webmanifest` : métadonnées d'installation PWA.
+- `assets/` : logo, icônes et visuels WebP optimisés avec images sources de repli.
 
-1. **Identité Visuelle & Réseaux Sociaux Pro** :
-   - Charte éco-responsable (Émeraude `#059669` et ardoise).
-   - Liens directs sécurisés (`target="_blank" rel="noopener noreferrer"`) vers la **Page Facebook Pro** (`facebook.com/efficiens.energia`) et le profil **LinkedIn de Sébastien Mathe**.
-   - Coordonnées légales complètes (SIRET 827 694 498 00011, Hautecourt-Romaneche 01250, Téléphone 07 78 24 65 67).
+Les huit cartes de l'accueil ouvrent une page dédiée à la prestation sélectionnée. `prestation.html` affiche son périmètre, ses points d'analyse et les limites associées ; l'accueil conserve également les détails et les étapes de cadrage d'une mission.
 
-2. **Simulateur Déterministe d'Aides & Travaux en 4 Étapes** :
-   - Barèmes réels 2026, éligibilité MaPrimeRénov' & CEE, ventilation des 4 postes travaux, export PDF 1-clic.
+La prestation relative à la protection juridique porte sur l'analyse technique du dossier. Les garanties et modalités de prise en charge dépendent du contrat et de l'assureur ; elles sont à vérifier avant d'engager une mission. Cette prestation ne constitue ni un conseil juridique ni une représentation auprès de l'assureur.
 
-3. **Curseur Comparateur Avant / Après Rénovation DPE** :
-   - Démonstrateur interactif montrant la transition énergétique d'une passoire F (1970) vers un habitat BBC Classe A.
+Le formulaire de contact est configuré pour Netlify Forms. Après déploiement sur Netlify, les demandes sont transmises à Netlify et consultables dans le tableau de bord du site ; le lien `mailto:` reste disponible en solution de repli. Dans Netlify, ouvrir les notifications de soumission de formulaires et ajouter l'adresse de contact comme destinataire. Avant publication, définir la durée de conservation et les modalités de suppression des demandes, puis vérifier la page de confidentialité. Ne pas transmettre de pièce confidentielle via le formulaire.
 
-4. **Cockpit Espace Client : Suivi de Chantier en Direct** :
-   - Suivi transparent des 5 jalons du projet témoin `EE-2026-AIN-LUMIERE` avec rapports d'audit et attestations RGE.
+L'accueil inclut une FAQ, des métadonnées locales et des données structurées de services. Les huit visuels d'expertise sont servis en WebP avec leur fichier JPEG/PNG d'origine en repli, en chargement différé.
 
-5. **Sécurité & Résilience** :
-   - 100% protégé contre les failles XSS (`escapeHtml()`).
-   - PWA Offline-First (`manifest.webmanifest`, `sw.js`).
-   - Banc d'essai automatisé validé à 100% (33/33 assertions PASS).
+Aucun outil de mesure d'audience n'est installé. L'hébergement, le directeur de publication, la forme juridique de l'éditeur et les informations de conservation des journaux doivent être confirmés avant publication ; aucune qualification ou référence client non vérifiée n'est revendiquée.
 
----
+## Lancer en local sous Windows
 
-## 🚀 Lancement 1-Clic sous Windows
+Depuis le dossier `projet training site internet`, exécuter `LANCER_SITE_CONSTRUCTION.bat`. Le serveur de développement local ouvre le site à l'adresse `http://localhost:8089/index.html`.
 
-Double-cliquez directement sur :
-`LANCER_SITE.bat` (à la racine) ou `projet training site internet/LANCER_SITE_CONSTRUCTION.bat`.
+On peut également utiliser Python depuis le dossier du site :
 
-Accès direct navigateur : **http://localhost:8089/index.html**
+```powershell
+python -m http.server 8089
+```
+
+## Contrôle du site
+
+Depuis `projet training site internet` :
+
+```powershell
+python scripts\audit_site_construction.py
+```
+
+La mission relative aux diagnostics immobiliers porte sur l'analyse technique d'un diagnostic existant mis en cause, contesté ou susceptible de l'être par un tiers. Elle ne signifie pas que l'entreprise réalise un nouveau diagnostic réglementaire.

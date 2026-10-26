@@ -1,11 +1,11 @@
 {
-  "name": "EFFICIENS ENERGIA — Conseil en Rénovation Énergétique & Audit",
+  "name": "EFFICIENS ENERGIA — Expertise technique & énergétique",
   "short_name": "EFFICIENS",
-  "description": "Conseil en rénovation énergétique, audit thermique certifié, assistance à maîtrise d'ouvrage et aides de l'État.",
+  "description": "Expert indépendant en bâtiment et énergie : sinistres, dommages de construction, installations industrielles et énergétiques, et diagnostics immobiliers contestés.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#059669",
+  "background_color": "#ffffff",
+  "theme_color": "#111215",
   "icons": [
     {
       "src": "./assets/icons/icon-192.svg",
