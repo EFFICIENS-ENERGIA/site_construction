@@ -153,8 +153,65 @@
                     <h2 id="expertises-title">Votre expert indépendant, selon votre besoin</h2>
                     <p class="section-desc">Particuliers, entreprises et acteurs du bâtiment : découvrez les situations dans lesquelles une analyse technique indépendante peut vous aider à mieux comprendre un dommage, un désordre ou un rapport contesté.</p>
                 </div>
+                                <!-- MINI-GUIDE D ORIENTATION INTERACTIF (LEAD CAPTURE WHATSAPP) -->
+                <div class="orientation-guide-card" id="guide-orientation">
+                    <div class="guide-header">
+                        <span class="guide-badge">🧭 Guide d'orientation rapide en 2 clics</span>
+                        <h3>Quel est votre besoin technique ?</h3>
+                        <p>Sélectionnez votre situation pour obtenir la recommandation directe et échanger avec l'expert :</p>
+                    </div>
+                    <div class="guide-selector-grid" role="group" aria-label="Sélectionnez votre situation">
+                        <button type="button" class="guide-option-btn active" data-topic="sinistre" data-filter="particulier" data-prefill="Bonjour Sébastien, je suis confronté à un sinistre (infiltrations, fissures ou malfaçon). Pouvons-nous faire le point rapidement ?">
+                            <span class="guide-icon">💧</span>
+                            <span class="guide-text"><strong>Sinistre & malfaçon</strong><small>Infiltration, fissure, litige</small></span>
+                        </button>
+                        <button type="button" class="guide-option-btn" data-topic="achat" data-filter="particulier" data-prefill="Bonjour Sébastien, j'envisage d'acheter un bien immobilier et je souhaite une visite technique avant de m'engager.">
+                            <span class="guide-icon">🏡</span>
+                            <span class="guide-text"><strong>Achat immobilier</strong><small>Visite technique avant offre</small></span>
+                        </button>
+                        <button type="button" class="guide-option-btn" data-topic="dpe" data-filter="particulier" data-prefill="Bonjour Sébastien, je souhaite contester un diagnostic immobilier (DPE, amiante...). Quel est le recours technique ?">
+                            <span class="guide-icon">📑</span>
+                            <span class="guide-text"><strong>Diagnostic contesté</strong><small>Recours DPE ou audit</small></span>
+                        </button>
+                        <button type="button" class="guide-option-btn" data-topic="assurance" data-filter="particulier" data-prefill="Bonjour Sébastien, j'ai un différend avec mon assurance et je dispose d'une garantie protection juridique.">
+                            <span class="guide-icon">⚖️</span>
+                            <span class="guide-text"><strong>Litige d'assurance</strong><small>Appui protection juridique</small></span>
+                        </button>
+                        <button type="button" class="guide-option-btn" data-topic="energie" data-filter="pro" data-prefill="Bonjour Sébastien, je rencontre un problème sur mon installation (panneaux solaires, pompe à chaleur...).">
+                            <span class="guide-icon">☀️</span>
+                            <span class="guide-text"><strong>Panneaux solaires / PAC</strong><small>Énergies renouvelables</small></span>
+                        </button>
+                        <button type="button" class="guide-option-btn" data-topic="pro" data-filter="pro" data-prefill="Bonjour Sébastien, je représente une entreprise et nous avons un sinistre sur nos locaux ou nos équipements industriels.">
+                            <span class="guide-icon">🏭</span>
+                            <span class="guide-text"><strong>Bâtiment d'entreprise</strong><small>Sinistre industriel ou incendie</small></span>
+                        </button>
+                    </div>
+                    <div class="guide-result-banner" id="guideResultBanner">
+                        <div class="guide-result-info">
+                            <strong id="guideResultTitle">Recommandation : Expertise Sinistres & Dommages à la construction</strong>
+                            <span id="guideResultDesc">Analyse indépendante des désordres (infiltrations, fissures, malfaçons) pour documenter votre dossier d'assurance ou faire valoir vos droits.</span>
+                        </div>
+                        <a id="guideWhatsAppBtn" href="https://wa.me/33778246567?text=Bonjour%20S%C3%A9bastien%2C%20je%20suis%20confront%C3%A9%20%C3%A0%20un%20sinistre%20%28infiltrations%2C%20fissures%20ou%20malfa%C3%A7on%29.%20Pouvons-nous%20faire%20le%20point%20rapidement%20%3F" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-guide">
+                            <span>💬</span> <strong>Échanger sur WhatsApp</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FILTRE D INTENTION 1-CLIC (8 CARTES D EXPERTISE) -->
+                <div class="expertise-filter-bar" role="tablist" aria-label="Filtrer les expertises">
+                    <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
+                        <span>Tous les domaines</span> <span class="filter-count">8</span>
+                    </button>
+                    <button type="button" class="filter-tab" data-filter="particulier" role="tab" aria-selected="false">
+                        <span>Particuliers & Sinistres</span> <span class="filter-count">4</span>
+                    </button>
+                    <button type="button" class="filter-tab" data-filter="pro" role="tab" aria-selected="false">
+                        <span>Entreprises & Énergie</span> <span class="filter-count">4</span>
+                    </button>
+                </div>
+
                 <div class="expertise-card-grid">
-                    <article class="expertise-card" id="sinistres">
+                    <article class="expertise-card" id="sinistres" data-category="particulier">
                         <span class="expertise-card-index">01</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/sinistres-construction.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/sinistres-construction.jpg" alt="Intérieur d’un logement endommagé, avec des éléments de plafond et de cloison détériorés" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <h3><a class="expertise-card-title-link" href="prestation.html?service=sinistres" target="_blank" rel="noopener noreferrer" aria-label="Sinistres et dommages à la construction (ouvre un nouvel onglet)">Sinistres & dommages à la construction</a></h3>
@@ -170,7 +227,7 @@
                             <a href="#contact" class="card-link">Échanger sur un sinistre <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
-                    <article class="expertise-card">
+                    <article class="expertise-card" data-category="pro">
                         <span class="expertise-card-index">02</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/expertise-industrielle.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/expertise-industrielle.jpg" alt="Deux techniciens en intervention sur une installation industrielle" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <h3><a class="expertise-card-title-link" href="prestation.html?service=industrie" target="_blank" rel="noopener noreferrer" aria-label="Expertise industrielle (ouvre un nouvel onglet)">Expertise industrielle</a></h3>
@@ -183,7 +240,7 @@
                         <a href="prestation.html?service=industrie" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise industrielle (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Décrire votre besoin <span aria-hidden="true">↗</span></a>
                     </article>
-                    <article class="expertise-card" id="energie">
+                    <article class="expertise-card" id="energie" data-category="pro">
                         <span class="expertise-card-index">03</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/energies-renouvelables.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/energies-renouvelables.jpg" alt="Deux professionnels examinent des panneaux photovoltaïques" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <h3><a class="expertise-card-title-link" href="prestation.html?service=renouvelables" target="_blank" rel="noopener noreferrer" aria-label="Énergies renouvelables (ouvre un nouvel onglet)">Énergies renouvelables</a></h3>
@@ -196,7 +253,7 @@
                         <a href="prestation.html?service=renouvelables" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise des énergies renouvelables (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Parler d'une installation <span aria-hidden="true">↗</span></a>
                     </article>
-                    <article class="expertise-card">
+                    <article class="expertise-card" data-category="pro">
                         <span class="expertise-card-index">04</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/performance-energetique.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/performance-energetique.jpg" alt="Façade d’un bâtiment en cours de rénovation énergétique avec son isolation extérieure" width="500" height="750" loading="lazy" decoding="async"></picture>
                         <h3><a class="expertise-card-title-link" href="prestation.html?service=performance" target="_blank" rel="noopener noreferrer" aria-label="Performance énergétique des bâtiments (ouvre un nouvel onglet)">Performance énergétique des bâtiments</a></h3>
@@ -209,7 +266,7 @@
                         <a href="prestation.html?service=performance" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise en performance énergétique des bâtiments (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Étudier un bâtiment <span aria-hidden="true">↗</span></a>
                     </article>
-                    <article class="expertise-card">
+                    <article class="expertise-card" data-category="pro">
                         <span class="expertise-card-index">05</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/incendie-dommages.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/incendie-dommages.png" alt="Départ de feu sur le balcon d’un immeuble, avec des traces de fumée en façade" width="500" height="749" loading="lazy" decoding="async"></picture>
                         <h3><a class="expertise-card-title-link" href="prestation.html?service=incendie" target="_blank" rel="noopener noreferrer" aria-label="Incendie et dommages associés (ouvre un nouvel onglet)">Incendie & dommages associés</a></h3>
@@ -222,7 +279,7 @@
                         <a href="prestation.html?service=incendie" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise incendie et dommages associés (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Présenter un dossier incendie <span aria-hidden="true">↗</span></a>
                     </article>
-                    <article class="expertise-card expertise-card-regulatory">
+                    <article class="expertise-card expertise-card-regulatory" data-category="particulier">
                         <span class="expertise-card-index">06</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/diagnostic-conteste.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/diagnostic-conteste.png" alt="Plan immobilier examiné à la loupe pour analyser un diagnostic contesté" width="349" height="154" loading="lazy" decoding="async"></picture>
                         <h3><a class="expertise-card-title-link" href="prestation.html?service=diagnostics" target="_blank" rel="noopener noreferrer" aria-label="Diagnostics immobiliers contestés (ouvre un nouvel onglet)">Diagnostics immobiliers contestés</a></h3>
@@ -236,7 +293,7 @@
                         <a href="prestation.html?service=diagnostics" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’analyse de diagnostics immobiliers contestés (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Parler d'un diagnostic contesté <span aria-hidden="true">↗</span></a>
                     </article>
-                    <article class="expertise-card expertise-card-purchase" id="visite-avant-achat">
+                    <article class="expertise-card expertise-card-purchase" id="visite-avant-achat" data-category="particulier">
                         <span class="expertise-card-index">07</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/visite-avant-achat.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/visite-avant-achat.png" alt="Plan immobilier et outils de plomberie examinés lors d’une visite technique" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <div class="expertise-purchase-copy">
@@ -255,7 +312,7 @@
                             </div>
                         </div>
                     </article>
-                    <article class="expertise-card expertise-card-purchase expertise-card-protection" id="protection-juridique">
+                    <article class="expertise-card expertise-card-purchase expertise-card-protection" id="protection-juridique" data-category="particulier">
                         <span class="expertise-card-index">08</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/protection-juridique.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/protection-juridique.png" alt="Un professionnel examine des plans et des données techniques avec un casque de chantier à proximité" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <div class="expertise-purchase-copy">

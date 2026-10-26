@@ -101,6 +101,108 @@ function initApplication() {
         });
     }
 
+
+    // --- GESTION DU FILTRE D'INTENTION 1-CLIC & DU GUIDE D'ORIENTATION (@UIX) ---
+    initExpertiseFilter();
+    initOrientationGuide();
+
+    function initExpertiseFilter() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const cards = document.querySelectorAll('.expertise-card');
+
+        if (!filterTabs.length || !cards.length) return;
+
+        filterTabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                const filter = tab.getAttribute('data-filter') || 'all';
+
+                filterTabs.forEach((t) => {
+                    const isActive = t === tab;
+                    t.classList.toggle('active', isActive);
+                    t.setAttribute('aria-selected', String(isActive));
+                });
+
+                cards.forEach((card) => {
+                    const category = card.getAttribute('data-category');
+                    const shouldShow = filter === 'all' || category === filter;
+                    if (shouldShow) {
+                        card.style.display = '';
+                        card.classList.remove('card-hidden');
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.add('card-hidden');
+                    }
+                });
+            });
+        });
+    }
+
+    function initOrientationGuide() {
+        const guideButtons = document.querySelectorAll('.guide-option-btn');
+        const resultTitle = document.getElementById('guideResultTitle');
+        const resultDesc = document.getElementById('guideResultDesc');
+        const whatsAppBtn = document.getElementById('guideWhatsAppBtn');
+
+        if (!guideButtons.length || !resultTitle || !resultDesc || !whatsAppBtn) return;
+
+        const topicData = {
+            sinistre: {
+                title: "Recommandation : Expertise Sinistres & Dommages à la construction",
+                desc: "Analyse indépendante des désordres (infiltrations, fissures, malfaçons) pour documenter votre dossier d'assurance ou faire valoir vos droits.",
+                targetCardId: "sinistres"
+            },
+            achat: {
+                title: "Recommandation : Visite technique avant achat immobilier",
+                desc: "Examen visuel des désordres visibles, de la structure et des finitions pour acheter en toute connaissance de cause avant la signature.",
+                targetCardId: "visite-avant-achat"
+            },
+            dpe: {
+                title: "Recommandation : Analyse de diagnostics immobiliers contestés",
+                desc: "Examen technique d'un DPE ou diagnostic mis en cause lors d'une transaction pour vérifier sa cohérence et ses limites.",
+                targetCardId: "protection-juridique"
+            },
+            assurance: {
+                title: "Recommandation : Expertise technique & Protection Juridique",
+                desc: "Assistance technique indépendante lors d'une expertise amiable ou judiciaire, prise en charge possible selon votre contrat d'assurance.",
+                targetCardId: "protection-juridique"
+            },
+            energie: {
+                title: "Recommandation : Énergies renouvelables & Systèmes thermiques",
+                desc: "Contrôle technique des panneaux photovoltaïques, pompes à chaleur et installations pour identifier les pannes ou les non-conformités.",
+                targetCardId: "energie"
+            },
+            pro: {
+                title: "Recommandation : Expertise industrielle & Bâtiments d'activité",
+                desc: "Constatations et analyse des défaillances après sinistre (incendie, bris de machine, dommage d'ouvrage) pour les entreprises.",
+                targetCardId: "sinistres"
+            }
+        };
+
+        guideButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                guideButtons.forEach((b) => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const topic = btn.getAttribute('data-topic');
+                const prefill = btn.getAttribute('data-prefill') || '';
+                const filter = btn.getAttribute('data-filter') || 'all';
+                const data = topicData[topic];
+
+                if (data) {
+                    resultTitle.textContent = data.title;
+                    resultDesc.textContent = data.desc;
+                    whatsAppBtn.href = "https://wa.me/33778246567?text=" + encodeURIComponent(prefill);
+                }
+
+                // Activer automatiquement le filtre correspondant pour adapter la grille
+                const matchingTab = document.querySelector(`.filter-tab[data-filter="${filter}"]`);
+                if (matchingTab && !matchingTab.classList.contains('active')) {
+                    matchingTab.click();
+                }
+            });
+        });
+    }
+
     function applyTheme(theme) {
         root.setAttribute('data-theme', theme);
 
