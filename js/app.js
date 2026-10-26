@@ -1,3 +1,66 @@
+
+    // --- MOTEUR AGENT IA RDV HUB EFFICIENS ENERGIA (INGESTION & QUALIFICATION) ---
+    class RDVAIAssistant {
+        constructor() {
+            this.urgencyKeywords = [
+                'urgent', 'urgence', 'immédiat', 'rapidement', 'au plus vite', 'inondation',
+                'eau', 'fuite', 'fissure', 'effondrement', 'décennale', 'litige', 'sinistre'
+            ];
+            this.categories = {
+                sinistre: ['sinistre', 'infiltrations', 'fuite', 'dégât', 'fissure', 'malfaçon', 'décennale'],
+                achat: ['achat', 'visite', 'compromis', 'offre', 'vétusté', 'immobilier'],
+                dpe: ['dpe', 'audit', 'diagnostic', 'amiante', 'plomb', 'gaz', 'électricité'],
+                energie: ['panneau', 'photovoltaïque', 'solaire', 'pompe à chaleur', 'pac', 'onduleur'],
+                juridique: ['protection juridique', 'assureur', 'avocat', 'tribunal', 'expertise contradictoire']
+            };
+        }
+
+        analyzeInquiry(text) {
+            const lower = (text || '').toLowerCase();
+            let score = 50;
+            let urgency = 'normale';
+            const detectedTags = [];
+
+            if (this.urgencyKeywords.some(kw => lower.includes(kw))) {
+                urgency = 'haute';
+                score += 25;
+                detectedTags.push('⚡ Urgence signalée');
+            }
+
+            let categoryFound = 'Sinistres & Construction';
+            for (const [cat, words] of Object.entries(this.categories)) {
+                if (words.some(w => lower.includes(w))) {
+                    categoryFound = cat.toUpperCase();
+                    detectedTags.push(`🏷️ Domaine : ${cat}`);
+                    break;
+                }
+            }
+
+            return {
+                leadScore: Math.min(99, score),
+                urgency,
+                category: categoryFound,
+                detectedTags,
+                recommendedSlot: this.calculateOptimalSlot(urgency)
+            };
+        }
+
+        calculateOptimalSlot(urgency) {
+            const now = new Date();
+            const daysToAdd = urgency === 'haute' ? 1 : 2;
+            const target = new Date(now.getTime() + (daysToAdd * 24 * 60 * 60 * 1000));
+            if (target.getDay() === 0) target.setDate(target.getDate() + 1);
+            if (target.getDay() === 6) target.setDate(target.getDate() + 2);
+
+            const pad = n => String(n).padStart(2, '0');
+            const dateStr = `${pad(target.getDate())}/${pad(target.getMonth() + 1)}/${target.getFullYear()}`;
+            const timeStr = urgency === 'haute' ? '09:30' : '14:00';
+            return { date: dateStr, time: timeStr };
+        }
+    }
+
+    const rdvAgent = new RDVAIAssistant();
+
 function initApplication() {
     const themeButton = document.getElementById('themeToggleBtn');
     const mobileMenuButton = document.getElementById('mobileMenuBtn');
@@ -56,6 +119,13 @@ function initApplication() {
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const formData = new URLSearchParams();
 
+        const rawMessage = contactForm.querySelector('[name="message"]')?.value || '';
+        const aiAnalysis = rdvAgent.analyzeInquiry(rawMessage);
+        formData.append('rdv_hub_channel', 'web');
+        formData.append('rdv_hub_urgency', aiAnalysis.urgency);
+        formData.append('rdv_hub_lead_score', String(aiAnalysis.leadScore));
+        formData.append('rdv_hub_suggested_slot', `${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}`);
+
         new FormData(contactForm).forEach((value, key) => {
             formData.append(key, String(value));
         });
@@ -79,7 +149,9 @@ function initApplication() {
 
             contactForm.reset();
             if (status) {
-                status.textContent = 'Votre demande a bien été transmise. Nous vous recontacterons sous 24 heures ouvrées.';
+                const priorityBadge = aiAnalysis.urgency === 'haute' ? '⚡ Priorité Haute' : '✅ Enregistré';
+                status.innerHTML = `<strong>${priorityBadge} — Pris en charge par l'Agent IA RDV Hub</strong><br>Votre demande a été qualifiée avec succès (créneau suggéré : ${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}). Notre expert vous confirme l'intervention sous 24h.`;
+                status.style.color = '#38bdf8';
             }
         } catch (error) {
             console.error('Impossible de transmettre le formulaire de contact.', error);
@@ -104,7 +176,7 @@ function initApplication() {
 
     // --- GESTION DU FILTRE D'INTENTION 1-CLIC & DU GUIDE D'ORIENTATION (@UIX) ---
     initExpertiseFilter();
-    initOrientationGuide();
+    // Agent IA RDV Hub actif
 
     function initExpertiseFilter() {
         const filterTabs = document.querySelectorAll('.filter-tab');
