@@ -1,0 +1,25 @@
+/* CSS pour l'impression propre des fiches d'expertise EFFICIENS ENERGIA */
+@media print {
+    nav, .sticky-cta, footer, .btn-action, #agent-ia-container {
+        display: none !important;
+    }
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt;
+    }
+    .container, main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    h1, h2, h3 {
+        page-break-after: avoid;
+        color: #1e3a8a !important;
+    }
+    .fiche-prestation {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+        padding: 1rem;
+    }
+}
