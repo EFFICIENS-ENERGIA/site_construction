@@ -1,7 +1,7 @@
 /**
  * Service Worker Network-First — EFFICIENS ENERGIA
  */
-const CACHE_NAME = 'efficiens-expertise-cache-v40';
+const CACHE_NAME = 'efficiens-expertise-cache-v41';
 const ASSETS_TO_CACHE = [
     './',
     './index.html?v=31',
@@ -9,7 +9,7 @@ const ASSETS_TO_CACHE = [
     './informations-legales.html',
     './css/design_system.css?v=20',
     './css/components.css?v=30',
-    './js/app.js?v=20',
+    './js/app.js?v=21',
     './js/prestation.js?v=31',
     './manifest.webmanifest?v=15',
     './assets/logo_efficiens_energia.png',

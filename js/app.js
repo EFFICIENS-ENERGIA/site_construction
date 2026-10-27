@@ -509,50 +509,50 @@ document.addEventListener('DOMContentLoaded', () => {
         const d = deliverableSelect.value;
 
         // 1. Calcul du montant
-        if (s === 'industriel') {
+        if (s === "industriel") {
             const data = TARIFF_MATRIX.industriel[d] || { min: 1450, max: 2800 };
-            priceDisplay.textContent = 'Sur Devis (dès ' + data.min + ' € HT)';
+            priceDisplay.textContent = "Sur Devis (dès " + data.min + " € HT)";
             if (subDisplay) {
-                subDisplay.textContent = 'Mission d'ingénierie tertiaire / industrielle : cahier des charges et devis sur mesure sous 24h.';
+                subDisplay.textContent = "Mission d'ingénierie tertiaire / industrielle : cahier des charges et devis sur mesure sous 24h.";
             }
         } else {
             const sData = TARIFF_MATRIX[s] || TARIFF_MATRIX.sinistre;
             const dData = sData[d] || sData.rapport_ecrit;
             const item = dData[p] || { min: 690, max: 990 };
-            priceDisplay.textContent = item.min + ' € – ' + item.max + ' € TTC';
+            priceDisplay.textContent = item.min + " € – " + item.max + " € TTC";
             if (subDisplay) {
-                if (d === 'oral') {
-                    subDisplay.textContent = 'Comprend examen in situ complet, mesures instrumentées + débriefing technique oral immédiat.';
-                } else if (d === 'contradictoire') {
-                    subDisplay.textContent = 'Comprend étude des pièces, rédaction des dires techniques et présence contradictoire face à l'expert adverse.';
+                if (d === "oral") {
+                    subDisplay.textContent = "Forfait 1 rendez-vous conseil sur site (déplacement + mesures instrumentées + débriefing technique oral immédiat).";
+                } else if (d === "contradictoire") {
+                    subDisplay.textContent = "Forfait mission contradictoire complète (analyse pièces + convocation + présence contradictoire face à l'expert adverse + dires).";
                 } else {
-                    subDisplay.textContent = 'Comprend examen in situ, mesures instrumentées + rapport d'expertise écrit officiel opposable aux assurances.';
+                    subDisplay.textContent = "Forfait global mission complète (déplacement + examen sur site + mesures instrumentées + rapport officiel opposable).";
                 }
             }
         }
 
         // 2. Livrable dynamique inclus
         if (incDeliverable) {
-            if (d === 'oral') {
-                incDeliverable.textContent = '✓ Débriefing technique oral & recommandations immédiates';
-            } else if (d === 'contradictoire') {
-                incDeliverable.textContent = '✓ Rédaction des dires techniques et présence contradictoire';
+            if (d === "oral") {
+                incDeliverable.textContent = "✓ Débriefing technique oral & recommandations immédiates sur place";
+            } else if (d === "contradictoire") {
+                incDeliverable.textContent = "✓ Rédaction des dires techniques et présence contradictoire";
             } else {
-                incDeliverable.textContent = '✓ Rapport d'expertise écrit circonstancié opposable (DTU)';
+                incDeliverable.textContent = "✓ Rapport d'expertise écrit circonstancié opposable (DTU / Eurocodes)";
             }
         }
 
         // 3. Badge Protection Juridique
         if (pjBadge) {
-            if (s === 'visite_achat') {
-                pjBadge.innerHTML = '<strong>💡 Sécurisation Acquisition :</strong> Investissement protecteur non couvert par les assurances, mais négociable directement sur le prix d'achat du bien.';
-                pjBadge.style.display = 'block';
-            } else if (s === 'industriel') {
-                pjBadge.innerHTML = '<strong>🏭 Contrats Professionnels :</strong> Éligible selon clauses PJ Pro, Responsabilité Civile ou Dommages-Ouvrage.';
-                pjBadge.style.display = 'block';
+            if (s === "visite_achat") {
+                pjBadge.innerHTML = "<strong>💡 Sécurisation Acquisition :</strong> Investissement protecteur non couvert par les assurances, mais négociable directement sur le prix d'achat du bien.";
+                pjBadge.style.display = "block";
+            } else if (s === "industriel") {
+                pjBadge.innerHTML = "<strong>🏭 Contrats Professionnels :</strong> Éligible selon clauses PJ Pro, Responsabilité Civile ou Dommages-Ouvrage.";
+                pjBadge.style.display = "block";
             } else {
-                pjBadge.innerHTML = '<strong>⚖️ Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).';
-                pjBadge.style.display = 'block';
+                pjBadge.innerHTML = "<strong>⚖️ Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).";
+                pjBadge.style.display = "block";
             }
         }
     }

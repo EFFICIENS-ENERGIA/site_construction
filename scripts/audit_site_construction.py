@@ -211,9 +211,9 @@ def run_audits():
     with open(os.path.join(base_dir, 'sw.js'), 'r', encoding='utf-8') as f:
         sw_js = f.read()
 
-    has_sw_v40 = ('efficiens-expertise-cache-v40' in sw_js) and ('caches.open' in sw_js) and ('fetch' in sw_js)
+    has_sw_v40 = ('efficiens-expertise-cache-v' in sw_js) and ('caches.open' in sw_js) and ('fetch' in sw_js)
     assertions_count += 1
-    if not log_test('Service Worker PWA Network-First (Cache v40 actif)', has_sw_v40):
+    if not log_test('Service Worker PWA Network-First (Cache actif)', has_sw_v40):
         all_passed = False
 
     # CSS Responsive & Performance
@@ -229,9 +229,13 @@ def run_audits():
     for jf in js_files:
         with open(os.path.join(base_dir, 'js', jf), 'r', encoding='utf-8') as f:
             js_content = f.read()
-        corrupted = ("'': '&quot;'" in js_content) or ("showAlert(Veuillez" in js_content)
+        # Validation par compilation AST Node.js pour garantir 0 erreur de syntaxe ou quote
+        node_res = subprocess.run(['node', '-c', os.path.join(base_dir, 'js', jf)], capture_output=True, text=True)
+        node_ok = (node_res.returncode == 0)
+        corrupted = ("'': '&quot;'" in js_content) or ("showAlert(Veuillez" in js_content) or (not node_ok)
         assertions_count += 1
-        if not log_test('Integrite syntaxique de js/' + jf, not corrupted, 'Syntaxe saine, aucune corruption'):
+        detail = 'Syntaxe saine, aucune corruption' if node_ok else ('Erreur AST Node: ' + node_res.stderr.strip()[:60])
+        if not log_test('Integrite syntaxique de js/' + jf, not corrupted, detail):
             all_passed = False
 
     # --- TEST 6 : Verification de l hebergement Netlify & Vercel ---
