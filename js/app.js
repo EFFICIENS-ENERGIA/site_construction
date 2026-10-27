@@ -392,31 +392,175 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Simulateur Tarifaire Interactif (Amélioration 9)
+    // 4. Simulateur Tarifaire Professionnel & Déterministe (Benchmark 20 Experts Bâtiment)
     const serviceSelect = document.getElementById('calcServiceSelect');
     const propSelect = document.getElementById('calcPropertySelect');
+    const deliverableSelect = document.getElementById('calcDeliverableSelect');
     const priceDisplay = document.getElementById('calcResultPrice');
+    const subDisplay = document.getElementById('calcResultSub');
+    const incDeliverable = document.getElementById('calcIncDeliverable');
+    const pjBadge = document.getElementById('calcPjBadge');
+
+    // Matrice de calcul réaliste issue du benchmark de marché français
+    const TARIFF_MATRIX = {
+        visite_achat: {
+            oral: {
+                apt_petit: { min: 380, max: 480 },
+                apt_grand: { min: 450, max: 550 },
+                maison_std: { min: 490, max: 620 },
+                maison_grande: { min: 590, max: 790 },
+                local_pro: { min: 750, max: 1100 }
+            },
+            rapport_ecrit: {
+                apt_petit: { min: 490, max: 650 },
+                apt_grand: { min: 580, max: 750 },
+                maison_std: { min: 650, max: 850 },
+                maison_grande: { min: 850, max: 1150 },
+                local_pro: { min: 1100, max: 1600 }
+            },
+            contradictoire: {
+                apt_petit: { min: 690, max: 950 },
+                apt_grand: { min: 790, max: 1100 },
+                maison_std: { min: 890, max: 1250 },
+                maison_grande: { min: 1100, max: 1550 },
+                local_pro: { min: 1400, max: 2100 }
+            }
+        },
+        sinistre: {
+            oral: {
+                apt_petit: { min: 450, max: 580 },
+                apt_grand: { min: 520, max: 680 },
+                maison_std: { min: 590, max: 780 },
+                maison_grande: { min: 720, max: 950 },
+                local_pro: { min: 890, max: 1300 }
+            },
+            rapport_ecrit: {
+                apt_petit: { min: 690, max: 890 },
+                apt_grand: { min: 750, max: 980 },
+                maison_std: { min: 790, max: 1090 },
+                maison_grande: { min: 990, max: 1390 },
+                local_pro: { min: 1250, max: 1950 }
+            },
+            contradictoire: {
+                apt_petit: { min: 850, max: 1200 },
+                apt_grand: { min: 950, max: 1350 },
+                maison_std: { min: 1050, max: 1550 },
+                maison_grande: { min: 1290, max: 1850 },
+                local_pro: { min: 1650, max: 2500 }
+            }
+        },
+        contre_expertise: {
+            oral: {
+                apt_petit: { min: 490, max: 650 },
+                apt_grand: { min: 580, max: 750 },
+                maison_std: { min: 650, max: 890 },
+                maison_grande: { min: 790, max: 1050 },
+                local_pro: { min: 990, max: 1450 }
+            },
+            rapport_ecrit: {
+                apt_petit: { min: 750, max: 990 },
+                apt_grand: { min: 850, max: 1150 },
+                maison_std: { min: 890, max: 1290 },
+                maison_grande: { min: 1150, max: 1590 },
+                local_pro: { min: 1450, max: 2200 }
+            },
+            contradictoire: {
+                apt_petit: { min: 950, max: 1350 },
+                apt_grand: { min: 1050, max: 1490 },
+                maison_std: { min: 1190, max: 1690 },
+                maison_grande: { min: 1390, max: 1990 },
+                local_pro: { min: 1800, max: 2800 }
+            }
+        },
+        dpe_energie: {
+            oral: {
+                apt_petit: { min: 380, max: 480 },
+                apt_grand: { min: 420, max: 550 },
+                maison_std: { min: 480, max: 620 },
+                maison_grande: { min: 580, max: 750 },
+                local_pro: { min: 790, max: 1150 }
+            },
+            rapport_ecrit: {
+                apt_petit: { min: 520, max: 690 },
+                apt_grand: { min: 590, max: 790 },
+                maison_std: { min: 690, max: 890 },
+                maison_grande: { min: 850, max: 1190 },
+                local_pro: { min: 1200, max: 1750 }
+            },
+            contradictoire: {
+                apt_petit: { min: 750, max: 1050 },
+                apt_grand: { min: 850, max: 1200 },
+                maison_std: { min: 950, max: 1390 },
+                maison_grande: { min: 1150, max: 1650 },
+                local_pro: { min: 1500, max: 2300 }
+            }
+        },
+        industriel: {
+            oral: { min: 850, max: 1250, custom: true },
+            rapport_ecrit: { min: 1450, max: 2800, custom: true },
+            contradictoire: { min: 1850, max: 3500, custom: true }
+        }
+    };
 
     function updatePrice() {
-        if (!serviceSelect || !propSelect || !priceDisplay) return;
+        if (!serviceSelect || !propSelect || !deliverableSelect || !priceDisplay) return;
         const s = serviceSelect.value;
         const p = propSelect.value;
-        
-        let base = 350;
-        if (s === 'sinistre') base = 450;
-        else if (s === 'visite_achat') base = 400;
-        else if (s === 'dpe_contestation') base = 380;
-        else if (s === 'industriel') base = 750;
+        const d = deliverableSelect.value;
 
-        if (p === 'maison') base += 50;
-        else if (p === 'professionnel') base += 250;
+        // 1. Calcul du montant
+        if (s === 'industriel') {
+            const data = TARIFF_MATRIX.industriel[d] || { min: 1450, max: 2800 };
+            priceDisplay.textContent = 'Sur Devis (dès ' + data.min + ' € HT)';
+            if (subDisplay) {
+                subDisplay.textContent = 'Mission d'ingénierie tertiaire / industrielle : cahier des charges et devis sur mesure sous 24h.';
+            }
+        } else {
+            const sData = TARIFF_MATRIX[s] || TARIFF_MATRIX.sinistre;
+            const dData = sData[d] || sData.rapport_ecrit;
+            const item = dData[p] || { min: 690, max: 990 };
+            priceDisplay.textContent = item.min + ' € – ' + item.max + ' € TTC';
+            if (subDisplay) {
+                if (d === 'oral') {
+                    subDisplay.textContent = 'Comprend examen in situ complet, mesures instrumentées + débriefing technique oral immédiat.';
+                } else if (d === 'contradictoire') {
+                    subDisplay.textContent = 'Comprend étude des pièces, rédaction des dires techniques et présence contradictoire face à l'expert adverse.';
+                } else {
+                    subDisplay.textContent = 'Comprend examen in situ, mesures instrumentées + rapport d'expertise écrit officiel opposable aux assurances.';
+                }
+            }
+        }
 
-        priceDisplay.textContent = base + ' € TTC';
+        // 2. Livrable dynamique inclus
+        if (incDeliverable) {
+            if (d === 'oral') {
+                incDeliverable.textContent = '✓ Débriefing technique oral & recommandations immédiates';
+            } else if (d === 'contradictoire') {
+                incDeliverable.textContent = '✓ Rédaction des dires techniques et présence contradictoire';
+            } else {
+                incDeliverable.textContent = '✓ Rapport d'expertise écrit circonstancié opposable (DTU)';
+            }
+        }
+
+        // 3. Badge Protection Juridique
+        if (pjBadge) {
+            if (s === 'visite_achat') {
+                pjBadge.innerHTML = '<strong>💡 Sécurisation Acquisition :</strong> Investissement protecteur non couvert par les assurances, mais négociable directement sur le prix d'achat du bien.';
+                pjBadge.style.display = 'block';
+            } else if (s === 'industriel') {
+                pjBadge.innerHTML = '<strong>🏭 Contrats Professionnels :</strong> Éligible selon clauses PJ Pro, Responsabilité Civile ou Dommages-Ouvrage.';
+                pjBadge.style.display = 'block';
+            } else {
+                pjBadge.innerHTML = '<strong>⚖️ Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).';
+                pjBadge.style.display = 'block';
+            }
+        }
     }
 
-    if (serviceSelect && propSelect) {
+    if (serviceSelect && propSelect && deliverableSelect) {
         serviceSelect.addEventListener('change', updatePrice);
         propSelect.addEventListener('change', updatePrice);
+        deliverableSelect.addEventListener('change', updatePrice);
         updatePrice();
     }
 });

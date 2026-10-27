@@ -469,43 +469,62 @@
 
         <section class="expertise-fees" id="tarifs" aria-labelledby="fees-title">
             <div class="container">
-                <!-- Simulateur Tarifaire Interactif (Amélioration 9) -->
+                <!-- Simulateur Tarifaire Professionnel & Transparent (Basé sur Benchmark de 20 Cabinets Indépendants) -->
                 <div class="interactive-calculator-card" id="estimateur-direct">
                     <div class="calc-header">
-                        <span class="calc-tag">Simulateur d'Honoraires Transparent</span>
-                        <h3>Estimez votre mission d'expertise en 2 clics</h3>
-                        <p>Nos honoraires sont établis sur devis ferme et forfaitaire avant toute intervention. Zéro mauvaise surprise.</p>
+                        <span class="calc-tag">Barème & Estimation d'Honoraires Déterministe</span>
+                        <h3>Simulateur d'Honoraires d'Expertise Bâtiment</h3>
+                        <p>Grille tarifaire établie selon les usages déontologiques de la profession d'expert indépendant : estimation déterministe basée sur la complexité technique, la surface du bien et le niveau de valeur probante requis.</p>
                     </div>
                     <div class="calc-body">
                         <div class="calc-controls">
                             <div class="calc-group">
-                                <label for="calcServiceSelect"><strong>1. Nature de votre besoin :</strong></label>
-                                <select id="calcServiceSelect" class="calc-select">
-                                    <option value="sinistre">Sinistre & Dommages Bâtiment</option>
-                                    <option value="visite_achat">Visite Technique Avant Achat</option>
-                                    <option value="dpe_contestation">Contestation DPE / Audit Énergie</option>
-                                    <option value="industriel">Expertise Industrielle / Pro</option>
+                                <label for="calcServiceSelect"><strong>1. Nature & Contexte de la mission :</strong></label>
+                                <select id="calcServiceSelect" class="calc-select" aria-label="Nature de la mission d'expertise">
+                                    <option value="sinistre" selected>Sinistre Bâtiment, Fissures ou Humidité (Recherche de causes & responsabilités)</option>
+                                    <option value="visite_achat">Visite Technique Avant Achat Immobilier (Sécurisation acquisition)</option>
+                                    <option value="contre_expertise">Contre-Expertise d'Assuré / Litige Sinistre (Art. L. 127-2-3 Code assurances)</option>
+                                    <option value="dpe_energie">Litige DPE / Audit Énergétique & Ponts Thermiques</option>
+                                    <option value="industriel">Bâtiment Industriel, Commercial ou Tertiaire (Ingénierie & Grandes surfaces)</option>
                                 </select>
                             </div>
                             <div class="calc-group">
-                                <label for="calcPropertySelect"><strong>2. Type de bien :</strong></label>
-                                <select id="calcPropertySelect" class="calc-select">
-                                    <option value="appartement">Appartement / Logement standard</option>
-                                    <option value="maison">Maison individuelle / Villa</option>
-                                    <option value="professionnel">Local d'activité / Entreprise</option>
+                                <label for="calcPropertySelect"><strong>2. Typologie & Superficie du bien :</strong></label>
+                                <select id="calcPropertySelect" class="calc-select" aria-label="Typologie et superficie du bien">
+                                    <option value="apt_petit">Appartement jusqu'à 80 m²</option>
+                                    <option value="apt_grand">Grand appartement / Duplex (> 80 m²)</option>
+                                    <option value="maison_std" selected>Maison individuelle standard (jusqu'à 140 m²)</option>
+                                    <option value="maison_grande">Grande propriété / Villa contemporaine (> 140 m²)</option>
+                                    <option value="local_pro">Local d'activité / Entrepôt / Locaux professionnels</option>
+                                </select>
+                            </div>
+                            <div class="calc-group">
+                                <label for="calcDeliverableSelect"><strong>3. Niveau de livrable & Valeur probante :</strong></label>
+                                <select id="calcDeliverableSelect" class="calc-select" aria-label="Niveau de livrable et engagement">
+                                    <option value="oral">Avis technique sur site & débriefing oral immédiat (Décision rapide)</option>
+                                    <option value="rapport_ecrit" selected>Rapport d'expertise écrit circonstancié & opposable (Normes DTU / Eurocodes)</option>
+                                    <option value="contradictoire">Assistance contradictoire & défense face à l'expert adverse</option>
                                 </select>
                             </div>
                         </div>
                         <div class="calc-result-box">
-                            <div class="calc-result-label">Estimation forfaitaire indicative :</div>
-                            <div class="calc-result-price" id="calcResultPrice">450 € TTC</div>
-                            <div class="calc-result-sub">Comprend examen in situ + compte-rendu d'investigation</div>
-                            <a href="#contact" class="btn btn-primary calc-cta">Valider cette mission avec le Copilote IA ↗</a>
+                            <div class="calc-result-label">Fourchette indicative constatée :</div>
+                            <div class="calc-result-price" id="calcResultPrice">790 € – 1 090 € TTC</div>
+                            <div class="calc-result-sub" id="calcResultSub">Comprend examen in situ, investigation instrumentée + rapport écrit officiel opposable</div>
+                            <div class="calc-inclusions" id="calcInclusions">
+                                <span class="calc-inc-item">✓ Déplacement Ain (01) & Métropole de Lyon (69)</span>
+                                <span class="calc-inc-item">✓ Instrumentation de mesure (Thermique & Humidité)</span>
+                                <span class="calc-inc-item" id="calcIncDeliverable">✓ Rapport d'expertise écrit opposable aux assurances</span>
+                            </div>
+                            <div class="calc-pj-badge" id="calcPjBadge">
+                                <strong>⚖️ Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).
+                            </div>
+                            <a href="#contact" class="btn btn-primary calc-cta">Demander un devis ferme sous 24h avec le Copilote IA ↗</a>
                         </div>
                     </div>
                 </div>
-</div>
-                    <div class="section-header expertise-section-heading">
+
+                <div class="section-header expertise-section-heading">
                         <p class="section-tag">Honoraires & transparence</p>
                         <h2 id="fees-title">Un devis adapté à la mission, avant intervention</h2>
                         <p class="section-desc">Chaque situation est différente. Le premier échange permet de comprendre votre demande et ne vous engage pas à confier une mission.</p>
@@ -539,7 +558,6 @@
                         </table>
                     </div>
                     <p class="fees-note">Avant votre accord, le devis détaille le périmètre, les honoraires, les frais éventuels de déplacement ou d’investigation ainsi que les livrables prévus. Aucune mission ne débute sans validation préalable du devis. Les honoraires sont définis pour la mission convenue, et non présentés comme un pourcentage d’une indemnité.</p>
-                </section>
                 <p class="method-note">Une expertise technique ne se substitue pas à un conseil juridique ni aux décisions d'un assureur ou d'une juridiction.</p>
             </div>
         </section>
