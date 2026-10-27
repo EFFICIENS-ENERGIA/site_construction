@@ -62,6 +62,7 @@
 <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
     <header class="site-header" role="banner">
+        <div id="scrollProgressBar" class="scroll-progress-bar" aria-hidden="true"></div>
         <div class="container header-inner">
             <a href="#accueil" class="logo-brand" aria-label="EFFICIENS ENERGIA, accueil">
                 <img src="assets/logo_efficiens_energia.png" alt="" class="logo-img" width="377" height="270">
@@ -154,6 +155,17 @@
                     <p class="section-desc">Particuliers, entreprises et acteurs du bâtiment : découvrez les situations dans lesquelles une analyse technique indépendante peut vous aider à mieux comprendre un dommage, un désordre ou un rapport contesté.</p>
                 </div>
                                 <!-- FILTRE D INTENTION 1-CLIC (8 CARTES D EXPERTISE) -->
+                
+                <!-- Barre de recherche prédictive par symptôme (Amélioration 6) -->
+                <div class="symptom-search-bar" role="search">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon" aria-hidden="true">🔍</span>
+                        <input type="search" id="symptomSearchInput" class="symptom-input" placeholder="Rechercher par symptôme (ex : fissure, infiltration, toiture, DPE, humidité, litige...)" aria-label="Rechercher une prestation par symptôme">
+                        <button type="button" id="clearSearchBtn" class="clear-search-btn" aria-label="Effacer la recherche" hidden>×</button>
+                    </div>
+                    <div id="searchCounter" class="search-counter" aria-live="polite"></div>
+                </div>
+
                 <div class="expertise-filter-bar" role="tablist" aria-label="Filtrer les expertises">
                     <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
                         <span>Tous les domaines</span> <span class="filter-count">8</span>
@@ -170,7 +182,7 @@
                     <article class="expertise-card" id="sinistres" data-category="particulier">
                         <span class="expertise-card-index">01</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/sinistres-construction.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/sinistres-construction.jpg" alt="Intérieur d’un logement endommagé, avec des éléments de plafond et de cloison détériorés" width="500" height="333" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=sinistres" target="_blank" rel="noopener noreferrer" aria-label="Sinistres et dommages à la construction (ouvre un nouvel onglet)">Sinistres & dommages à la construction</a></h3>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=sinistres" aria-label="Sinistres et dommages à la construction">Sinistres & dommages à la construction</a></h3>
                         <p>Analyse technique des dommages et désordres affectant un ouvrage, à la suite d'un événement ou de travaux.</p>
                         <ul>
                             <li>Infiltrations, dégâts des eaux et humidité</li>
@@ -179,66 +191,66 @@
                             <li>Éléments techniques utiles à l'évaluation du préjudice</li>
                         </ul>
                         <div class="sinistre-card-actions">
-                            <a href="prestation.html?service=sinistres" class="btn btn-secondary sinistre-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir la prestation sinistres et dommages à la construction (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                            <a href="prestation.html?service=sinistres" class="btn btn-secondary sinistre-more-link" aria-label="Découvrir la prestation sinistres et dommages à la construction">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                             <a href="#contact" class="card-link">Échanger sur un sinistre <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
                     <article class="expertise-card" data-category="pro">
                         <span class="expertise-card-index">02</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/expertise-industrielle.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/expertise-industrielle.jpg" alt="Deux techniciens en intervention sur une installation industrielle" width="500" height="333" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=industrie" target="_blank" rel="noopener noreferrer" aria-label="Expertise industrielle (ouvre un nouvel onglet)">Expertise industrielle</a></h3>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=industrie" aria-label="Expertise industrielle">Expertise industrielle</a></h3>
                         <p>Examen de dommages et de désordres concernant des locaux, équipements ou installations professionnelles.</p>
                         <ul>
                             <li>Dommages aux bâtiments et aux équipements</li>
                             <li>Analyse des défaillances et de leurs conséquences techniques</li>
                             <li>Constatations après incident ou événement dommageable</li>
                         </ul>
-                        <a href="prestation.html?service=industrie" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise industrielle (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                        <a href="prestation.html?service=industrie" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise industrielle">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Décrire votre besoin <span aria-hidden="true">↗</span></a>
                     </article>
                     <article class="expertise-card" id="energie" data-category="pro">
                         <span class="expertise-card-index">03</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/energies-renouvelables.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/energies-renouvelables.jpg" alt="Deux professionnels examinent des panneaux photovoltaïques" width="500" height="333" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=renouvelables" target="_blank" rel="noopener noreferrer" aria-label="Énergies renouvelables (ouvre un nouvel onglet)">Énergies renouvelables</a></h3>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=renouvelables" aria-label="Énergies renouvelables">Énergies renouvelables</a></h3>
                         <p>Analyse de désordres ou de performances d'installations de production et de systèmes énergétiques.</p>
                         <ul>
                             <li>Installations photovoltaïques et solaires</li>
                             <li>Pompes à chaleur et systèmes thermiques</li>
                             <li>Équipements, fonctionnement et écarts constatés</li>
                         </ul>
-                        <a href="prestation.html?service=renouvelables" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise des énergies renouvelables (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                        <a href="prestation.html?service=renouvelables" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise des énergies renouvelables">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Parler d'une installation <span aria-hidden="true">↗</span></a>
                     </article>
                     <article class="expertise-card" data-category="pro">
                         <span class="expertise-card-index">04</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/performance-energetique.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/performance-energetique.jpg" alt="Façade d’un bâtiment en cours de rénovation énergétique avec son isolation extérieure" width="500" height="750" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=performance" target="_blank" rel="noopener noreferrer" aria-label="Performance énergétique des bâtiments (ouvre un nouvel onglet)">Performance énergétique des bâtiments</a></h3>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=performance" aria-label="Performance énergétique des bâtiments">Performance énergétique des bâtiments</a></h3>
                         <p>Comprendre les caractéristiques énergétiques d'un bâtiment et les facteurs pouvant affecter son confort ou ses consommations.</p>
                         <ul>
                             <li>Enveloppe, isolation et ponts thermiques</li>
                             <li>Chauffage, ventilation et régulation</li>
                             <li>Analyse de performance et pistes d'amélioration</li>
                         </ul>
-                        <a href="prestation.html?service=performance" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise en performance énergétique des bâtiments (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                        <a href="prestation.html?service=performance" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise en performance énergétique des bâtiments">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Étudier un bâtiment <span aria-hidden="true">↗</span></a>
                     </article>
                     <article class="expertise-card" data-category="pro">
                         <span class="expertise-card-index">05</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/incendie-dommages.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/incendie-dommages.png" alt="Départ de feu sur le balcon d’un immeuble, avec des traces de fumée en façade" width="500" height="749" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=incendie" target="_blank" rel="noopener noreferrer" aria-label="Incendie et dommages associés (ouvre un nouvel onglet)">Incendie & dommages associés</a></h3>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=incendie" aria-label="Incendie et dommages associés">Incendie & dommages associés</a></h3>
                         <p>Constat et analyse des dommages visibles sur les ouvrages et équipements après un incendie ou un dégagement de fumées.</p>
                         <ul>
                             <li>Dommages aux matériaux et aux équipements</li>
                             <li>Étendue des atteintes et besoins d'investigation</li>
                             <li>Éléments techniques à documenter pour le dossier</li>
                         </ul>
-                        <a href="prestation.html?service=incendie" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise incendie et dommages associés (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                        <a href="prestation.html?service=incendie" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise incendie et dommages associés">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Présenter un dossier incendie <span aria-hidden="true">↗</span></a>
                     </article>
                     <article class="expertise-card expertise-card-regulatory" data-category="particulier">
                         <span class="expertise-card-index">06</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/diagnostic-conteste.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/diagnostic-conteste.png" alt="Plan immobilier examiné à la loupe pour analyser un diagnostic contesté" width="349" height="154" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=diagnostics" target="_blank" rel="noopener noreferrer" aria-label="Diagnostics immobiliers contestés (ouvre un nouvel onglet)">Diagnostics immobiliers contestés</a></h3>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=diagnostics" aria-label="Diagnostics immobiliers contestés">Diagnostics immobiliers contestés</a></h3>
                         <p>Analyse technique d'un diagnostic mis en cause, contesté ou susceptible de l'être par un tiers, dans le cadre d'une vente ou d'un différend.</p>
                         <ul>
                             <li>Examen du rapport, de sa portée et des pièces disponibles</li>
@@ -246,7 +258,7 @@
                             <li>DPE, amiante, plomb, électricité, gaz ou autres diagnostics selon le dossier</li>
                         </ul>
                         <p class="expertise-card-note">La mission porte sur l'analyse d'un diagnostic existant. Elle ne vaut pas réalisation d'un nouveau diagnostic réglementaire.</p>
-                        <a href="prestation.html?service=diagnostics" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’analyse de diagnostics immobiliers contestés (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                        <a href="prestation.html?service=diagnostics" class="btn btn-secondary service-more-link" aria-label="Découvrir l’analyse de diagnostics immobiliers contestés">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                         <a href="#contact" class="card-link">Parler d'un diagnostic contesté <span aria-hidden="true">↗</span></a>
                     </article>
                     <article class="expertise-card expertise-card-purchase" id="visite-avant-achat" data-category="particulier">
@@ -254,7 +266,7 @@
                         <picture class="expertise-card-media"><source srcset="assets/services/visite-avant-achat.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/visite-avant-achat.png" alt="Plan immobilier et outils de plomberie examinés lors d’une visite technique" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <div class="expertise-purchase-copy">
                             <p class="section-tag">Acheter ou vendre en connaissance de cause</p>
-                            <h3><a class="expertise-card-title-link" href="prestation.html?service=visite-achat" target="_blank" rel="noopener noreferrer" aria-label="Visite technique avant achat immobilier (ouvre un nouvel onglet)">Visite technique avant achat immobilier</a></h3>
+                            <h3><a class="expertise-card-title-link" href="prestation.html?service=visite-achat" aria-label="Visite technique avant achat immobilier">Visite technique avant achat immobilier</a></h3>
                             <p>Avant de vous engager, faites examiner visuellement le bien pour mieux comprendre son état apparent, repérer les désordres visibles et anticiper les points à approfondir ou les travaux à envisager.</p>
                             <ul>
                                 <li>Examen visuel des ouvrages, équipements et finitions accessibles</li>
@@ -263,7 +275,7 @@
                             </ul>
                             <p class="expertise-card-note">Visite sans démontage ni sondage destructif : elle ne remplace pas les diagnostics réglementaires et ne garantit pas l’absence de défauts cachés.</p>
                             <div class="expertise-purchase-actions">
-                                <a href="prestation.html?service=visite-achat" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir la visite technique avant achat immobilier (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                                <a href="prestation.html?service=visite-achat" class="btn btn-secondary service-more-link" aria-label="Découvrir la visite technique avant achat immobilier">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                                 <a href="#contact" class="card-link">Préparer votre visite <span aria-hidden="true">↗</span></a>
                             </div>
                         </div>
@@ -273,7 +285,7 @@
                         <picture class="expertise-card-media"><source srcset="assets/services/protection-juridique.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/protection-juridique.png" alt="Un professionnel examine des plans et des données techniques avec un casque de chantier à proximité" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <div class="expertise-purchase-copy">
                             <p class="section-tag">Un appui technique indépendant</p>
-                            <h3><a class="expertise-card-title-link" href="prestation.html?service=protection-juridique" target="_blank" rel="noopener noreferrer" aria-label="Expertise technique dans le cadre d’une protection juridique (ouvre un nouvel onglet)">Expertise technique & protection juridique</a></h3>
+                            <h3><a class="expertise-card-title-link" href="prestation.html?service=protection-juridique" aria-label="Expertise technique dans le cadre d’une protection juridique">Expertise technique & protection juridique</a></h3>
                             <p>Dans un différend lié au bâtiment ou à un dommage, un regard technique indépendant peut aider à documenter les faits et à éclairer les échanges.</p>
                             <ul>
                                 <li>Analyse des désordres, dommages et pièces techniques</li>
@@ -282,7 +294,7 @@
                             </ul>
                             <p class="expertise-card-note">Les conditions de garantie et l’éventuelle prise en charge des honoraires dépendent de votre contrat et de l’accord de votre assureur.</p>
                             <div class="expertise-purchase-actions">
-                                <a href="prestation.html?service=protection-juridique" class="btn btn-secondary service-more-link" target="_blank" rel="noopener noreferrer" aria-label="Découvrir l’expertise technique dans le cadre d’une protection juridique (ouvre un nouvel onglet)">Découvrir la prestation <span aria-hidden="true">↗</span></a>
+                                <a href="prestation.html?service=protection-juridique" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise technique dans le cadre d’une protection juridique">Découvrir la prestation <span aria-hidden="true">↗</span></a>
                                 <a href="#protection-juridique-details" class="card-link">Comprendre les étapes <span aria-hidden="true">↘</span></a>
                             </div>
                         </div>
@@ -687,6 +699,28 @@
                 </div>
             </div>
         </section>
+    
+    <!-- Volet Latéral Coulissant Quick View (Amélioration 2) -->
+    <div id="quickViewDrawer" class="quick-view-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="drawer-panel">
+            <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Fermer le volet">×</button>
+            <div class="drawer-content" id="drawerContent">
+                <p class="drawer-eyebrow" id="drawerEyebrow">EXPERTISE TECHNIQUE</p>
+                <h3 class="drawer-title" id="drawerTitle">Titre de la prestation</h3>
+                <div class="drawer-image-box">
+                    <img id="drawerImage" src="" alt="" loading="lazy">
+                </div>
+                <p class="drawer-summary" id="drawerSummary"></p>
+                <div class="drawer-actions">
+                    <a id="drawerFullPageLink" href="" class="btn btn-primary drawer-btn">Consulter la page complète ➔</a>
+                    <a id="drawerPdfLink" href="" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-pdf drawer-btn">📄 Télécharger la fiche PDF ↓</a>
+                </div>
+                <div class="drawer-details" id="drawerDetails"></div>
+            </div>
+        </div>
+    </div>
+
     </main>
 
     <footer class="site-footer" role="contentinfo">

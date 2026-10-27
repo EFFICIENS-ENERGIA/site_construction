@@ -324,3 +324,99 @@ if (document.readyState === 'loading') {
 } else {
     initApplication();
 }
+
+
+// ==========================================================================
+// 10 AMÉLIORATIONS DESIGN & UX - MOTEUR INTERACTIF (@DEV)
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Barre de progression de défilement (Scroll Progress Bar)
+    const progressBar = document.getElementById('scrollProgressBar');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+            progressBar.style.width = scrolled + '%';
+        }, { passive: true });
+    }
+
+    // 2. Recherche Prédictive par Symptôme (Amélioration 6)
+    const searchInput = document.getElementById('symptomSearchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    const counterEl = document.getElementById('searchCounter');
+    const cards = document.querySelectorAll('.expertise-card');
+
+    if (searchInput && cards.length > 0) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (clearBtn) clearBtn.hidden = (query.length === 0);
+
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const match = query === '' || text.includes(query);
+                card.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
+            });
+
+            if (counterEl) {
+                if (query === '') {
+                    counterEl.textContent = '';
+                } else {
+                    counterEl.textContent = `${visibleCount} prestation(s) correspondent à votre recherche`;
+                }
+            }
+        });
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+                searchInput.focus();
+            });
+        }
+    }
+
+    // 3. Slider Comparateur Avant / Après (Amélioration 7)
+    const sliderRange = document.getElementById('baSliderRange');
+    const afterLayer = document.getElementById('baAfterLayer');
+    const sliderLine = document.getElementById('baSliderLine');
+
+    if (sliderRange && afterLayer && sliderLine) {
+        sliderRange.addEventListener('input', (e) => {
+            const val = e.target.value;
+            afterLayer.style.width = val + '%';
+            sliderLine.style.left = val + '%';
+        });
+    }
+
+    // 4. Simulateur Tarifaire Interactif (Amélioration 9)
+    const serviceSelect = document.getElementById('calcServiceSelect');
+    const propSelect = document.getElementById('calcPropertySelect');
+    const priceDisplay = document.getElementById('calcResultPrice');
+
+    function updatePrice() {
+        if (!serviceSelect || !propSelect || !priceDisplay) return;
+        const s = serviceSelect.value;
+        const p = propSelect.value;
+        
+        let base = 350;
+        if (s === 'sinistre') base = 450;
+        else if (s === 'visite_achat') base = 400;
+        else if (s === 'dpe_contestation') base = 380;
+        else if (s === 'industriel') base = 750;
+
+        if (p === 'maison') base += 50;
+        else if (p === 'professionnel') base += 250;
+
+        priceDisplay.textContent = base + ' € TTC';
+    }
+
+    if (serviceSelect && propSelect) {
+        serviceSelect.addEventListener('change', updatePrice);
+        propSelect.addEventListener('change', updatePrice);
+        updatePrice();
+    }
+});
