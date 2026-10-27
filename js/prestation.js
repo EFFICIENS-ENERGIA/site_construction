@@ -353,6 +353,22 @@ if (!prestation) {
         detailTitle.textContent = prestation.detailTitle;
         detailIntro.textContent = prestation.detailIntro;
         contextText.textContent = prestation.context;
+
+        const pdfServiceMap = {
+            'sinistres': 'assets/pdf/Fiche_Expertise_Sinistres_et_Dommages.pdf',
+            'industrie': 'assets/pdf/Fiche_Expertise_Industrielle.pdf',
+            'renouvelables': 'assets/pdf/Fiche_Expertise_Energies_Renouvelables.pdf',
+            'performance': 'assets/pdf/Fiche_Expertise_Performance_Energetique.pdf',
+            'incendie': 'assets/pdf/Fiche_Expertise_Incendie.pdf',
+            'diagnostics': 'assets/pdf/Fiche_Expertise_Diagnostics_Contestes.pdf',
+            'visite-achat': 'assets/pdf/Fiche_Expertise_Visite_Avant_Achat.pdf',
+            'protection-juridique': 'assets/pdf/Fiche_Expertise_Protection_Juridique.pdf'
+        };
+        const pdfLinkEl = document.getElementById('prestationPdfLink');
+        if (pdfLinkEl && pdfServiceMap[serviceKey]) {
+            pdfLinkEl.href = pdfServiceMap[serviceKey];
+        }
+
         document.title = `${prestation.category} | EFFICIENS ENERGIA`;
         if (metaDescription instanceof HTMLMetaElement) {
             metaDescription.content = `${prestation.summary} Expertise indépendante dans l’Ain et les départements voisins.`;

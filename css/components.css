@@ -3182,3 +3182,58 @@
         font-size: 0.82rem;
     }
 }
+
+/* --- Boutons Fiche PDF d Expertise 1-Clic --- */
+.card-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    margin-bottom: 0.4rem;
+}
+
+.btn-pdf {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0284c7;
+    background: rgba(2, 132, 199, 0.08);
+    border: 1px solid rgba(2, 132, 199, 0.35);
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    white-space: nowrap;
+}
+
+[data-theme="dark"] .btn-pdf {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.btn-pdf:hover {
+    background: rgba(2, 132, 199, 0.2);
+    border-color: #0284c7;
+    transform: translateY(-2px);
+    color: #0369a1;
+}
+
+[data-theme="dark"] .btn-pdf:hover {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: #38bdf8;
+    color: #7dd3fc;
+}
+
+.prestation-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
