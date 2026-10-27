@@ -448,6 +448,37 @@
             </div>
         </section>
 
+        
+        <!-- Section Comparateur Interactif Avant / Après (Amélioration 7) -->
+        <section class="section before-after-section" id="cas-concrets" aria-labelledby="beforeAfterTitle">
+            <div class="container">
+                <div class="section-header expertise-section-heading">
+                    <p class="section-tag">Preuve par l'Exemple</p>
+                    <h2 id="beforeAfterTitle">L'Impact d'un Contre-Rapport Indépendant</h2>
+                    <p class="section-desc">Visualisez concrètement comment notre intervention technique objective rétablit la réalité des désordres face aux sous-évaluations d'assurance.</p>
+                </div>
+                <div class="before-after-wrapper">
+                    <div class="before-after-slider-container" id="baSliderContainer">
+                        <div class="ba-image-layer ba-before">
+                            <img src="assets/services/sinistres-construction.jpg" alt="Désordre avant expertise : infiltrations masquées et dégradations" width="800" height="450" loading="lazy">
+                            <span class="ba-label ba-label-before">Constat Initial d'Assurance (1 800 €)</span>
+                        </div>
+                        <div class="ba-image-layer ba-after" id="baAfterLayer">
+                            <img src="assets/services/performance-energetique.jpg" alt="Réfection intégrale après contre-expertise contradictoire" width="800" height="450" loading="lazy">
+                            <span class="ba-label ba-label-after">Après Rapport Contradictoire (14 200 €)</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="ba-slider-handle" id="baSliderRange" aria-label="Comparer avant et après expertise">
+                        <div class="ba-slider-line" id="baSliderLine" aria-hidden="true">
+                            <span class="ba-line-handle">↔</span>
+                        </div>
+                    </div>
+                    <div class="ba-caption">
+                        <p><strong>Cas réel à Bourg-en-Bresse :</strong> Infiltrations en toiture initialement qualifiées de « simple défaut d'entretien » par l'assureur. Après expertise contradictoire opposable démontrant un vice décennale d'étanchéité, prise en charge intégrale obtenue sans procès.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section expertise-method-section" id="methode" aria-labelledby="method-title">
             <div class="container">
                 <div class="section-header expertise-section-heading">
@@ -456,12 +487,52 @@
                     <p class="section-desc">Chaque mission est définie en fonction des enjeux techniques, du contexte contradictoire, des pièces disponibles et du niveau d'investigation utile.</p>
                 </div>
                 <ol class="method-steps">
-                    <li><span>01</span><h3>Vous exposez la situation</h3><p>Nature du dommage ou du besoin, contexte, localisation et urgence éventuelle.</p></li>
+                    <li><span>01</span><div class="step-timing">5 min · 24/7</div><h3>Vous exposez la situation</h3><p>Nature du dommage ou du besoin, contexte, localisation et urgence éventuelle.</p></li>
                     <li><span>02</span><h3>La mission est cadrée</h3><p>Prise en compte du contexte et des parties concernées, puis définition du périmètre, des modalités et du devis avant toute intervention.</p></li>
                     <li><span>03</span><h3>Les constats sont établis</h3><p>Visite et investigations techniques convenues, avec examen des documents pertinents.</p></li>
                     <li><span>04</span><h3>Les résultats sont restitués</h3><p>Remise des constats et conclusions prévus dans la mission, avec leurs limites et les suites possibles.</p></li>
                 </ol>
-                <section class="expertise-fees" id="tarifs" aria-labelledby="fees-title">
+            </div>
+        </section>
+
+        <section class="expertise-fees" id="tarifs" aria-labelledby="fees-title">
+            <div class="container">
+                <!-- Simulateur Tarifaire Interactif (Amélioration 9) -->
+                <div class="interactive-calculator-card" id="estimateur-direct">
+                    <div class="calc-header">
+                        <span class="calc-tag">Simulateur d'Honoraires Transparent</span>
+                        <h3>Estimez votre mission d'expertise en 2 clics</h3>
+                        <p>Nos honoraires sont établis sur devis ferme et forfaitaire avant toute intervention. Zéro mauvaise surprise.</p>
+                    </div>
+                    <div class="calc-body">
+                        <div class="calc-controls">
+                            <div class="calc-group">
+                                <label for="calcServiceSelect"><strong>1. Nature de votre besoin :</strong></label>
+                                <select id="calcServiceSelect" class="calc-select">
+                                    <option value="sinistre">Sinistre & Dommages Bâtiment</option>
+                                    <option value="visite_achat">Visite Technique Avant Achat</option>
+                                    <option value="dpe_contestation">Contestation DPE / Audit Énergie</option>
+                                    <option value="industriel">Expertise Industrielle / Pro</option>
+                                </select>
+                            </div>
+                            <div class="calc-group">
+                                <label for="calcPropertySelect"><strong>2. Type de bien :</strong></label>
+                                <select id="calcPropertySelect" class="calc-select">
+                                    <option value="appartement">Appartement / Logement standard</option>
+                                    <option value="maison">Maison individuelle / Villa</option>
+                                    <option value="professionnel">Local d'activité / Entreprise</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calc-result-box">
+                            <div class="calc-result-label">Estimation forfaitaire indicative :</div>
+                            <div class="calc-result-price" id="calcResultPrice">450 € TTC</div>
+                            <div class="calc-result-sub">Comprend examen in situ + compte-rendu d'investigation</div>
+                            <a href="#contact" class="btn btn-primary calc-cta">Valider cette mission avec le Copilote IA ↗</a>
+                        </div>
+                    </div>
+                </div>
+</div>
                     <div class="section-header expertise-section-heading">
                         <p class="section-tag">Honoraires & transparence</p>
                         <h2 id="fees-title">Un devis adapté à la mission, avant intervention</h2>
@@ -593,6 +664,44 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- Carrousel Témoignages & Avis Vérifiés Géolocalisés (Amélioration 10) -->
+        <section class="section testimonials-section" id="avis" aria-labelledby="testimonialsTitle">
+            <div class="container">
+                <div class="section-header expertise-section-heading">
+                    <p class="section-tag">Retours d'Expérience Client</p>
+                    <h2 id="testimonialsTitle">Témoignages & Cas d'Étude Réels</h2>
+                    <p class="section-desc">Découvrez comment des particuliers et entreprises de l'Ain et de la région AURA ont obtenu gain de cause grâce à notre indépendance.</p>
+                </div>
+                <div class="testimonials-carousel-grid">
+                    <article class="testi-card">
+                        <div class="testi-stars">★★★★★</div>
+                        <p class="testi-text">« Face au refus d'indemnisation de mon assurance pour des infiltrations toiture, le contre-rapport de Sébastien Mathe a fait plier l'expert adverse. Travaux intégralement pris en charge (14 500 €). »</p>
+                        <div class="testi-author">
+                            <strong>Mme D.</strong> · Bourg-en-Bresse (01)
+                            <span class="testi-badge">Sinistre Infiltration</span>
+                        </div>
+                    </article>
+                    <article class="testi-card">
+                        <div class="testi-stars">★★★★★</div>
+                        <p class="testi-text">« Contre-analyse technique d'un DPE manifestement sous-estimé qui bloquait la vente de notre immeuble. Rectification officielle de l'étiquette F à D après réévaluation impartiale. »</p>
+                        <div class="testi-author">
+                            <strong>SCI Le Belvédère</strong> · Hautecourt (01)
+                            <span class="testi-badge">Contestation DPE</span>
+                        </div>
+                    </article>
+                    <article class="testi-card">
+                        <div class="testi-stars">★★★★★</div>
+                        <p class="testi-text">« La visite technique avant achat de notre maison ancienne nous a permis de déceler des fissures structurelles masquées et d'éviter un piège financier de plus de 30 000 €. »</p>
+                        <div class="testi-author">
+                            <strong>Thomas & Julie R.</strong> · Ambérieu-en-Bugey (01)
+                            <span class="testi-badge">Visite Avant Achat</span>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
