@@ -725,6 +725,8 @@
                         <input id="contactLocation" name="location" type="text" maxlength="100" autocomplete="address-level2">
                         <label for="contactMessage">Votre message (facultatif)</label>
                         <textarea id="contactMessage" name="message" rows="4" maxlength="1200" aria-describedby="contactPrivacyNote"></textarea>
+                        <label for="dropzone-file-input">Pièces justificatives (photos de désordres, devis, DPE - facultatif)</label>
+                        <div id="fileUploadContainer" style="margin-bottom: 1.25rem;"></div>
                         <p id="contactPrivacyNote" class="contact-privacy-note">Votre demande est transmise à Netlify pour être reçue par EFFICIENS ENERGIA. Évitez toute donnée sensible et pièce confidentielle. Consultez les <a href="informations-legales.html#privacy-title">informations de confidentialité</a>.</p>
                         <button class="btn btn-primary" type="submit">Envoyer ma demande <span aria-hidden="true">↗</span></button>
                         <p class="contact-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
@@ -813,5 +815,6 @@
     <script src="js/cookie_banner.js"></script>
     <script src="js/pdf_download.js"></script>
     <script src="js/pwa_update.js"></script>
+    <script src="js/file_upload.js"></script>
 </body>
 </html>
