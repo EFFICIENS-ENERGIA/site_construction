@@ -88,39 +88,58 @@
     color: #0b0c0e;
 }
 
-.logo-text {
-    display: flex;
+.logo-brand {
+    display: inline-flex;
     flex-direction: column;
-    line-height: 1.15;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    gap: 0.25rem;
+    padding: 0.15rem 0;
+}
+
+.logo-img {
+    height: 42px;
+    width: auto;
+    max-width: 65px;
+    object-fit: contain;
+    display: block;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 2px 5px;
+    border-radius: var(--border-radius-xs);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.logo-brand:hover .logo-img {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    display: block;
     font-family: 'Comic Sans MS', 'Comic Neue', 'Chalkboard SE', cursive, sans-serif;
     color: #2f6534;
     font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 0.025em;
+    font-size: 0.78rem;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+    text-align: center;
     transition: color var(--transition-normal);
-}
-
-.logo-text strong {
-    font-family: inherit;
-    font-weight: 700;
-    color: inherit;
-}
-
-.logo-text span {
-    font-family: var(--font-family-base, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    font-size: 0.65rem;
-    margin-top: 0.15rem;
 }
 
 [data-theme="dark"] .logo-text {
     color: #4ade80;
 }
 
-[data-theme="dark"] .logo-text span {
-    color: rgba(255, 255, 255, 0.65);
+.logo-img-footer {
+    height: 48px;
+    max-width: 72px;
+}
+
+.expertise-footer-brand .logo-text {
+    font-size: 0.85rem;
 }
 
 .main-nav {
