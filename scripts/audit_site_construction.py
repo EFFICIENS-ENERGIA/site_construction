@@ -145,7 +145,7 @@ def run_audits():
         all_passed = False
 
     # Badge d'independance et de neutralite
-    has_independence_badge = ('independence-badge' in index_html) and ('100% Ind' in index_html)
+    has_independence_badge = ('independence-badge' in index_html) and ('Indépendant' in index_html)
     assertions_count += 1
     if not log_test('Badge de Reassurance & Independance d assureur', has_independence_badge, 'Independance 100% certifiee'):
         all_passed = False

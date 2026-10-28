@@ -3043,20 +3043,41 @@
 
 .independence-badge .badge-content {
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    line-height: 1.4;
 }
 
 .independence-badge strong {
     color: #38bdf8;
-    font-size: 0.95rem;
+    font-weight: 600;
     letter-spacing: -0.01em;
 }
 
+.independence-badge .badge-sep {
+    color: #38bdf8;
+    opacity: 0.7;
+    font-weight: 700;
+}
+
 .independence-badge span {
-    font-size: 0.82rem;
-    line-height: 1.4;
-    color: var(--color-text-muted, #94a3b8);
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+[data-theme="light"] .independence-badge strong {
+    color: #0284c7;
+}
+
+[data-theme="light"] .independence-badge .badge-sep {
+    color: #0284c7;
+}
+
+[data-theme="light"] .independence-badge {
+    background: rgba(2, 132, 199, 0.07);
+    border-color: rgba(2, 132, 199, 0.25);
 }
 
 /* ==========================================================================
