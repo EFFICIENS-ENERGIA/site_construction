@@ -1422,8 +1422,7 @@
 }
 
 .expertise-intro-grid h2,
-.expertise-section-heading h2,
-.expertise-contact-copy h2 {
+.expertise-section-heading h2 {
     margin-top: 0.8rem;
     font-size: clamp(2.15rem, 4vw, 3.65rem);
     font-weight: 300;
@@ -2134,6 +2133,16 @@
     margin-top: 1.75rem;
     padding-top: 1.2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.expertise-contact-copy h2 {
+    margin-top: 0.8rem;
+    margin-bottom: 0.85rem;
+    font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: #ffffff;
 }
 
 .contact-preparation h3 {
