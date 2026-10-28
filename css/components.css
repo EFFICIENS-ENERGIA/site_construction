@@ -4214,3 +4214,287 @@
         gap: 0.5rem;
     }
 }
+
+
+
+/* ==========================================================================
+   PLANNING OFFICIEL D'INTERVENTIONS — M. MATHE SÉBASTIEN (RDV HUB IA)
+   ========================================================================== */
+.mathe-planning-container {
+    width: 100%;
+    margin-top: 2.25rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.45);
+    color: #f8fafc;
+}
+
+[data-theme="light"] .mathe-planning-container {
+    background: linear-gradient(135deg, #ffffff, #f1f5f9);
+    border-color: rgba(14, 165, 233, 0.35);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+}
+
+.mathe-planning-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .mathe-planning-header {
+    border-bottom-color: rgba(15, 23, 42, 0.1);
+}
+
+.mathe-badge-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    margin-bottom: 0.35rem;
+}
+
+.live-dot-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: mathePulse 2s infinite;
+}
+
+@keyframes mathePulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.mathe-planning-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0.2rem 0 0.35rem 0;
+    color: #f8fafc;
+}
+
+[data-theme="light"] .mathe-planning-title {
+    color: #0f172a;
+}
+
+.mathe-planning-subtitle {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.4;
+}
+
+[data-theme="light"] .mathe-planning-subtitle {
+    color: #64748b;
+}
+
+.mathe-planning-actions-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.mathe-planning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.15rem;
+    margin-bottom: 1.25rem;
+}
+
+.mathe-rdv-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #0ea5e9;
+    border-radius: 8px;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="light"] .mathe-rdv-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.mathe-rdv-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.mathe-rdv-card.status-confirmed {
+    border-left-color: #10b981;
+}
+
+.mathe-rdv-card.status-pending {
+    border-left-color: #f59e0b;
+}
+
+.mathe-rdv-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.mathe-slot-badge {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+[data-theme="light"] .mathe-slot-badge {
+    color: #0284c7;
+}
+
+.mathe-status-pill {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.status-confirmed .mathe-status-pill {
+    background: rgba(16, 185, 129, 0.18);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+[data-theme="light"] .status-confirmed .mathe-status-pill {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-pending .mathe-status-pill {
+    background: rgba(245, 158, 11, 0.18);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+[data-theme="light"] .status-pending .mathe-status-pill {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.mathe-card-client {
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 0.2rem 0 0.1rem 0;
+}
+
+[data-theme="light"] .mathe-card-client {
+    color: #0f172a;
+}
+
+.mathe-card-subject {
+    font-size: 0.84rem;
+    color: #cbd5e1;
+    line-height: 1.4;
+    margin: 0;
+}
+
+[data-theme="light"] .mathe-card-subject {
+    color: #475569;
+}
+
+.mathe-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    margin-top: 0.4rem;
+}
+
+.mathe-chip {
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .mathe-chip {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #e2e8f0;
+}
+
+.mathe-chip.chip-amount {
+    font-weight: 700;
+    color: #38bdf8;
+    background: rgba(14, 165, 233, 0.12);
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+[data-theme="light"] .mathe-chip.chip-amount {
+    color: #0284c7;
+    background: #e0f2fe;
+}
+
+.mathe-chip.chip-ai {
+    font-weight: 600;
+    color: #a78bfa;
+    background: rgba(139, 92, 246, 0.12);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.mathe-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .mathe-card-actions {
+    border-top-color: #e2e8f0;
+}
+
+.mathe-planning-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+[data-theme="light"] .mathe-planning-footer {
+    border-top-color: #e2e8f0;
+    color: #64748b;
+}
+
+.mathe-footer-sync-status {
+    font-weight: 700;
+    color: #10b981;
+}
