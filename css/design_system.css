@@ -121,17 +121,17 @@ h1 {
 }
 
 h2 {
-    font-size: clamp(2.1rem, 4vw, 3.2rem);
-    font-weight: 300;
-    letter-spacing: -0.03em;
-    line-height: 1.08;
+    font-size: clamp(1.85rem, 3.2vw, 2.85rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
 }
 
 h3 {
-    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
 }
 
 h4 {
