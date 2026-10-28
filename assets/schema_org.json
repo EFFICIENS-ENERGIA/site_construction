@@ -1,23 +1,57 @@
 {
-  "context": "https://schema.org",
-  "type": "ProfessionalService",
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
   "name": "EFFICIENS ENERGIA",
-  "description": "Cabinet d'expertise technique 100% indépendant spécialisé en sinistres du bâtiment, litiges DPE, visites avant achat et performance énergétique.",
+  "legalName": "EFFICIENS ENERGIA - Sébastien Mathe",
+  "description": "Cabinet d'Expertise Technique Indépendant · Particuliers, Entreprises, Collectivités & Institutionnels",
   "founder": {
-    "type": "Person",
+    "@type": "Person",
     "name": "Sébastien Mathe"
   },
   "telephone": "+33778246567",
   "email": "contact@efficiens-energia.fr",
-  "url": "https://efficiens-energia.fr",
+  "url": "https://siteconstruction.vercel.app",
+  "sameAs": [
+    "https://efficiens-energia.fr",
+    "https://www.linkedin.com/company/efficiens-energia"
+  ],
   "taxID": "82769449800011",
   "address": {
-    "type": "PostalAddress",
+    "@type": "PostalAddress",
     "streetAddress": "480 Route du Belvédère",
     "postalCode": "01250",
-    "addressLocality": "Hautecourt-Romaneche",
+    "addressLocality": "Hautecourt-Romanèche",
+    "addressRegion": "Ain",
     "addressCountry": "FR"
   },
-  "openingHours": "Mo-Fr 08:30-18:00",
-  "priceRange": "€€"
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 46.1608,
+    "longitude": 5.4194
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:30",
+      "closes": "18:00"
+    }
+  ],
+  "priceRange": "€€",
+  "areaServed": [
+    "Ain",
+    "Rhône",
+    "Saône-et-Loire",
+    "Jura",
+    "Isère",
+    "Savoie",
+    "Haute-Savoie",
+    "Suisse romande"
+  ]
 }

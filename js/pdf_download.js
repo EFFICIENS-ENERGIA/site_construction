@@ -1,28 +1,45 @@
-// Gestionnaire de téléchargement des fiches PDF individuelles par prestation
-const PDF_MAPPING = {
-    'sinistre': 'assets/pdf/Fiche_Expertise_Sinistres_et_Dommages.pdf',
-    'protection_juridique': 'assets/pdf/Fiche_Expertise_Protection_Juridique.pdf',
-    'visite_achat': 'assets/pdf/Fiche_Expertise_Visite_Avant_Achat.pdf',
-    'dpe_contestation': 'assets/pdf/Fiche_Expertise_Diagnostics_Contestes.pdf',
-    'energies_renouvelables': 'assets/pdf/Fiche_Expertise_Energies_Renouvelables.pdf',
-    'performance_energetique': 'assets/pdf/Fiche_Expertise_Performance_Energetique.pdf',
-    'incendie': 'assets/pdf/Fiche_Expertise_Incendie.pdf',
-    'industriel': 'assets/pdf/Fiche_Expertise_Industrielle.pdf'
-};
+// ==========================================================================
+// GESTIONNAIRE DE TÉLÉCHARGEMENT DES FICHES PDF D'EXPERTISE — EFFICIENS ENERGIA
+// ==========================================================================
+(function() {
+    'use strict';
 
-function initPdfDownloadButtons() {
-    const downloadBtns = document.querySelectorAll('[data-pdf-service]');
-    downloadBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const serviceKey = btn.getAttribute('data-pdf-service');
-            const pdfUrl = PDF_MAPPING[serviceKey];
-            if (pdfUrl) {
-                window.open(pdfUrl, '_blank');
-            } else {
-                window.open('Dossier_Prestations_EFFICIENS_ENERGIA.pdf', '_blank');
-            }
+    const PDF_SERVICE_MAP = {
+        'sinistre': 'assets/pdf/Fiche_Expertise_Sinistres_et_Dommages.pdf',
+        'protection_juridique': 'assets/pdf/Fiche_Expertise_Protection_Juridique.pdf',
+        'visite_achat': 'assets/pdf/Fiche_Expertise_Visite_Avant_Achat.pdf',
+        'dpe_contestation': 'assets/pdf/Fiche_Expertise_Diagnostics_Contestes.pdf',
+        'energies_renouvelables': 'assets/pdf/Fiche_Expertise_Energies_Renouvelables.pdf',
+        'performance_energetique': 'assets/pdf/Fiche_Expertise_Performance_Energetique.pdf',
+        'incendie': 'assets/pdf/Fiche_Expertise_Incendie.pdf',
+        'industriel': 'assets/pdf/Fiche_Expertise_Industrielle.pdf'
+    };
+
+    window.downloadServicePDF = function(serviceKey) {
+        const path = PDF_SERVICE_MAP[serviceKey] || 'Dossier_Prestations_EFFICIENS_ENERGIA.pdf';
+        const link = document.createElement('a');
+        link.href = path;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    function attachPdfButtons() {
+        const buttons = document.querySelectorAll('[data-pdf-service]');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const serviceKey = btn.getAttribute('data-pdf-service');
+                window.downloadServicePDF(serviceKey);
+            });
         });
-    });
-}
+    }
 
-document.addEventListener('DOMContentLoaded', initPdfDownloadButtons);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachPdfButtons);
+    } else {
+        attachPdfButtons();
+    }
+})();

@@ -1,25 +1,77 @@
-/* CSS pour l'impression propre des fiches d'expertise EFFICIENS ENERGIA */
+/* ==========================================================================
+   FEUILLE DE STYLE DÉDIÉE À L'IMPRESSION (@media print)
+   EFFICIENS ENERGIA — Sébastien Mathe
+   ========================================================================== */
 @media print {
-    nav, .sticky-cta, footer, .btn-action, #agent-ia-container {
+    /* Masquage des éléments interactifs, de navigation et d'animation */
+    nav,
+    header nav,
+    .top-bar,
+    .mobile-header-bar,
+    .nav-toggle-label,
+    .nav-toggle,
+    .sticky-cta,
+    .mobile-bottom-bar,
+    .cookie-banner,
+    .pwa-update-banner,
+    .emergency-banner,
+    #copilote-rdv-hub,
+    #agent-ia-container,
+    .modal,
+    .btn-action,
+    .btn-primary,
+    .btn-secondary,
+    button,
+    form,
+    .simulator-controls,
+    .upload-dropzone,
+    .whatsapp-btn,
+    .phone-btn,
+    .newsletter-section,
+    footer .newsletter-box,
+    .reading-time-badge,
+    .table-of-contents {
         display: none !important;
     }
+
+    /* Format papier propre et sobre */
     body {
         background: #ffffff !important;
-        color: #000000 !important;
-        font-size: 12pt;
-    }
-    .container, main {
-        width: 100% !important;
+        color: #0f172a !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 0.8cm !important;
     }
-    h1, h2, h3 {
-        page-break-after: avoid;
+
+    a {
         color: #1e3a8a !important;
+        text-decoration: underline !important;
     }
-    .fiche-prestation {
+
+    h1, h2, h3, h4 {
+        color: #1e3a8a !important;
+        page-break-after: avoid;
+    }
+
+    .card, .fiche-prestation, .expert-badge, .legal-card, .service-card {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
         page-break-inside: avoid;
-        border: 1px solid #ccc;
-        padding: 1rem;
+        margin-bottom: 1.25rem !important;
+        padding: 1rem !important;
+    }
+
+    /* En-tête officiel d'impression */
+    body::before {
+        content: "EFFICIENS ENERGIA · Cabinet d'Expertise Technique Indépendant · Particuliers, Entreprises, Collectivités & Institutionnels · SIRET 82769449800011 · Tél : 07 78 24 65 67";
+        display: block;
+        font-size: 8.5pt;
+        color: #475569;
+        border-bottom: 1px solid #cbd5e1;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+        text-align: center;
     }
 }
