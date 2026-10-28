@@ -3964,3 +3964,253 @@
 .drawer-btn {
     justify-content: center;
 }
+
+
+/* ==========================================================================
+   PIED DE PAGE STYLE KAPIA-RGI (MULTI-COLONNES & DEEP NAVY)
+   EFFICIENS ENERGIA — Sébastien Mathe
+   ========================================================================== */
+.site-footer.kapia-style-footer {
+    position: relative;
+    background: #001728 !important;
+    color: #cbd5e1 !important;
+    padding: 4.5rem 0 2.5rem 0 !important;
+    border-top: 2px solid #0284c7 !important;
+}
+
+.site-footer.kapia-style-footer::before {
+    display: none !important;
+}
+
+.site-footer .footer-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+/* En-tête du Footer (Marque & Baseline) */
+.footer-top-row {
+    margin-bottom: 2.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-main-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+}
+
+.footer-logo-img {
+    height: 44px;
+    width: auto;
+    max-width: 60px;
+    object-fit: contain;
+}
+
+.footer-brand-title {
+    font-family: "Comic Sans MS", "Chalkboard SE", system-ui, sans-serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.5px;
+    line-height: 1;
+}
+
+.footer-brand-title span {
+    color: #ffffff;
+}
+
+.footer-brand-baseline {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    max-width: 860px;
+}
+
+.footer-brand-baseline span {
+    color: #64748b;
+    font-size: 0.82rem;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Grille multi-colonnes (5 colonnes) */
+.footer-columns-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1.15fr 1fr 1fr 1.15fr;
+    gap: 2.25rem;
+}
+
+.footer-col-title {
+    color: #38bdf8 !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.6px !important;
+    margin: 0 0 1rem 0 !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.25) !important;
+}
+
+.footer-col-subtitle {
+    color: #64748b;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 1.25rem 0 0.5rem 0;
+}
+
+.footer-col-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.footer-col-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-col-list a {
+    color: #cbd5e1 !important;
+    font-size: 0.86rem !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease, transform 0.15s ease !important;
+    display: inline-block;
+    line-height: 1.45;
+}
+
+.footer-col-list a:hover {
+    color: #38bdf8 !important;
+    transform: translateX(3px);
+}
+
+.footer-text-item {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    display: block;
+}
+
+.footer-highlight-link {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.footer-wa-link {
+    color: #4ade80 !important;
+    font-weight: 600 !important;
+}
+
+.footer-cta-link {
+    color: #38bdf8 !important;
+    font-weight: 600 !important;
+}
+
+/* Barre inférieure (Copyright & Légal) */
+.footer-bottom-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+
+.footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer-social-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-decoration: none !important;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+}
+
+.footer-social-badge:hover {
+    opacity: 0.85;
+}
+
+.footer-social-badge.linkedin-badge {
+    background: #0a66c2;
+    color: #ffffff !important;
+}
+
+.footer-social-badge.facebook-badge {
+    background: #1877f2;
+    color: #ffffff !important;
+}
+
+.footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-right a {
+    color: #cbd5e1 !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease !important;
+}
+
+.footer-bottom-right a:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+}
+
+/* Responsivité Mobile & Tablette */
+@media (max-width: 1024px) {
+    .footer-columns-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-columns-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+    }
+    .footer-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-columns-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .footer-bottom-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
