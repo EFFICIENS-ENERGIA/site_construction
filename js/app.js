@@ -689,8 +689,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function setActiveNavLink(activeId) {
             mainNavLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === '#' + activeId) {
+                const href = link.getAttribute('href').replace('#', '');
+                const isMatch = (href === activeId) ||
+                    (activeId === 'zones-intervention' && href === 'zones') ||
+                    (activeId === 'zones' && href === 'zones-intervention');
+                if (isMatch) {
                     link.classList.add('nav-highlight', 'active');
                 } else {
                     link.classList.remove('nav-highlight', 'active');
