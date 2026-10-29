@@ -3162,7 +3162,8 @@
 /* ==========================================================================
    MISE EN VALEUR DU LIEN "NOS EXPERTISES" DANS LE MENU
    ========================================================================== */
-.main-nav .nav-highlight {
+.main-nav .nav-highlight,
+.main-nav a.active {
     color: #38bdf8 !important;
     font-weight: 700 !important;
     position: relative;

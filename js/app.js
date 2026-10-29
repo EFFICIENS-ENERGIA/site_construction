@@ -677,4 +677,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ==========================================================================
+    // GESTION DYNAMIQUE DE L'ONGLET ACTIF DANS LA NAVBAR (SCROLLSPY)
+    // ==========================================================================
+    const mainNavLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+    if (mainNavLinks.length > 0) {
+        const sections = Array.from(mainNavLinks)
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+        function setActiveNavLink(activeId) {
+            mainNavLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === '#' + activeId) {
+                    link.classList.add('nav-highlight', 'active');
+                } else {
+                    link.classList.remove('nav-highlight', 'active');
+                }
+            });
+        }
+
+        mainNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const targetId = link.getAttribute('href').replace('#', '');
+                setActiveNavLink(targetId);
+            });
+        });
+
+        if ('IntersectionObserver' in window && sections.length > 0) {
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveNavLink(entry.target.id);
+                    }
+                });
+            }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.1 });
+
+            sections.forEach(sec => navObserver.observe(sec));
+        }
+    }
 });
+
