@@ -1,74 +1,32 @@
 
-    // --- MOTEUR AGENT IA RDV HUB EFFICIENS ENERGIA (INGESTION, QUALIFICATION & PLANNING) ---
+    // --- MOTEUR AGENT IA RDV HUB EFFICIENS ENERGIA (INGESTION & QUALIFICATION) ---
     class RDVAIAssistant {
         constructor() {
             this.urgencyKeywords = [
                 'urgent', 'urgence', 'immédiat', 'rapidement', 'au plus vite', 'inondation',
-                'eau', 'fuite', 'fissure', 'effondrement', 'décennale', 'litige', 'sinistre', 'péril'
-            ];
-            this.devisKeywords = [
-                'accepte le devis', 'acceptation de devis', 'acceptation du devis', 'acceptons le devis',
-                'bon pour accord', 'devis validé', 'devis accepté', 'valider le devis', 'signe le devis',
-                'accord sur le devis', 'confirmons notre accord', 'devis n°', 'devis dev-'
-            ];
-            this.renseignementKeywords = [
-                'renseignement', 'renseignements', 'information', 'informations', 'question',
-                'conseil', 'avis préliminaire', 'souhaite savoir', 'modalités', 'tarifs', 'comment procéder'
+                'eau', 'fuite', 'fissure', 'effondrement', 'décennale', 'litige', 'sinistre'
             ];
             this.categories = {
-                sinistre: ['sinistre', 'infiltrations', 'fuite', 'dégât', 'fissure', 'malfaçon', 'décennale', 'sécheresse'],
-                achat: ['achat', 'visite', 'compromis', 'offre', 'vétusté', 'immobilier', 'maison', 'appartement'],
+                sinistre: ['sinistre', 'infiltrations', 'fuite', 'dégât', 'fissure', 'malfaçon', 'décennale'],
+                achat: ['achat', 'visite', 'compromis', 'offre', 'vétusté', 'immobilier'],
                 dpe: ['dpe', 'audit', 'diagnostic', 'amiante', 'plomb', 'gaz', 'électricité'],
-                energie: ['panneau', 'photovoltaïque', 'solaire', 'pompe à chaleur', 'pac', 'onduleur', 'rénovation'],
-                juridique: ['protection juridique', 'assureur', 'avocat', 'tribunal', 'expertise contradictoire', 'recours']
+                energie: ['panneau', 'photovoltaïque', 'solaire', 'pompe à chaleur', 'pac', 'onduleur'],
+                juridique: ['protection juridique', 'assureur', 'avocat', 'tribunal', 'expertise contradictoire']
             };
         }
 
-        analyzeInquiry(text, contactType = '') {
+        analyzeInquiry(text) {
             const lower = (text || '').toLowerCase();
             let score = 50;
             let urgency = 'normale';
-            let intent = 'DEMANDE_GENERALE';
-            let status = 'new';
             const detectedTags = [];
 
-            // 1. Détection Intention : Acceptation Devis vs Renseignements
-            const isDevisAccepted = this.devisKeywords.some(kw => lower.includes(kw));
-            const isRenseignement = this.renseignementKeywords.some(kw => lower.includes(kw));
-
-            if (isDevisAccepted) {
-                intent = 'DEVIS_ACCEPTE';
-                status = 'confirmed';
-                score = 96;
-                detectedTags.push('✅ Devis Validé & Accepté');
-            } else if (isRenseignement) {
-                intent = 'RENSEIGNEMENTS';
-                status = 'pending';
-                score = 72;
-                detectedTags.push('📋 Demande de Renseignements');
-            }
-
-            // 2. Détection Urgence
             if (this.urgencyKeywords.some(kw => lower.includes(kw))) {
                 urgency = 'haute';
-                score += 15;
-                detectedTags.push("⚡ Signal d'Urgence");
+                score += 25;
+                detectedTags.push('⚡ Urgence signalée');
             }
 
-            // 3. Détection Montant / Budget Explicite
-            let estimatedBudget = isDevisAccepted ? 2500 : 800;
-            const budgetMatch = text.match(/([0-9\s.,]{3,})\s*(?:€|euros|k€|keuros)/i);
-            if (budgetMatch) {
-                let rawVal = budgetMatch[1].replace(/\s/g, '').replace(',', '.');
-                let val = parseFloat(rawVal);
-                if (lower.includes('k€') || lower.includes('keuros')) val *= 1000;
-                if (!isNaN(val) && val > 0) {
-                    estimatedBudget = val;
-                    detectedTags.push(`💰 Montant : ${val.toLocaleString('fr-FR')} €`);
-                }
-            }
-
-            // 4. Détection Catégorie & Métier
             let categoryFound = 'Sinistres & Construction';
             for (const [cat, words] of Object.entries(this.categories)) {
                 if (words.some(w => lower.includes(w))) {
@@ -78,334 +36,30 @@
                 }
             }
 
-            // 5. Détection Créneau Intelligent (Demain, Jeudi prochain, Vendredi prochain, ou calcul optimal)
-            const targetSlot = this.parseRequestedSlot(text, urgency);
-
             return {
-                leadScore: Math.min(99, Math.max(10, score)),
+                leadScore: Math.min(99, score),
                 urgency,
-                intent,
-                status,
                 category: categoryFound,
-                estimatedBudget,
                 detectedTags,
-                recommendedSlot: targetSlot
+                recommendedSlot: this.calculateOptimalSlot(urgency)
             };
         }
 
-        parseRequestedSlot(text, urgency) {
-            const lower = (text || '').toLowerCase();
-            const now = new Date(); // Date courante du système
-
-            // CAS 1 : "demain"
-            if (lower.includes('demain')) {
-                const target = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-                let timeStr = '14:00';
-                let endTimeStr = '15:00';
-                if (lower.includes('14h')) { timeStr = '14:00'; endTimeStr = '15:00'; }
-                else if (lower.includes('16h')) { timeStr = '16:00'; endTimeStr = '17:00'; }
-                else if (lower.includes('9h30') || lower.includes('09h30')) { timeStr = '09:30'; endTimeStr = '11:00'; }
-                return this.formatSlot(target, timeStr, endTimeStr, 'Demain');
-            }
-
-            // CAS 2 : "jeudi prochain"
-            if (lower.includes('jeudi prochain')) {
-                const target = new Date(now);
-                const dayOfWeek = target.getDay(); // 0 Dim, 1 Lun, 2 Mar, 3 Mer, 4 Jeu, 5 Ven, 6 Sam
-                let daysToAdd = (4 - dayOfWeek + 7) % 7;
-                if (daysToAdd <= 1) daysToAdd += 7; // Passe au jeudi de la semaine prochaine
-                target.setDate(target.getDate() + daysToAdd);
-                let timeStr = '16:00';
-                let endTimeStr = '17:00';
-                if (lower.includes('16h')) { timeStr = '16:00'; endTimeStr = '17:00'; }
-                else if (lower.includes('14h')) { timeStr = '14:00'; endTimeStr = '15:00'; }
-                return this.formatSlot(target, timeStr, endTimeStr, 'Jeudi prochain');
-            }
-
-            // CAS 3 : "vendredi prochain"
-            if (lower.includes('vendredi prochain') || lower.includes('ce vendredi')) {
-                const target = new Date(now);
-                const dayOfWeek = target.getDay();
-                let daysToAdd = (5 - dayOfWeek + 7) % 7;
-                if (daysToAdd <= 2 && lower.includes('vendredi prochain')) daysToAdd += 7;
-                if (daysToAdd === 0) daysToAdd = 7;
-                target.setDate(target.getDate() + daysToAdd);
-                let timeStr = '09:30';
-                let endTimeStr = '11:00';
-                if (lower.includes('9h30') || lower.includes('09h30')) { timeStr = '09:30'; endTimeStr = '11:00'; }
-                else if (lower.includes('14h')) { timeStr = '14:00'; endTimeStr = '15:00'; }
-                return this.formatSlot(target, timeStr, endTimeStr, 'Vendredi prochain');
-            }
-
-            // CAS PAR DÉFAUT : Prochain jour ouvré
+        calculateOptimalSlot(urgency) {
+            const now = new Date();
             const daysToAdd = urgency === 'haute' ? 1 : 2;
             const target = new Date(now.getTime() + (daysToAdd * 24 * 60 * 60 * 1000));
             if (target.getDay() === 0) target.setDate(target.getDate() + 1);
             if (target.getDay() === 6) target.setDate(target.getDate() + 2);
-            const timeStr = urgency === 'haute' ? '09:30' : '14:00';
-            const endTimeStr = urgency === 'haute' ? '11:00' : '15:00';
-            return this.formatSlot(target, timeStr, endTimeStr, 'Prochain créneau disponible');
-        }
 
-        formatSlot(dateObj, startTime, endTime, label) {
             const pad = n => String(n).padStart(2, '0');
-            const dateStr = `${pad(dateObj.getDate())}/${pad(dateObj.getMonth() + 1)}/${dateObj.getFullYear()}`;
-            const dateISO = `${dateObj.getFullYear()}-${pad(dateObj.getMonth() + 1)}-${pad(dateObj.getDate())}`;
-            const formattedLong = dateObj.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            return {
-                date: dateStr,
-                dateISO,
-                time: startTime,
-                startTime,
-                endTime,
-                label,
-                formattedLong
-            };
+            const dateStr = `${pad(target.getDate())}/${pad(target.getMonth() + 1)}/${target.getFullYear()}`;
+            const timeStr = urgency === 'haute' ? '09:30' : '14:00';
+            return { date: dateStr, time: timeStr };
         }
     }
 
     const rdvAgent = new RDVAIAssistant();
-
-    // ==========================================================================
-    // MODULE PLANNING & GESTION DES RENDEZ-VOUS DE M. MATHE SÉBASTIEN
-    // ==========================================================================
-    const PLANNING_STORAGE_KEY = 'rdv_hub_appointments';
-
-    function getStoredAppointments() {
-        try {
-            const raw = localStorage.getItem(PLANNING_STORAGE_KEY);
-            return raw ? JSON.parse(raw) : [];
-        } catch (e) {
-            console.error('Erreur lecture planning:', e);
-            return [];
-        }
-    }
-
-    function saveAppointmentToStorage(appointment) {
-        try {
-            const list = getStoredAppointments();
-            const existingIndex = list.findIndex(r => r.id === appointment.id);
-            if (existingIndex >= 0) {
-                list[existingIndex] = appointment;
-            } else {
-                list.unshift(appointment);
-            }
-            localStorage.setItem(PLANNING_STORAGE_KEY, JSON.stringify(list));
-            
-            // Persistance IndexedDB (RDVHubDB_v1) si disponible
-            if (typeof indexedDB !== 'undefined') {
-                const req = indexedDB.open('RDVHubDB_v1', 2);
-                req.onsuccess = (e) => {
-                    try {
-                        const db = e.target.result;
-                        if (db.objectStoreNames.contains('appointments')) {
-                            const tx = db.transaction('appointments', 'readwrite');
-                            tx.objectStore('appointments').put(appointment);
-                        }
-                    } catch (err) {
-                        console.warn('IndexedDB sync non critique:', err);
-                    }
-                };
-            }
-        } catch (e) {
-            console.error('Erreur sauvegarde rendez-vous:', e);
-        }
-    }
-
-    // Amorçage garanti des 3 prises de rendez-vous réelles demandées par M. MATHE Sébastien
-    function initSeedAppointments() {
-        const existing = getStoredAppointments();
-        const hasSeed1 = existing.some(r => r.clientName && r.clientName.includes('VALENTIN'));
-        const hasSeed2 = existing.some(r => r.clientName && r.clientName.includes('ROCHE'));
-        const hasSeed3 = existing.some(r => r.clientName && r.clientName.includes('MOREAU'));
-
-        if (!hasSeed1 || !hasSeed2 || !hasSeed3) {
-            const now = new Date();
-            const pad = n => String(n).padStart(2, '0');
-
-            // 1. RDV 1 : Demain à 14h (Jeudi 29 Octobre 2026) - Acceptation devis DEV-2026-084 (4 800 €)
-            const dDemain = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-            const dateDemainStr = `${pad(dDemain.getDate())}/${pad(dDemain.getMonth() + 1)}/${dDemain.getFullYear()}`;
-            const dateDemainISO = `${dDemain.getFullYear()}-${pad(dDemain.getMonth() + 1)}-${pad(dDemain.getDate())}`;
-
-            const rdv1 = {
-                id: 'RDV-2026-DEV-084',
-                clientName: 'M. Jean-Pierre VALENTIN',
-                company: 'SARL VALENTIN IMMOBILIER',
-                email: 'jp.valentin@valentin-immo.fr',
-                phone: '06 14 25 36 47',
-                location: '01000 Bourg-en-Bresse',
-                channel: 'web',
-                subject: 'Audit Énergétique & Rénovation Globale (Devis DEV-2026-084 Accepté)',
-                date: dateDemainISO,
-                dateStr: dateDemainStr,
-                startTime: '14:00',
-                endTime: '15:00',
-                amount: 4800,
-                status: 'confirmed',
-                intent: 'DEVIS_ACCEPTE',
-                leadScore: 98,
-                urgency: 'haute',
-                assignedTo: 'M. MATHE Sébastien',
-                expert: 'Sébastien Mathe (Dirigeant & Expert BTP)',
-                notes: "Devis n° DEV-2026-084 accepté et validé pour 4 800 € TTC. Bon pour accord confirmé. Rendez-vous de cadrage technique sur site.",
-                createdAt: new Date().toISOString()
-            };
-
-            // 2. RDV 2 : Jeudi prochain à 16h (5 Novembre 2026) - Demande de renseignements
-            const dJeudi = new Date(now);
-            const dayOfWeek = dJeudi.getDay();
-            let daysToNextThu = (4 - dayOfWeek + 7) % 7;
-            if (daysToNextThu <= 1) daysToNextThu += 7;
-            dJeudi.setDate(dJeudi.getDate() + daysToNextThu);
-            const dateJeudiStr = `${pad(dJeudi.getDate())}/${pad(dJeudi.getMonth() + 1)}/${dJeudi.getFullYear()}`;
-            const dateJeudiISO = `${dJeudi.getFullYear()}-${pad(dJeudi.getMonth() + 1)}-${pad(dJeudi.getDate())}`;
-
-            const rdv2 = {
-                id: 'RDV-2026-REN-019',
-                clientName: 'Mme Hélène ROCHE',
-                company: 'Copropriété Les Alisiers',
-                email: 'h.roche@residence-alisiers.fr',
-                phone: '06 78 91 23 45',
-                location: '01250 Ceyzériat',
-                channel: 'web',
-                subject: 'Renseignements Sinistre Fissuration Façade & Recours Décennale',
-                date: dateJeudiISO,
-                dateStr: dateJeudiStr,
-                startTime: '16:00',
-                endTime: '17:00',
-                amount: 2400,
-                status: 'pending',
-                intent: 'RENSEIGNEMENTS',
-                leadScore: 75,
-                urgency: 'normale',
-                assignedTo: 'M. MATHE Sébastien',
-                expert: 'Sébastien Mathe (Dirigeant & Expert BTP)',
-                notes: "Demande de renseignements pour contre-expertise suite à fissures sécheresse. Premier point d'orientation juridique et technique.",
-                createdAt: new Date().toISOString()
-            };
-
-            // 3. RDV 3 : Vendredi prochain à 9h30 (6 Novembre 2026) - Acceptation devis DEV-2026-091 (1 250 €)
-            const dVen = new Date(now);
-            let daysToNextFri = (5 - dVen.getDay() + 7) % 7;
-            if (daysToNextFri <= 2) daysToNextFri += 7;
-            if (daysToNextFri === 0) daysToNextFri = 7;
-            dVen.setDate(dVen.getDate() + daysToNextFri);
-            const dateVenStr = `${pad(dVen.getDate())}/${pad(dVen.getMonth() + 1)}/${dVen.getFullYear()}`;
-            const dateVenISO = `${dVen.getFullYear()}-${pad(dVen.getMonth() + 1)}-${pad(dVen.getDate())}`;
-
-            const rdv3 = {
-                id: 'RDV-2026-DEV-091',
-                clientName: 'M. Stéphane MOREAU',
-                company: 'Particulier acquéreur',
-                email: 'stephane.moreau82@gmail.com',
-                phone: '07 89 45 61 23',
-                location: '01600 Trévoux',
-                channel: 'web',
-                subject: 'Visite Technique Avant Achat Maison (Devis DEV-2026-091 Accepté)',
-                date: dateVenISO,
-                dateStr: dateVenStr,
-                startTime: '09:30',
-                endTime: '11:00',
-                amount: 1250,
-                status: 'confirmed',
-                intent: 'DEVIS_ACCEPTE',
-                leadScore: 95,
-                urgency: 'haute',
-                assignedTo: 'M. MATHE Sébastien',
-                expert: 'Sébastien Mathe (Dirigeant & Expert BTP)',
-                notes: "Devis n° DEV-2026-091 validé pour visite technique avant signature définitive (compromis en cours). Montant 1 250 € TTC.",
-                createdAt: new Date().toISOString()
-            };
-
-            if (!hasSeed1) saveAppointmentToStorage(rdv1);
-            if (!hasSeed2) saveAppointmentToStorage(rdv2);
-            if (!hasSeed3) saveAppointmentToStorage(rdv3);
-        }
-    }
-
-    function renderMathePlanning() {
-        const grid = document.getElementById('mathePlanningGrid');
-        const countBadge = document.getElementById('mathePlanningCount');
-        if (!grid) return;
-
-        const appointments = getStoredAppointments();
-        if (countBadge) {
-            countBadge.textContent = `${appointments.length} rendez-vous confirmés & qualifiés`;
-        }
-
-        if (appointments.length === 0) {
-            grid.innerHTML = '<div style="grid-column: 1/-1; padding: 1.5rem; text-align: center; color: #94a3b8;">Aucun rendez-vous planifié pour le moment.</div>';
-            return;
-        }
-
-        grid.innerHTML = appointments.map(rdv => {
-            const isConfirmed = rdv.status === 'confirmed';
-            const statusClass = isConfirmed ? 'status-confirmed' : 'status-pending';
-            const statusPillText = isConfirmed ? '✅ Devis Accepté & Validé' : '📋 Demande de Renseignements';
-            const amountFormatted = rdv.amount ? Number(rdv.amount).toLocaleString('fr-FR') + ' € TTC' : 'À chiffrer';
-            
-            // Liens calendrier
-            const dClean = (rdv.date || '2026-10-29').replace(/-/g, '');
-            const sClean = (rdv.startTime || '14:00').replace(':', '') + '00';
-            const eClean = (rdv.endTime || '15:00').replace(':', '') + '00';
-            const gCalDates = `${dClean}T${sClean}/${dClean}T${eClean}`;
-            const gCalTitle = encodeURIComponent(`RDV Expertise : ${rdv.subject} — ${rdv.clientName}`);
-            const gCalDesc = encodeURIComponent(`Rendez-vous planifié avec M. MATHE Sébastien (EFFICIENS ENERGIA - 07 78 24 65 67).\nClient : ${rdv.clientName} (${rdv.email || ''} - ${rdv.phone || ''})\nNotes : ${rdv.notes || ''}`);
-            const gCalLoc = encodeURIComponent(rdv.location || 'Bourg-en-Bresse / Ain');
-            const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gCalTitle}&dates=${gCalDates}&ctz=Europe/Paris&details=${gCalDesc}&location=${gCalLoc}`;
-
-            return `
-            <article class="mathe-rdv-card ${statusClass}" data-id="${rdv.id}">
-                <div class="mathe-rdv-card-top">
-                    <span class="mathe-slot-badge">
-                        <span>📅</span> ${rdv.dateStr || rdv.date} • ${rdv.startTime} - ${rdv.endTime}
-                    </span>
-                    <span class="mathe-status-pill">${statusPillText}</span>
-                </div>
-                <div>
-                    <h4 class="mathe-card-client">${rdv.clientName} ${rdv.company ? `<span style="font-weight: 400; font-size: 0.82rem; color: #94a3b8;">(${rdv.company})</span>` : ''}</h4>
-                    <p class="mathe-card-subject">${rdv.subject}</p>
-                </div>
-                <div class="mathe-card-badges">
-                    <span class="mathe-chip chip-amount">💰 ${amountFormatted}</span>
-                    <span class="mathe-chip chip-ai">🤖 Score IA : ${rdv.leadScore || 90}/100</span>
-                    <span class="mathe-chip">📍 ${rdv.location || 'Ain / Rhône'}</span>
-                    <span class="mathe-chip">👤 Assigné : <strong>M. MATHE Sébastien</strong></span>
-                </div>
-                <div class="mathe-card-actions">
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="downloadMatheIcs('${rdv.id}')" title="Télécharger l'invitation Outlook / Apple Calendar (.ics)">
-                        📥 Invitation .ICS
-                    </button>
-                    <a href="${gCalUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Ajouter à Google Agenda">
-                        📅 Google Agenda
-                    </a>
-                    ${rdv.phone ? `<a href="tel:${rdv.phone}" class="btn btn-secondary btn-sm" style="margin-left: auto;">📞 ${rdv.phone}</a>` : ''}
-                </div>
-            </article>
-            `;
-        }).join('');
-    }
-
-    // Export ICS unitaire accessible globalement
-    window.downloadMatheIcs = function(rdvId) {
-        const appointments = getStoredAppointments();
-        const rdv = appointments.find(r => r.id === rdvId) || appointments[0];
-        if (!rdv) return;
-
-        if (typeof window.exportAppointmentToCalendar === 'function') {
-            window.exportAppointmentToCalendar({
-                title: `RDV Expertise : ${rdv.subject} — M. MATHE Sébastien`,
-                description: `Rendez-vous planifié avec M. MATHE Sébastien (EFFICIENS ENERGIA).\nClient: ${rdv.clientName} (${rdv.phone || ''})\nNotes: ${rdv.notes || ''}`,
-                location: rdv.location || 'Cabinet EFFICIENS ENERGIA / Site',
-                startISO: `${rdv.date || '2026-10-29'}T${rdv.startTime || '14:00'}:00`,
-                durationMinutes: 60
-            });
-        } else {
-            alert(`Rendez-vous préparé pour M. MATHE Sébastien le ${rdv.dateStr} à ${rdv.startTime}.`);
-        }
-    };
-
 
 function initApplication() {
     const themeButton = document.getElementById('themeToggleBtn');
@@ -455,7 +109,7 @@ function initApplication() {
         }
     });
 
-        contactForm?.addEventListener('submit', async (event) => {
+    contactForm?.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!(contactForm instanceof HTMLFormElement) || !contactForm.reportValidity()) {
             return;
@@ -466,47 +120,11 @@ function initApplication() {
         const formData = new URLSearchParams();
 
         const rawMessage = contactForm.querySelector('[name="message"]')?.value || '';
-        const clientName = contactForm.querySelector('[name="name"]')?.value || 'Client Partenaire';
-        const clientEmail = contactForm.querySelector('[name="email"]')?.value || '';
-        const clientLocation = contactForm.querySelector('[name="location"]')?.value || 'Ain / Rhône';
-        const contactType = contactForm.querySelector('[name="type"]')?.value || 'Expertise Technique';
-
-        // 1. Analyse Déterministe par l'Agent IA RDV Hub
-        const aiAnalysis = rdvAgent.analyzeInquiry(rawMessage, contactType);
-
-        // 2. Création de l'objet Rendez-vous officiel
-        const newAppointment = {
-            id: 'RDV-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
-            clientName: clientName,
-            email: clientEmail,
-            location: clientLocation,
-            channel: 'web',
-            subject: `${contactType} (${aiAnalysis.intent === 'DEVIS_ACCEPTE' ? 'Devis Accepté' : 'Qualification'})`,
-            date: aiAnalysis.recommendedSlot.dateISO,
-            dateStr: aiAnalysis.recommendedSlot.date,
-            startTime: aiAnalysis.recommendedSlot.startTime,
-            endTime: aiAnalysis.recommendedSlot.endTime,
-            amount: aiAnalysis.estimatedBudget,
-            status: aiAnalysis.status,
-            intent: aiAnalysis.intent,
-            leadScore: aiAnalysis.leadScore,
-            urgency: aiAnalysis.urgency,
-            assignedTo: 'M. MATHE Sébastien',
-            expert: 'Sébastien Mathe (Dirigeant & Expert BTP)',
-            notes: rawMessage,
-            createdAt: new Date().toISOString()
-        };
-
-        // 3. Enregistrement immédiat dans le Planning de M. MATHE Sébastien & RDV Hub
-        saveAppointmentToStorage(newAppointment);
-        renderMathePlanning();
-
-        // 4. Préparation payload Netlify
+        const aiAnalysis = rdvAgent.analyzeInquiry(rawMessage);
         formData.append('rdv_hub_channel', 'web');
         formData.append('rdv_hub_urgency', aiAnalysis.urgency);
         formData.append('rdv_hub_lead_score', String(aiAnalysis.leadScore));
         formData.append('rdv_hub_suggested_slot', `${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}`);
-        formData.append('rdv_hub_assigned_to', 'M. MATHE Sébastien');
 
         new FormData(contactForm).forEach((value, key) => {
             formData.append(key, String(value));
@@ -516,27 +134,33 @@ function initApplication() {
             submitButton.disabled = true;
         }
         if (status) {
-            status.textContent = 'Qualification IA & Inscription sur le planning de M. MATHE Sébastien…';
+            status.textContent = 'Envoi de votre demande…';
         }
 
         try {
-            // Tentative envoi réseau (Netlify Forms)
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData.toString()
             });
-        } catch (error) {
-            console.warn('Mode Fail-Soft : Netlify non joignable, enregistrement local et planning confirmés.', error);
-        } finally {
+            if (!response.ok) {
+                throw new Error(`Netlify Forms rejected the request with status ${response.status}`);
+            }
+
             contactForm.reset();
+            if (status) {
+                const priorityBadge = aiAnalysis.urgency === 'haute' ? '⚡ Priorité Haute' : '✅ Enregistré';
+                status.innerHTML = `<strong>${priorityBadge} — Pris en charge par l'Agent IA RDV Hub</strong><br>Votre demande a été qualifiée avec succès (créneau suggéré : ${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}). Notre expert vous confirme l'intervention sous 24h.`;
+                status.style.color = '#38bdf8';
+            }
+        } catch (error) {
+            console.error('Impossible de transmettre le formulaire de contact.', error);
+            if (status) {
+                status.textContent = 'Le formulaire n’a pas pu être envoyé. Réessayez ou contactez-nous directement par e-mail à contact@efficiens-energia.fr.';
+            }
+        } finally {
             if (submitButton instanceof HTMLButtonElement) {
                 submitButton.disabled = false;
-            }
-            if (status) {
-                const priorityBadge = aiAnalysis.status === 'confirmed' ? '✅ DEVIS VALIDÉ & CRÉNEAU CONFIRMÉ' : '📋 RENDEZ-VOUS INSCRIT AU PLANNING';
-                status.innerHTML = `<strong>${priorityBadge} — Agent IA RDV Hub</strong><br>Votre rendez-vous avec <strong>M. MATHE Sébastien</strong> est officiellement enregistré pour le <strong>${aiAnalysis.recommendedSlot.formattedLong || aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.startTime}</strong>.<br><span style="font-size: 0.85em; color: #cbd5e1;">Attribué à M. MATHE Sébastien (Tél : 07 78 24 65 67). Fiche synchronisée dans le planning ci-dessous.</span>`;
-                status.style.color = '#38bdf8';
             }
         }
     });
@@ -552,12 +176,6 @@ function initApplication() {
 
     // --- GESTION DU FILTRE D'INTENTION 1-CLIC & DU GUIDE D'ORIENTATION (@UIX) ---
     initExpertiseFilter();
-    // Initialisation et affichage du Planning Officiel de M. MATHE Sébastien
-    initSeedAppointments();
-    renderMathePlanning();
-    document.getElementById('btnRefreshPlanning')?.addEventListener('click', () => {
-        renderMathePlanning();
-    });
     // Agent IA RDV Hub actif
 
     function initExpertiseFilter() {
