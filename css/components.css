@@ -5275,3 +5275,11 @@ a.contact-header-badge:hover {
         transform: translateY(0);
     }
 }
+
+/* ==========================================================================
+   MASQUAGE DU HERO D'ACCUEIL & DE L'INTRO CABINET (@PO SEB)
+   ========================================================================== */
+#accueil,
+#cabinet {
+    display: none !important;
+}

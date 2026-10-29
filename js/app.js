@@ -700,16 +700,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Si ce n'est pas un des 6 onglets connus, ne rien faire
         if (!validTabs.includes(targetId)) return;
 
-        // 0. Hero & Intro Cabinet : VISIBLES UNIQUEMENT SUR L'ONGLET "NOS EXPERTISES"
+        // 0. Hero & Intro Cabinet masqués sur tous les onglets
         const heroSection = document.getElementById('accueil');
         const introSection = document.getElementById('cabinet');
-        if (targetId === 'expertises') {
-            if (heroSection) heroSection.style.display = '';
-            if (introSection) introSection.style.display = '';
-        } else {
-            if (heroSection) heroSection.style.display = 'none';
-            if (introSection) introSection.style.display = 'none';
-        }
+        if (heroSection) heroSection.style.display = 'none';
+        if (introSection) introSection.style.display = 'none';
 
         // 1. Basculer l'affichage des panneaux
         tabPanels.forEach(panel => {
