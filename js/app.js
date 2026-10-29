@@ -557,10 +557,124 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const zoneSelect = document.getElementById('calcZoneSelect');
+    const btnTogglePjLetter = document.getElementById('btnTogglePjLetter');
+    const pjLetterBox = document.getElementById('pjLetterBox');
+    const pjLetterTextarea = document.getElementById('pjLetterTextarea');
+    const btnCopyPjLetter = document.getElementById('btnCopyPjLetter');
+    const pjCopyConfirm = document.getElementById('pjCopyConfirm');
+    const btnApplyCalcToRdv = document.getElementById('btnApplyCalcToRdv');
+
+    function buildPjOfficialLetter() {
+        const sLabel = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : 'Expertise bâtiment';
+        const pLabel = propSelect ? propSelect.options[propSelect.selectedIndex].text : 'Bien immobilier';
+        const priceText = priceDisplay ? priceDisplay.textContent : '790 € – 1 090 € TTC';
+        const todayStr = new Date().toLocaleDateString('fr-FR');
+        return [
+            "OBJET : Déclaration de sinistre et exercice du droit au libre choix de l'expert (Art. L. 127-2-3 du Code des assurances)",
+            "Date : " + todayStr,
+            "",
+            "Madame, Monsieur,",
+            "",
+            "Dans le cadre de mon contrat d'assurance Protection Juridique / Multirisque Habitation, je vous informe par la présente faire appel à un expert bâtiment et énergie indépendant pour assurer la défense technique de mes intérêts concernant :",
+            "- Nature de la mission : " + sLabel,
+            "- Bien concerné : " + pLabel,
+            "- Cabinet d'expertise désigné : EFFICIENS ENERGIA (M. Sébastien MATHE, SIRET 827 694 498 00011, 480 Route du Belvédère, 01250 Hautecourt-Romanèche).",
+            "- Estimation d'honoraires forfaitaires : " + priceText,
+            "",
+            "Conformément aux dispositions d'ordre public de l'Article L. 127-2-3 du Code des assurances (liberté du choix de l'expert et du conseil par l'assuré), je vous prie de bien vouloir enregistrer la constitution de M. Sébastien MATHE et de me confirmer le plafond de prise en charge applicable aux frais et honoraires d'expertise.",
+            "",
+            "Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+        ].join("\n");
+    }
+
+    const origUpdatePrice = updatePrice;
+    function enhancedUpdatePrice() {
+        origUpdatePrice();
+        if (zoneSelect && priceDisplay && serviceSelect && serviceSelect.value !== 'industriel') {
+            const z = zoneSelect.value;
+            const s = serviceSelect.value;
+            const p = propSelect.value;
+            const d = deliverableSelect.value;
+            const sData = TARIFF_MATRIX[s] || TARIFF_MATRIX.sinistre;
+            const dData = sData[d] || sData.rapport_ecrit;
+            const item = dData[p] || { min: 690, max: 990 };
+            let surcharge = 0;
+            if (z === 'zone_38_73_74') surcharge = 60;
+            else if (z === 'zone_suisse') surcharge = 140;
+            const minFinal = item.min + surcharge;
+            const maxFinal = item.max + surcharge;
+            priceDisplay.textContent = minFinal + " € – " + maxFinal + " € TTC";
+        }
+        if (pjLetterTextarea) {
+            pjLetterTextarea.value = buildPjOfficialLetter();
+        }
+    }
+
     if (serviceSelect && propSelect && deliverableSelect) {
-        serviceSelect.addEventListener('change', updatePrice);
-        propSelect.addEventListener('change', updatePrice);
-        deliverableSelect.addEventListener('change', updatePrice);
-        updatePrice();
+        serviceSelect.addEventListener('change', enhancedUpdatePrice);
+        propSelect.addEventListener('change', enhancedUpdatePrice);
+        deliverableSelect.addEventListener('change', enhancedUpdatePrice);
+        if (zoneSelect) zoneSelect.addEventListener('change', enhancedUpdatePrice);
+        enhancedUpdatePrice();
+    }
+
+    if (btnTogglePjLetter && pjLetterBox) {
+        btnTogglePjLetter.addEventListener('click', () => {
+            const isHidden = pjLetterBox.hasAttribute('hidden');
+            if (isHidden) {
+                pjLetterBox.removeAttribute('hidden');
+                if (pjLetterTextarea) pjLetterTextarea.value = buildPjOfficialLetter();
+            } else {
+                pjLetterBox.setAttribute('hidden', '');
+            }
+        });
+    }
+
+    if (btnCopyPjLetter && pjLetterTextarea) {
+        btnCopyPjLetter.addEventListener('click', () => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(pjLetterTextarea.value).catch(() => {});
+            }
+            if (pjCopyConfirm) {
+                pjCopyConfirm.removeAttribute('hidden');
+                setTimeout(() => pjCopyConfirm.setAttribute('hidden', ''), 3500);
+            }
+        });
+    }
+
+    if (btnApplyCalcToRdv) {
+        btnApplyCalcToRdv.addEventListener('click', () => {
+            const contactType = document.getElementById('contactType');
+            const contactLocation = document.getElementById('contactLocation');
+            const contactMessage = document.getElementById('contactMessage');
+            const sVal = serviceSelect ? serviceSelect.value : 'sinistre';
+            const sText = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : '';
+            const pText = propSelect ? propSelect.options[propSelect.selectedIndex].text : '';
+            const dText = deliverableSelect ? deliverableSelect.options[deliverableSelect.selectedIndex].text : '';
+            const zText = zoneSelect ? zoneSelect.options[zoneSelect.selectedIndex].text : '';
+            const priceText = priceDisplay ? priceDisplay.textContent : '';
+
+            if (contactType) {
+                const mapType = {
+                    sinistre: 'Sinistre ou dommage de construction',
+                    visite_achat: 'Visite technique avant achat immobilier',
+                    contre_expertise: 'Expertise technique dans le cadre d’une protection juridique',
+                    dpe_energie: 'Diagnostic immobilier contesté',
+                    industriel: 'Expertise industrielle'
+                };
+                contactType.value = mapType[sVal] || 'Sinistre ou dommage de construction';
+            }
+            if (contactLocation && !contactLocation.value) {
+                contactLocation.value = zText.split('—')[0].trim();
+            }
+            if (contactMessage) {
+                contactMessage.value = `[SIMULATION D'HONORAIRES VALIDÉE : ${priceText}]\n- Mission : ${sText}\n- Typologie : ${pText}\n- Livrable : ${dText}\n- Secteur : ${zText}\nBonjour M. MATHE, je souhaite confirmer un devis ferme et réserver un créneau pour cette mission.`;
+            }
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     }
 });

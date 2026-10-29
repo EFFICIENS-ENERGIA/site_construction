@@ -4217,284 +4217,389 @@
 
 
 
+
+
 /* ==========================================================================
-   PLANNING OFFICIEL D'INTERVENTIONS — M. MATHE SÉBASTIEN (RDV HUB IA)
+   AFFORDANCE & VISIBILITÉ HAUTE PERFORMANCE DES ÉLÉMENTS CLIQUABLES & ÉPURATION
    ========================================================================== */
-.mathe-planning-container {
-    width: 100%;
-    margin-top: 2.25rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
-    border: 1px solid rgba(14, 165, 233, 0.3);
-    border-radius: 12px;
-    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.45);
-    color: #f8fafc;
-}
 
-[data-theme="light"] .mathe-planning-container {
-    background: linear-gradient(135deg, #ffffff, #f1f5f9);
-    border-color: rgba(14, 165, 233, 0.35);
-    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
-    color: #0f172a;
-}
-
-.mathe-planning-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="light"] .mathe-planning-header {
-    border-bottom-color: rgba(15, 23, 42, 0.1);
-}
-
-.mathe-badge-live {
+/* 1. Header & Navigation : Affordance des boutons */
+.site-header .main-nav a {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.25rem 0.65rem;
-    border-radius: 9999px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    background: rgba(16, 185, 129, 0.15);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    margin-bottom: 0.35rem;
-}
-
-.live-dot-pulse {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-    animation: mathePulse 2s infinite;
-}
-
-@keyframes mathePulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-
-.mathe-planning-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0.2rem 0 0.35rem 0;
-    color: #f8fafc;
-}
-
-[data-theme="light"] .mathe-planning-title {
-    color: #0f172a;
-}
-
-.mathe-planning-subtitle {
-    font-size: 0.82rem;
-    color: #94a3b8;
-    margin: 0;
-    line-height: 1.4;
-}
-
-[data-theme="light"] .mathe-planning-subtitle {
-    color: #64748b;
-}
-
-.mathe-planning-actions-top {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.mathe-planning-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-    gap: 1.15rem;
-    margin-bottom: 1.25rem;
-}
-
-.mathe-rdv-card {
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: 4px solid #0ea5e9;
+    padding: 0.5rem 0.9rem;
     border-radius: 8px;
-    padding: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.85rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-[data-theme="light"] .mathe-rdv-card {
-    background: #ffffff;
-    border-color: #e2e8f0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.mathe-rdv-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-.mathe-rdv-card.status-confirmed {
-    border-left-color: #10b981;
-}
-
-.mathe-rdv-card.status-pending {
-    border-left-color: #f59e0b;
-}
-
-.mathe-rdv-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.5rem;
-}
-
-.mathe-slot-badge {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: #38bdf8;
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-
-[data-theme="light"] .mathe-slot-badge {
-    color: #0284c7;
-}
-
-.mathe-status-pill {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-}
-
-.status-confirmed .mathe-status-pill {
-    background: rgba(16, 185, 129, 0.18);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.4);
-}
-
-[data-theme="light"] .status-confirmed .mathe-status-pill {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.status-pending .mathe-status-pill {
-    background: rgba(245, 158, 11, 0.18);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.4);
-}
-
-[data-theme="light"] .status-pending .mathe-status-pill {
-    background: #fef3c7;
-    color: #b45309;
-}
-
-.mathe-card-client {
-    font-size: 0.96rem;
-    font-weight: 700;
-    color: #f8fafc;
-    margin: 0.2rem 0 0.1rem 0;
-}
-
-[data-theme="light"] .mathe-card-client {
-    color: #0f172a;
-}
-
-.mathe-card-subject {
-    font-size: 0.84rem;
-    color: #cbd5e1;
-    line-height: 1.4;
-    margin: 0;
-}
-
-[data-theme="light"] .mathe-card-subject {
-    color: #475569;
-}
-
-.mathe-card-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    font-size: 0.72rem;
-    margin-top: 0.4rem;
-}
-
-.mathe-chip {
-    padding: 0.15rem 0.45rem;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.06);
-    color: #cbd5e1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="light"] .mathe-chip {
-    background: #f1f5f9;
-    color: #475569;
-    border-color: #e2e8f0;
-}
-
-.mathe-chip.chip-amount {
-    font-weight: 700;
-    color: #38bdf8;
-    background: rgba(14, 165, 233, 0.12);
-    border-color: rgba(14, 165, 233, 0.3);
-}
-
-[data-theme="light"] .mathe-chip.chip-amount {
-    color: #0284c7;
-    background: #e0f2fe;
-}
-
-.mathe-chip.chip-ai {
     font-weight: 600;
-    color: #a78bfa;
-    background: rgba(139, 92, 246, 0.12);
-    border-color: rgba(139, 92, 246, 0.3);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    text-decoration: none !important;
 }
 
-.mathe-card-actions {
+.site-header .main-nav a:hover,
+.site-header .main-nav a.nav-highlight {
+    background: rgba(37, 99, 235, 0.08);
+    color: #1d4ed8 !important;
+}
+
+[data-theme="dark"] .site-header .main-nav a:hover,
+[data-theme="dark"] .site-header .main-nav a.nav-highlight {
+    background: rgba(96, 165, 250, 0.15);
+    color: #93c5fd !important;
+}
+
+.site-header .header-contact {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border: 2px solid #3b82f6 !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
+    padding: 0.65rem 1.4rem !important;
+    border-radius: 9999px !important;
+    text-decoration: none !important;
+}
+
+.site-header .header-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.55) !important;
+    filter: brightness(1.1);
+}
+
+.site-header .btn-theme-toggle {
+    border: 1.5px solid var(--color-border);
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    cursor: pointer;
+    background: var(--bg-secondary);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.site-header .btn-theme-toggle:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+/* 2. Hero Action Buttons */
+.expertise-hero-actions {
     display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding-top: 0.65rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="light"] .mathe-card-actions {
-    border-top-color: #e2e8f0;
-}
-
-.mathe-planning-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
     flex-wrap: wrap;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.78rem;
-    color: #94a3b8;
+    gap: 1rem;
+    align-items: center;
+    margin: 2rem 0;
 }
 
-[data-theme="light"] .mathe-planning-footer {
-    border-top-color: #e2e8f0;
-    color: #64748b;
-}
-
-.mathe-footer-sync-status {
+.expertise-hero-actions .btn {
+    font-size: 1rem;
+    padding: 0.95rem 2rem;
     font-weight: 700;
-    color: #10b981;
+}
+
+.expertise-hero-actions .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.85rem 1.4rem;
+    border-radius: 9999px;
+    background: rgba(37, 99, 235, 0.06);
+    color: #1d4ed8 !important;
+    border: 1.5px solid rgba(37, 99, 235, 0.2);
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+}
+
+.expertise-hero-actions .text-link:hover {
+    background: #2563eb;
+    color: #ffffff !important;
+    border-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+/* 3. Cartes d'Expertise : Affordance interactive & visibilité maximale */
+.expertise-card {
+    border: 2px solid rgba(15, 23, 42, 0.08) !important;
+    border-radius: 14px !important;
+    cursor: pointer;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.expertise-card:hover {
+    border-color: #2563eb !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 16px 36px rgba(37, 99, 235, 0.15) !important;
+}
+
+[data-theme="dark"] .expertise-card {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    background: #13151b !important;
+}
+
+[data-theme="dark"] .expertise-card:hover {
+    border-color: #60a5fa !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5) !important;
+}
+
+.expertise-card h3 a.expertise-card-title-link {
+    color: var(--text-primary);
+    text-decoration: none !important;
+    transition: color 0.18s;
+}
+
+.expertise-card:hover h3 a.expertise-card-title-link {
+    color: #2563eb;
+}
+
+[data-theme="dark"] .expertise-card:hover h3 a.expertise-card-title-link {
+    color: #60a5fa;
+}
+
+/* Actions des cartes (Boutons cliquables haute visibilité) */
+.expertise-card-actions,
+.sinistre-card-actions,
+.expertise-purchase-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    margin-top: auto !important;
+    padding-top: 1.25rem !important;
+    width: 100% !important;
+}
+
+/* Bouton 1 dans la carte : Découvrir la prestation */
+.expertise-card .service-more-link,
+.expertise-card .sinistre-more-link,
+.expertise-card .btn-card-primary {
+    background: #1d4ed8 !important;
+    color: #ffffff !important;
+    border: 2px solid #1d4ed8 !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    padding: 0.65rem 1.25rem !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 3px 10px rgba(29, 78, 216, 0.3) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.expertise-card .service-more-link:hover,
+.expertise-card .sinistre-more-link:hover,
+.expertise-card .btn-card-primary:hover {
+    background: #1e40af !important;
+    border-color: #1e40af !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.45) !important;
+}
+
+/* Bouton 2 dans la carte : Échanger / Préparer */
+.expertise-card .card-link,
+.expertise-card .btn-card-secondary {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 2px solid #94a3b8 !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+}
+
+.expertise-card .card-link:hover,
+.expertise-card .btn-card-secondary:hover {
+    background: #e2e8f0 !important;
+    border-color: #2563eb !important;
+    color: #1d4ed8 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+}
+
+[data-theme="dark"] .expertise-card .card-link,
+[data-theme="dark"] .expertise-card .btn-card-secondary {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .expertise-card .card-link:hover,
+[data-theme="dark"] .expertise-card .btn-card-secondary:hover {
+    background: #334155 !important;
+    border-color: #60a5fa !important;
+    color: #93c5fd !important;
+}
+
+/* 4. Boutons PDF */
+.btn-pdf,
+#prestationPdfLink {
+    background: #fff1f2 !important;
+    color: #be123c !important;
+    border: 2px solid #f43f5e !important;
+    font-weight: 700 !important;
+    padding: 0.8rem 1.6rem !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 12px rgba(190, 18, 60, 0.15) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-pdf:hover,
+#prestationPdfLink:hover {
+    background: #be123c !important;
+    color: #ffffff !important;
+    border-color: #be123c !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(190, 18, 60, 0.3) !important;
+}
+
+[data-theme="dark"] .btn-pdf,
+[data-theme="dark"] #prestationPdfLink {
+    background: rgba(190, 18, 60, 0.2) !important;
+    color: #fca5a5 !important;
+    border-color: #f43f5e !important;
+}
+
+[data-theme="dark"] .btn-pdf:hover,
+[data-theme="dark"] #prestationPdfLink:hover {
+    background: #be123c !important;
+    color: #ffffff !important;
+}
+
+/* 5. Simulateur Tarifaire & Tuiles Claires */
+.interactive-calculator-card {
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06) !important;
+}
+
+.calc-selector-btn,
+.calc-preset-pill,
+.calc-option {
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    padding: 0.65rem 1.1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.calc-selector-btn:hover,
+.calc-preset-pill:hover,
+.calc-option:hover {
+    border-color: #2563eb !important;
+    background: rgba(37, 99, 235, 0.05) !important;
+}
+
+.calc-selector-btn.active,
+.calc-preset-pill.active,
+.calc-option.selected {
+    border-color: #1d4ed8 !important;
+    background: rgba(37, 99, 235, 0.12) !important;
+    color: #1d4ed8 !important;
+}
+
+[data-theme="dark"] .calc-selector-btn,
+[data-theme="dark"] .calc-preset-pill,
+[data-theme="dark"] .calc-option {
+    border-color: #475569 !important;
+}
+
+/* 6. Questions FAQ */
+.faq-item {
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    margin-bottom: 0.85rem !important;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.faq-item summary,
+.faq-question {
+    padding: 1.1rem 1.4rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    background: var(--bg-secondary) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    transition: background 0.2s ease !important;
+}
+
+.faq-item summary:hover,
+.faq-question:hover {
+    background: rgba(37, 99, 235, 0.06) !important;
+    color: #1d4ed8 !important;
+}
+
+/* 7. Zone Glisser-Déposer & Formulaire */
+.file-dropzone {
+    border: 2.5px dashed #3b82f6 !important;
+    background: rgba(37, 99, 235, 0.03) !important;
+    border-radius: 12px !important;
+    padding: 2rem !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.file-dropzone:hover,
+.file-dropzone.dragover {
+    border-color: #1d4ed8 !important;
+    background: rgba(37, 99, 235, 0.08) !important;
+    transform: scale(1.01);
+}
+
+.file-dropzone .btn-browse-file {
+    background: #1d4ed8 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    padding: 0.65rem 1.3rem !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    margin-top: 0.85rem !important;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25) !important;
+}
+
+/* 8. Modernisation Section Transition Allégée */
+.light-transition-banner {
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.06) 0%, rgba(30, 58, 138, 0.04) 100%);
+    border: 2px solid rgba(37, 99, 235, 0.15);
+    text-align: center;
+}
+
+.light-transition-banner h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.light-transition-banner p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0 auto 1.75rem auto;
+    line-height: 1.6;
+}
+
+.light-transition-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
 }

@@ -22,39 +22,121 @@
     <link rel="apple-touch-icon" href="assets/logo_efficiens_energia.png">
     <link rel="stylesheet" href="css/design_system.css?v=20">
     <link rel="stylesheet" href="css/components.css?v=30">
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="geoSchemaJsonLd">
         {
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "EFFICIENS ENERGIA",
-            "telephone": "+33778246567",
-            "email": "contact@efficiens-energia.fr",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "480 Route du Belvédère",
-                "postalCode": "01250",
-                "addressLocality": "Hautecourt-Romaneche",
-                "addressCountry": "FR"
-            },
-            "identifier": {
-                "@type": "PropertyValue",
-                "propertyID": "SIRET",
-                "value": "827 694 498 00011"
-            },
-            "areaServed": [
-                {"@type": "AdministrativeArea", "name": "Ain"},
-                {"@type": "AdministrativeArea", "name": "Rhône (69) et Métropole de Lyon"},
-                {"@type": "AdministrativeArea", "name": "Saône-et-Loire (71)"},
-                {"@type": "AdministrativeArea", "name": "Jura (39)"},
-                {"@type": "AdministrativeArea", "name": "Isère (38)"},
-                {"@type": "AdministrativeArea", "name": "Haute-Savoie (74)"},
-                {"@type": "AdministrativeArea", "name": "Savoie (73)"},
-                {"@type": "AdministrativeArea", "name": "Cantons de Genève et Vaud, Suisse"},
-                {"@type": "AdministrativeArea", "name": "Auvergne-Rhône-Alpes"}
-            ],
-            "sameAs": [
-                "https://www.facebook.com/efficiens.energia",
-                "https://www.linkedin.com/in/s%C3%A9bastien-mathe-b04446113/"
+            "@graph": [
+                {
+                    "@type": "ProfessionalService",
+                    "@id": "https://efficiens-energia.fr/#organization",
+                    "name": "EFFICIENS ENERGIA",
+                    "legalName": "EFFICIENS ENERGIA - Cabinet d'Expertise Bâtiment & Énergie Indépendant",
+                    "founder": {
+                        "@type": "Person",
+                        "name": "Sébastien MATHE",
+                        "jobTitle": "Expert Bâtiment & Énergie Indépendant"
+                    },
+                    "telephone": "+33778246567",
+                    "email": "contact@efficiens-energia.fr",
+                    "priceRange": "380€ - 2800€ TTC",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "480 Route du Belvédère",
+                        "postalCode": "01250",
+                        "addressLocality": "Hautecourt-Romaneche",
+                        "addressRegion": "Auvergne-Rhône-Alpes",
+                        "addressCountry": "FR"
+                    },
+                    "identifier": {
+                        "@type": "PropertyValue",
+                        "propertyID": "SIRET",
+                        "value": "827 694 498 00011"
+                    },
+                    "areaServed": [
+                        {"@type": "AdministrativeArea", "name": "Ain (01) - Bourg-en-Bresse, Oyonnax, Ambérieu-en-Bugey, Pays de Gex"},
+                        {"@type": "AdministrativeArea", "name": "Rhône (69) et Métropole de Lyon"},
+                        {"@type": "AdministrativeArea", "name": "Saône-et-Loire (71) - Mâcon, Chalon-sur-Saône"},
+                        {"@type": "AdministrativeArea", "name": "Jura (39) - Lons-le-Saunier, Saint-Claude"},
+                        {"@type": "AdministrativeArea", "name": "Isère (38)"},
+                        {"@type": "AdministrativeArea", "name": "Haute-Savoie (74) - Annecy, Annemasse"},
+                        {"@type": "AdministrativeArea", "name": "Savoie (73) - Chambéry, Aix-les-Bains"},
+                        {"@type": "AdministrativeArea", "name": "Suisse romande (Cantons de Genève et Vaud)"},
+                        {"@type": "AdministrativeArea", "name": "Auvergne-Rhône-Alpes"}
+                    ],
+                    "hasOfferCatalog": {
+                        "@type": "OfferCatalog",
+                        "name": "Missions d'Expertise Bâtiment & Énergie Indépendante",
+                        "itemListElement": [
+                            {
+                                "@type": "Offer",
+                                "itemOffered": {
+                                    "@type": "Service",
+                                    "name": "Expertise Sinistres Bâtiment, Fissures RGA & Humidité",
+                                    "description": "Recherche de causes racines, mesures instrumentées et rapport opposable DTU / Eurocodes."
+                                },
+                                "priceSpecification": {
+                                    "@type": "PriceSpecification",
+                                    "minPrice": "690",
+                                    "maxPrice": "1390",
+                                    "priceCurrency": "EUR"
+                                }
+                            },
+                            {
+                                "@type": "Offer",
+                                "itemOffered": {
+                                    "@type": "Service",
+                                    "name": "Visite Technique Avant Achat Immobilier",
+                                    "description": "Inspection structurelle, thermique et humidité avant signature de compromis."
+                                },
+                                "priceSpecification": {
+                                    "@type": "PriceSpecification",
+                                    "minPrice": "490",
+                                    "maxPrice": "1150",
+                                    "priceCurrency": "EUR"
+                                }
+                            },
+                            {
+                                "@type": "Offer",
+                                "itemOffered": {
+                                    "@type": "Service",
+                                    "name": "Contre-Expertise d'Assuré & Protection Juridique (Art. L. 127-2-3 C. assur.)",
+                                    "description": "Assistance contradictoire indépendante face à l'expert d'assurance avec libre choix de l'expert."
+                                },
+                                "priceSpecification": {
+                                    "@type": "PriceSpecification",
+                                    "minPrice": "750",
+                                    "maxPrice": "1590",
+                                    "priceCurrency": "EUR"
+                                }
+                            }
+                        ]
+                    },
+                    "sameAs": [
+                        "https://www.facebook.com/efficiens.energia",
+                        "https://www.linkedin.com/in/s%C3%A9bastien-mathe-b04446113/"
+                    ]
+                },
+                {
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "Puis-je choisir librement mon expert bâtiment avec mon assurance Protection Juridique ?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Oui. En vertu de l'Article L. 127-2-3 du Code des assurances, l'assuré dispose de la liberté absolue du choix de son expert ou conseil technique dès lors qu'un conflit d'intérêts ou un désaccord survient. Les honoraires d'EFFICIENS ENERGIA sont alors remboursables selon le barème contractuel de votre Protection Juridique."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Dans quels départements intervient le cabinet EFFICIENS ENERGIA ?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "M. Sébastien MATHE intervient en totale indépendance dans l'Ain (01), le Rhône et Lyon (69), le Jura (39), la Saône-et-Loire (71), l'Isère (38), la Savoie (73), la Haute-Savoie (74) ainsi qu'en Suisse romande (Genève, Vaud)."
+                            }
+                        }
+                    ]
+                }
             ]
         }
     </script>
@@ -91,11 +173,11 @@
                 <div class="expertise-hero-copy">
                     <p class="eyebrow"><span class="eyebrow-line"></span> Expert indépendant · bâtiment & énergie</p>
                     <h1>Besoin d'un regard technique indépendant ?<br><span>Faisons le point sur votre situation.</span></h1>
-                    <p class="expertise-hero-lead">Sinistre, malfaçon, dommage à une installation ou diagnostic contesté : vous pouvez solliciter une analyse technique à votre initiative, distincte de celle réalisée pour une autre partie. Nous clarifions d'abord votre besoin, les documents utiles et le périmètre d'une éventuelle mission.</p>
+                    <p class="expertise-hero-lead">Sinistre, malfaçon, dommage ou diagnostic contesté : bénéficiez d'un regard technique indépendant, rigoureux et opposable. Cadrons ensemble votre dossier dès le premier contact.</p>
                     <div class="expertise-hero-actions">
-                        <a class="btn btn-primary" href="#sinistres-details">Sinistre ou dommage <span aria-hidden="true">↘</span></a>
-                        <a class="btn btn-secondary" href="#diagnostics-details">Diagnostic contesté <span aria-hidden="true">↘</span></a>
-                        <a class="text-link" href="#expertises">Découvrir nos domaines <span aria-hidden="true">↓</span></a>
+                        <a class="btn btn-primary" href="prestation.html?service=sinistres">Sinistre & dommage <span aria-hidden="true">→</span></a>
+                        <a class="btn btn-secondary" href="prestation.html?service=diagnostics">Diagnostic contesté <span aria-hidden="true">→</span></a>
+                        <a class="text-link" href="#expertises">Toutes nos expertises <span aria-hidden="true">↓</span></a>
                     </div>
                     <div class="independence-badge-container">
                         <div class="independence-badge">
@@ -127,8 +209,8 @@
                     <h2 id="intro-title">Un avis technique à votre initiative.</h2>
                 </div>
                 <div class="expertise-intro-copy">
-                    <p>Un expert missionné par une autre partie répond à un cadre d'intervention qui lui est propre. En faisant appel directement à un expert indépendant, vous disposez d'une analyse menée dans le cadre de la mission définie avec vous, en fonction de votre situation et de vos objectifs.</p>
-                    <p>Le premier échange sert à comprendre les désordres ou le désaccord, à identifier les documents disponibles et à vérifier si une intervention est pertinente. Si une mission est envisagée, son périmètre, ses modalités, ses honoraires et ses livrables sont précisés avant toute intervention. L'expertise décrit et analyse des éléments techniques ; elle ne constitue ni un avis juridique, ni une décision d'assurance, ni une garantie sur l'issue d'un différend.</p>
+                    <p>Faire appel à un expert indépendant, c'est l'assurance d'une analyse technique neutre et rigoureuse, menée exclusivement selon vos intérêts et les faits observables.</p>
+                    <p>Chaque dossier fait l'objet d'un premier cadrage préalable sans engagement pour vérifier la pertinence de l'intervention et définir un périmètre d'action précis.</p>
                 </div>
             </div>
             <div class="container expertise-principles">
@@ -168,276 +250,154 @@
 
                 <div class="expertise-card-grid">
                     <article class="expertise-card" id="sinistres" data-category="particulier">
+                        <span id="sinistres-details" class="section-anchor"></span>
                         <span class="expertise-card-index">01</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/sinistres-construction.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/sinistres-construction.jpg" alt="Intérieur d’un logement endommagé, avec des éléments de plafond et de cloison détériorés" width="500" height="333" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=sinistres" aria-label="Sinistres et dommages à la construction">Sinistres & dommages à la construction</a></h3>
-                        <p>Analyse technique des dommages et désordres affectant un ouvrage, à la suite d'un événement ou de travaux.</p>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=sinistres">Sinistres & dommages à la construction</a></h3>
+                        <p>Analyse technique impartiale des désordres affectant un ouvrage après travaux ou événement dommageable.</p>
                         <ul>
-                            <li>Infiltrations, dégâts des eaux et humidité</li>
-                            <li>Fissures, mouvements et désordres structurels</li>
-                            <li>Malfaçons, non-conformités et dommages après travaux</li>
-                            <li>Éléments techniques utiles à l'évaluation du préjudice</li>
+                            <li>Infiltrations, humidité et dégâts des eaux</li>
+                            <li>Fissures et mouvements de structure</li>
+                            <li>Malfaçons et non-conformités après travaux</li>
                         </ul>
-                        <div class="sinistre-card-actions">
-                            <a href="prestation.html?service=sinistres" class="btn btn-secondary sinistre-more-link" aria-label="Découvrir la prestation sinistres et dommages à la construction">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                            <a href="#contact" class="card-link">Échanger sur un sinistre <span aria-hidden="true">↗</span></a>
+                        <div class="expertise-card-actions">
+                            <a href="prestation.html?service=sinistres" class="service-more-link" aria-label="Consulter la prestation sinistres">Consulter la fiche <span aria-hidden="true">→</span></a>
+                            <a href="#contact" class="card-link" aria-label="Échanger sur un sinistre">Échanger sur un sinistre <span aria-hidden="true">💬</span></a>
                         </div>
                     </article>
-                    <article class="expertise-card" data-category="pro">
+                    <article class="expertise-card" id="industrie" data-category="pro">
+                        <span id="industrie-details" class="section-anchor"></span>
                         <span class="expertise-card-index">02</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/expertise-industrielle.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/expertise-industrielle.jpg" alt="Deux techniciens en intervention sur une installation industrielle" width="500" height="333" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=industrie" aria-label="Expertise industrielle">Expertise industrielle</a></h3>
-                        <p>Examen de dommages et de désordres concernant des locaux, équipements ou installations professionnelles.</p>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=industrie">Expertise industrielle</a></h3>
+                        <p>Examen technique des dommages aux locaux, équipements et installations professionnelles.</p>
                         <ul>
-                            <li>Dommages aux bâtiments et aux équipements</li>
-                            <li>Analyse des défaillances et de leurs conséquences techniques</li>
-                            <li>Constatations après incident ou événement dommageable</li>
+                            <li>Dommages aux bâtiments et outils industriels</li>
+                            <li>Analyse des causes de défaillance matérielle</li>
+                            <li>Constatations d'urgence après incident d'exploitation</li>
                         </ul>
-                        <a href="prestation.html?service=industrie" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise industrielle">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                        <a href="#contact" class="card-link">Décrire votre besoin <span aria-hidden="true">↗</span></a>
+                        <div class="expertise-card-actions">
+                            <a href="prestation.html?service=industrie" class="service-more-link" aria-label="Consulter l'expertise industrielle">Consulter la fiche <span aria-hidden="true">→</span></a>
+                            <a href="#contact" class="card-link" aria-label="Décrire votre besoin industriel">Décrire votre besoin <span aria-hidden="true">💬</span></a>
+                        </div>
                     </article>
                     <article class="expertise-card" id="energie" data-category="pro">
+                        <span id="energies-details" class="section-anchor"></span>
                         <span class="expertise-card-index">03</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/energies-renouvelables.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/energies-renouvelables.jpg" alt="Deux professionnels examinent des panneaux photovoltaïques" width="500" height="333" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=renouvelables" aria-label="Énergies renouvelables">Énergies renouvelables</a></h3>
-                        <p>Analyse de désordres ou de performances d'installations de production et de systèmes énergétiques.</p>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=renouvelables">Énergies renouvelables</a></h3>
+                        <p>Audit des désordres et analyse des écarts de production sur installations énergétiques.</p>
                         <ul>
-                            <li>Installations photovoltaïques et solaires</li>
-                            <li>Pompes à chaleur et systèmes thermiques</li>
-                            <li>Équipements, fonctionnement et écarts constatés</li>
+                            <li>Centrales solaires photovoltaïques et thermiques</li>
+                            <li>Pompes à chaleur (PAC) et réseaux thermodynamiques</li>
+                            <li>Écarts de rendement et litiges d'installation</li>
                         </ul>
-                        <a href="prestation.html?service=renouvelables" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise des énergies renouvelables">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                        <a href="#contact" class="card-link">Parler d'une installation <span aria-hidden="true">↗</span></a>
+                        <div class="expertise-card-actions">
+                            <a href="prestation.html?service=renouvelables" class="service-more-link" aria-label="Consulter l'expertise énergies renouvelables">Consulter la fiche <span aria-hidden="true">→</span></a>
+                            <a href="#contact" class="card-link" aria-label="Parler d'une installation énergétique">Parler d'une installation <span aria-hidden="true">💬</span></a>
+                        </div>
                     </article>
-                    <article class="expertise-card" data-category="pro">
+                    <article class="expertise-card" id="performance" data-category="pro">
+                        <span id="performance-details" class="section-anchor"></span>
                         <span class="expertise-card-index">04</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/performance-energetique.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/performance-energetique.jpg" alt="Façade d’un bâtiment en cours de rénovation énergétique avec son isolation extérieure" width="500" height="750" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=performance" aria-label="Performance énergétique des bâtiments">Performance énergétique des bâtiments</a></h3>
-                        <p>Comprendre les caractéristiques énergétiques d'un bâtiment et les facteurs pouvant affecter son confort ou ses consommations.</p>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=performance">Performance énergétique des bâtiments</a></h3>
+                        <p>Évaluation des caractéristiques thermiques de l'enveloppe et des systèmes du bâti.</p>
                         <ul>
-                            <li>Enveloppe, isolation et ponts thermiques</li>
-                            <li>Chauffage, ventilation et régulation</li>
-                            <li>Analyse de performance et pistes d'amélioration</li>
+                            <li>Isolation thermique, ponts thermiques et étanchéité à l'air</li>
+                            <li>Chauffage, ventilation (VMC) et régulation</li>
+                            <li>Pistes d'amélioration mesurables et cohérentes</li>
                         </ul>
-                        <a href="prestation.html?service=performance" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise en performance énergétique des bâtiments">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                        <a href="#contact" class="card-link">Étudier un bâtiment <span aria-hidden="true">↗</span></a>
+                        <div class="expertise-card-actions">
+                            <a href="prestation.html?service=performance" class="service-more-link" aria-label="Consulter l'expertise performance énergétique">Consulter la fiche <span aria-hidden="true">→</span></a>
+                            <a href="#contact" class="card-link" aria-label="Étudier votre bâtiment">Étudier un bâtiment <span aria-hidden="true">💬</span></a>
+                        </div>
                     </article>
-                    <article class="expertise-card" data-category="pro">
+                    <article class="expertise-card" id="incendie" data-category="pro">
+                        <span id="incendie-details" class="section-anchor"></span>
                         <span class="expertise-card-index">05</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/incendie-dommages.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/incendie-dommages.png" alt="Départ de feu sur le balcon d’un immeuble, avec des traces de fumée en façade" width="500" height="749" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=incendie" aria-label="Incendie et dommages associés">Incendie & dommages associés</a></h3>
-                        <p>Constat et analyse des dommages visibles sur les ouvrages et équipements après un incendie ou un dégagement de fumées.</p>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=incendie">Incendie & dommages associés</a></h3>
+                        <p>Constat factuel des atteintes sur ouvrages et matériaux après sinistre incendie ou fumées.</p>
                         <ul>
-                            <li>Dommages aux matériaux et aux équipements</li>
-                            <li>Étendue des atteintes et besoins d'investigation</li>
-                            <li>Éléments techniques à documenter pour le dossier</li>
+                            <li>Dégradation des matériaux, structures et réseaux</li>
+                            <li>Délimitation des zones sinistrées et mesures conservatoires</li>
+                            <li>Constitution d'un dossier technique complet</li>
                         </ul>
-                        <a href="prestation.html?service=incendie" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise incendie et dommages associés">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                        <a href="#contact" class="card-link">Présenter un dossier incendie <span aria-hidden="true">↗</span></a>
+                        <div class="expertise-card-actions">
+                            <a href="prestation.html?service=incendie" class="service-more-link" aria-label="Consulter l'expertise incendie">Consulter la fiche <span aria-hidden="true">→</span></a>
+                            <a href="#contact" class="card-link" aria-label="Présenter un dossier incendie">Présenter un dossier <span aria-hidden="true">💬</span></a>
+                        </div>
                     </article>
-                    <article class="expertise-card expertise-card-regulatory" data-category="particulier">
+                    <article class="expertise-card expertise-card-regulatory" id="diagnostics" data-category="particulier">
+                        <span id="diagnostics-details" class="section-anchor"></span>
                         <span class="expertise-card-index">06</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/diagnostic-conteste.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/diagnostic-conteste.png" alt="Plan immobilier examiné à la loupe pour analyser un diagnostic contesté" width="349" height="154" loading="lazy" decoding="async"></picture>
-                        <h3><a class="expertise-card-title-link" href="prestation.html?service=diagnostics" aria-label="Diagnostics immobiliers contestés">Diagnostics immobiliers contestés</a></h3>
-                        <p>Analyse technique d'un diagnostic mis en cause, contesté ou susceptible de l'être par un tiers, dans le cadre d'une vente ou d'un différend.</p>
+                        <h3><a class="expertise-card-title-link" href="prestation.html?service=diagnostics">Diagnostics immobiliers contestés</a></h3>
+                        <p>Contre-analyse technique d'un rapport de diagnostic contesté lors d'une transaction ou d'un litige.</p>
                         <ul>
-                            <li>Examen du rapport, de sa portée et des pièces disponibles</li>
-                            <li>Analyse des constats, méthodes et conclusions contestés</li>
-                            <li>DPE, amiante, plomb, électricité, gaz ou autres diagnostics selon le dossier</li>
+                            <li>Contestation de DPE erroné ou incohérent</li>
+                            <li>Audit critique des rapports amiante, plomb, électricité, gaz</li>
+                            <li>Note de cadrage technique opposable</li>
                         </ul>
-                        <p class="expertise-card-note">La mission porte sur l'analyse d'un diagnostic existant. Elle ne vaut pas réalisation d'un nouveau diagnostic réglementaire.</p>
-                        <a href="prestation.html?service=diagnostics" class="btn btn-secondary service-more-link" aria-label="Découvrir l’analyse de diagnostics immobiliers contestés">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                        <a href="#contact" class="card-link">Parler d'un diagnostic contesté <span aria-hidden="true">↗</span></a>
+                        <div class="expertise-card-actions">
+                            <a href="prestation.html?service=diagnostics" class="service-more-link" aria-label="Consulter l'analyse de diagnostics contestés">Consulter la fiche <span aria-hidden="true">→</span></a>
+                            <a href="#contact" class="card-link" aria-label="Parler d'un diagnostic contesté">Parler d'un diagnostic <span aria-hidden="true">💬</span></a>
+                        </div>
                     </article>
                     <article class="expertise-card expertise-card-purchase" id="visite-avant-achat" data-category="particulier">
+                        <span id="visite-avant-achat-details" class="section-anchor"></span>
                         <span class="expertise-card-index">07</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/visite-avant-achat.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/visite-avant-achat.png" alt="Plan immobilier et outils de plomberie examinés lors d’une visite technique" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <div class="expertise-purchase-copy">
-                            <p class="section-tag">Acheter ou vendre en connaissance de cause</p>
-                            <h3><a class="expertise-card-title-link" href="prestation.html?service=visite-achat" aria-label="Visite technique avant achat immobilier">Visite technique avant achat immobilier</a></h3>
-                            <p>Avant de vous engager, faites examiner visuellement le bien pour mieux comprendre son état apparent, repérer les désordres visibles et anticiper les points à approfondir ou les travaux à envisager.</p>
+                            <p class="section-tag">Acheter en connaissance de cause</p>
+                            <h3><a class="expertise-card-title-link" href="prestation.html?service=visite-achat">Visite technique avant achat immobilier</a></h3>
+                            <p>Examen visuel impartial du bien immobilier pour identifier les pathologies apparentes, vétustés et anticiper les travaux prioritaires.</p>
                             <ul>
-                                <li>Examen visuel des ouvrages, équipements et finitions accessibles</li>
-                                <li>Repérage des désordres, signes de vétusté et points de vigilance</li>
-                                <li>Visite sur place avec vous et restitution écrite selon la mission convenue</li>
+                                <li>Examen de la structure accessible, toiture, façades et réseaux</li>
+                                <li>Détection des signes d'infiltrations, fissures ou malfaçons</li>
+                                <li>Visite conjointe sur place et synthèse écrite rapide</li>
                             </ul>
-                            <p class="expertise-card-note">Visite sans démontage ni sondage destructif : elle ne remplace pas les diagnostics réglementaires et ne garantit pas l’absence de défauts cachés.</p>
-                            <div class="expertise-purchase-actions">
-                                <a href="prestation.html?service=visite-achat" class="btn btn-secondary service-more-link" aria-label="Découvrir la visite technique avant achat immobilier">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                                <a href="#contact" class="card-link">Préparer votre visite <span aria-hidden="true">↗</span></a>
+                            <div class="expertise-card-actions">
+                                <a href="prestation.html?service=visite-achat" class="service-more-link" aria-label="Consulter la visite avant achat">Consulter la fiche <span aria-hidden="true">→</span></a>
+                                <a href="#contact" class="card-link" aria-label="Préparer votre visite">Préparer votre visite <span aria-hidden="true">💬</span></a>
                             </div>
                         </div>
                     </article>
                     <article class="expertise-card expertise-card-purchase expertise-card-protection" id="protection-juridique" data-category="particulier">
+                        <span id="protection-juridique-details" class="section-anchor"></span>
                         <span class="expertise-card-index">08</span>
                         <picture class="expertise-card-media"><source srcset="assets/services/protection-juridique.webp" type="image/webp"><img class="expertise-card-image" src="assets/services/protection-juridique.png" alt="Un professionnel examine des plans et des données techniques avec un casque de chantier à proximité" width="500" height="333" loading="lazy" decoding="async"></picture>
                         <div class="expertise-purchase-copy">
                             <p class="section-tag">Un appui technique indépendant</p>
-                            <h3><a class="expertise-card-title-link" href="prestation.html?service=protection-juridique" aria-label="Expertise technique dans le cadre d’une protection juridique">Expertise technique & protection juridique</a></h3>
-                            <p>Dans un différend lié au bâtiment ou à un dommage, un regard technique indépendant peut aider à documenter les faits et à éclairer les échanges.</p>
+                            <h3><a class="expertise-card-title-link" href="prestation.html?service=protection-juridique">Expertise technique & protection juridique</a></h3>
+                            <p>Assistance technique contradictoire indépendante en cas de litige, prise en charge selon contrat d'assurance protection juridique.</p>
                             <ul>
-                                <li>Analyse des désordres, dommages et pièces techniques</li>
-                                <li>Préparation d’une réunion ou d’une expertise contradictoire convenue</li>
-                                <li>Restitution écrite des constats et de leurs limites</li>
+                                <li>Analyse factuelle des désordres et pièces adverses</li>
+                                <li>Assistance lors de réunions d'expertise contradictoire</li>
+                                <li>Rapport technique rigoureux d'assistance à recours</li>
                             </ul>
-                            <p class="expertise-card-note">Les conditions de garantie et l’éventuelle prise en charge des honoraires dépendent de votre contrat et de l’accord de votre assureur.</p>
-                            <div class="expertise-purchase-actions">
-                                <a href="prestation.html?service=protection-juridique" class="btn btn-secondary service-more-link" aria-label="Découvrir l’expertise technique dans le cadre d’une protection juridique">Découvrir la prestation <span aria-hidden="true">↗</span></a>
-                                <a href="#protection-juridique-details" class="card-link">Comprendre les étapes <span aria-hidden="true">↘</span></a>
+                            <div class="expertise-card-actions">
+                                <a href="prestation.html?service=protection-juridique" class="service-more-link" aria-label="Consulter l'expertise en protection juridique">Consulter la fiche <span aria-hidden="true">→</span></a>
+                                <a href="#contact" class="card-link" aria-label="Parler d'un dossier de protection juridique">Échanger sur votre dossier <span aria-hidden="true">💬</span></a>
                             </div>
                         </div>
                     </article>
-                </div>
-            </div>
-        </section>
+                </div></section>
 
-        <section class="section sinistre-details-section" id="sinistres-details" aria-labelledby="sinistres-details-title">
+        <section class="section light-transition-section">
             <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Sinistres & dommages</p>
-                    <h2 id="sinistres-details-title">Comprendre les désordres, documenter les dommages</h2>
-                    <p class="section-desc">Une analyse technique indépendante aide à décrire la situation, à examiner les éléments disponibles et à clarifier les points qui restent à vérifier.</p>
-                </div>
-                <div class="sinistre-detail-grid">
-                    <article class="sinistre-detail-item">
-                        <span class="principle-number">01 / Situations</span>
-                        <h3>Des dommages et désordres variés</h3>
-                        <p>Selon le dossier, l'intervention peut porter sur des infiltrations, dégâts des eaux, problèmes d'humidité, fissures, mouvements d'ouvrage, malfaçons ou dommages apparus après des travaux.</p>
-                    </article>
-                    <article class="sinistre-detail-item">
-                        <span class="principle-number">02 / Analyse</span>
-                        <h3>Des constats replacés dans leur contexte</h3>
-                        <p>Les pièces communiquées et les observations convenues sont examinées pour décrire les désordres, confronter les hypothèses techniques et préciser les investigations éventuellement nécessaires.</p>
-                    </article>
-                    <article class="sinistre-detail-item">
-                        <span class="principle-number">03 / Restitution</span>
-                        <h3>Une lecture claire des éléments établis</h3>
-                        <p>La restitution distingue les faits observés, les analyses et leurs limites. Le périmètre de mission, les modalités et les livrables sont définis avec vous avant toute intervention.</p>
-                    </article>
-                </div>
-                <div class="sinistre-details-cta">
-                    <p>Vous êtes confronté à un sinistre ou à un désordre de construction ? Présentez-nous les premiers éléments du dossier.</p>
-                    <a class="btn btn-primary" href="#contact">Échanger sur votre situation <span aria-hidden="true">↗</span></a>
+                <div class="light-transition-banner">
+                    <p class="section-tag">Transparence & Indépendance</p>
+                    <h3>Chaque dossier est unique : estimons votre accompagnement</h3>
+                    <p>Découvrez nos honoraires forfaitaires clairs ou échangez directement avec Sébastien MATHE pour cadrer votre mission sans engagement.</p>
+                    <div class="light-transition-actions">
+                        <a class="btn btn-primary" href="#tarifs">Simuler mon tarif indicatif <span aria-hidden="true">📊</span></a>
+                        <a class="btn btn-secondary" href="#contact">Prendre contact directement <span aria-hidden="true">✉️</span></a>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <section class="section service-details-section" id="protection-juridique-details" aria-labelledby="protection-juridique-details-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Expertise technique & protection juridique</p>
-                    <h2 id="protection-juridique-details-title">Un appui technique, à chaque étape de votre dossier</h2>
-                    <p class="section-desc">Si votre différend relève de votre garantie, une expertise indépendante peut vous aider à mieux comprendre les constats et les éléments techniques en discussion. Le contenu de la mission est défini avec vous.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Avant la mission</span><h3>Vérifier les modalités de votre garantie</h3><p>Contactez votre assureur de protection juridique pour connaître les conditions applicables à votre dossier, les éventuels plafonds et l’accord préalable requis avant d’engager une expertise.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Analyse technique</span><h3>Examiner les faits et les pièces utiles</h3><p>Selon le périmètre convenu, les désordres, dommages, rapports et autres documents techniques sont étudiés. Une visite ou des investigations peuvent être proposées si elles sont pertinentes et accessibles.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Restitution</span><h3>Présenter les constats et leurs limites</h3><p>Une restitution technique distingue les observations, les analyses et les points restant à vérifier. La participation à une réunion d’expertise peut être prévue dans la mission, après accord sur ses modalités.</p></article>
-                </div>
-                <p class="method-note">L’expertise porte sur les aspects techniques : elle ne constitue ni un conseil juridique, ni une représentation auprès de l’assureur et ne préjuge pas de la décision de prise en charge. Les conditions de la garantie sont déterminées par votre contrat et votre assureur.</p>
-                <a class="btn btn-primary service-details-cta" href="#contact">Parler d’un dossier de protection juridique <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <section class="section service-details-section" id="industrie-details" aria-labelledby="industrie-details-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Expertise industrielle</p>
-                    <h2 id="industrie-details-title">Analyser les dommages aux locaux et équipements</h2>
-                    <p class="section-desc">L'examen est adapté à la nature de l'installation, aux dommages signalés et aux éléments techniques accessibles.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Périmètre</span><h3>Bâtiments et équipements professionnels</h3><p>La mission peut concerner des locaux, des équipements ou des installations professionnelles touchés par un incident ou un désordre.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Examen</span><h3>Décrire les défaillances observées</h3><p>Les constats disponibles sont rapprochés du contexte et des documents transmis, afin de caractériser les atteintes et leurs conséquences techniques.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Suite</span><h3>Préciser les vérifications utiles</h3><p>Les investigations envisageables et les limites de l'analyse sont définies en fonction de l'accès aux installations et du périmètre convenu.</p></article>
-                </div>
-                <a class="btn btn-primary service-details-cta" href="#contact">Échanger sur un dossier industriel <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <section class="section service-details-section" id="energies-details" aria-labelledby="energies-details-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Énergies renouvelables</p>
-                    <h2 id="energies-details-title">Examiner les installations et écarts de fonctionnement</h2>
-                    <p class="section-desc">L'analyse porte sur les désordres ou performances signalés pour les équipements de production et les systèmes énergétiques.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Installations</span><h3>Solaire, photovoltaïque et systèmes thermiques</h3><p>Selon le dossier, les équipements examinés peuvent inclure des installations solaires, des pompes à chaleur ou d'autres systèmes thermiques.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Analyse</span><h3>Mettre les écarts en contexte</h3><p>Les éléments techniques accessibles et les documents disponibles sont étudiés pour décrire le fonctionnement signalé et les écarts constatés.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Cadrage</span><h3>Définir les constats réalisables</h3><p>Les mesures, accès et investigations utiles sont précisés avant la mission ; aucune performance n'est présumée sans vérification adaptée.</p></article>
-                </div>
-                <a class="btn btn-primary service-details-cta" href="#contact">Présenter une installation <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <section class="section service-details-section" id="performance-details" aria-labelledby="performance-details-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Performance énergétique</p>
-                    <h2 id="performance-details-title">Comprendre l'enveloppe et les équipements du bâtiment</h2>
-                    <p class="section-desc">L'analyse technique examine les caractéristiques pouvant contribuer au confort ou aux consommations, sans promettre d'économies non mesurées.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Enveloppe</span><h3>Isolation et ponts thermiques</h3><p>L'examen peut porter sur l'enveloppe, les parois et les éléments disponibles permettant de comprendre les transferts thermiques et les désordres associés.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Équipements</span><h3>Chauffage, ventilation et régulation</h3><p>Les systèmes et leur fonctionnement sont étudiés selon les pièces accessibles, les conditions d'usage décrites et le périmètre convenu.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Restitution</span><h3>Présenter les constats et pistes possibles</h3><p>La restitution distingue les observations des hypothèses et indique les limites de l'analyse ; elle ne constitue pas une garantie de résultat énergétique.</p></article>
-                </div>
-                <a class="btn btn-primary service-details-cta" href="#contact">Étudier un bâtiment <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <section class="section service-details-section" id="incendie-details" aria-labelledby="incendie-details-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Incendie & dommages associés</p>
-                    <h2 id="incendie-details-title">Documenter les atteintes après un incendie</h2>
-                    <p class="section-desc">Un examen technique des dommages visibles peut contribuer à clarifier l'état des ouvrages et les investigations à envisager.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Constats</span><h3>Matériaux, ouvrages et équipements</h3><p>Les atteintes visibles après un incendie ou un dégagement de fumées sont décrites, sous réserve des conditions de sécurité et d'accès.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Étendue</span><h3>Repérer les zones à examiner</h3><p>L'analyse documente les dommages observables et les points qui peuvent nécessiter des vérifications complémentaires par des intervenants compétents.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Dossier</span><h3>Restituer les éléments techniques</h3><p>Les constats et leurs limites sont présentés pour éclairer le dossier, sans se substituer aux décisions de l'assureur ni à un conseil juridique.</p></article>
-                </div>
-                <a class="btn btn-primary service-details-cta" href="#contact">Présenter un dossier incendie <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <section class="section service-details-section" id="diagnostics-details" aria-labelledby="diagnostics-details-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Diagnostics immobiliers contestés</p>
-                    <h2 id="diagnostics-details-title">Analyser un diagnostic existant mis en cause</h2>
-                    <p class="section-desc">L'intervention porte sur un rapport existant et sur les constats, méthodes ou conclusions contestés ou susceptibles de l'être par un tiers.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Documents</span><h3>Examiner le rapport et les pièces</h3><p>Le diagnostic concerné, son contexte et les documents utiles transmis sont examinés pour comprendre les points en discussion.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Contradiction</span><h3>Confronter les constats techniques</h3><p>L'analyse peut concerner un DPE, l'amiante, le plomb, l'électricité, le gaz ou un autre diagnostic selon le dossier et les compétences mobilisables.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Limites</span><h3>Clarifier la portée de l'analyse</h3><p>La mission porte sur l'analyse d'un diagnostic existant ; elle ne vaut pas réalisation d'un nouveau diagnostic réglementaire ni avis juridique.</p></article>
-                </div>
-                <a class="btn btn-primary service-details-cta" href="#contact">Parler d'un diagnostic contesté <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <section class="section service-details-section" id="visite-avant-achat-details" aria-labelledby="visite-avant-achat-title">
-            <div class="container">
-                <div class="section-header expertise-section-heading">
-                    <p class="section-tag">Visite avant achat immobilier</p>
-                    <h2 id="visite-avant-achat-title">Un regard technique avant de vous engager</h2>
-                    <p class="section-desc">La visite vous aide à mieux comprendre l’état apparent du bien et à poser les bonnes questions avant une acquisition ou une vente. Son périmètre est défini avec vous avant l’intervention.</p>
-                </div>
-                <div class="service-details-grid">
-                    <article class="service-detail-item"><span class="principle-number">01 / Visite</span><h3>Examiner les parties accessibles</h3><p>Lors d’une visite sur place avec vous, l’examen visuel porte, selon les accès et le périmètre convenu, sur les ouvrages, les équipements et les finitions du bien.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">02 / Points de vigilance</span><h3>Repérer les désordres visibles</h3><p>Les signes de pathologie, de malfaçon apparente ou de vétusté sont relevés afin de distinguer les constats des points qui demanderaient des vérifications complémentaires.</p></article>
-                    <article class="service-detail-item"><span class="principle-number">03 / Restitution</span><h3>Vous aider à préparer la suite</h3><p>La restitution écrite prévue dans la mission synthétise les constats et les limites de la visite. Elle peut vous aider à préparer vos questions et à identifier les sujets à approfondir.</p></article>
-                </div>
-                <p class="expertise-card-note expertise-purchase-note">La visite est visuelle et non destructive : elle ne comprend ni démontage, ni sondage, ni diagnostic réglementaire. Elle ne permet pas de garantir l’absence de désordres non visibles et ne constitue pas un devis de travaux.</p>
-                <a class="btn btn-primary service-details-cta" href="#contact">Parler de votre projet d’achat <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        
-        
 
         <section class="section expertise-method-section" id="methode" aria-labelledby="method-title">
             <div class="container">
@@ -494,6 +454,15 @@
                                     <option value="contradictoire">Assistance contradictoire & défense face à l'expert adverse</option>
                                 </select>
                             </div>
+                            <div class="calc-group">
+                                <label for="calcZoneSelect"><strong>4. Secteur géographique d'intervention :</strong></label>
+                                <select id="calcZoneSelect" class="calc-select" aria-label="Secteur géographique d'intervention">
+                                    <option value="zone_01_69" selected>Ain (01) & Métropole de Lyon / Rhône (69) — Déplacement standard inclus</option>
+                                    <option value="zone_39_71">Jura (39) & Saône-et-Loire (71 - Mâcon, Chalon) — Déplacement inclus</option>
+                                    <option value="zone_38_73_74">Isère (38), Savoie (73) & Haute-Savoie (74 - Annecy, Genevois)</option>
+                                    <option value="zone_suisse">Suisse romande (Genève, Nyon, Lausanne - Canton de Vaud)</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="calc-result-box">
                             <div class="calc-result-label">Forfait global indicatif de la mission :</div>
@@ -508,7 +477,30 @@
                             <div class="calc-pj-badge" id="calcPjBadge">
                                 <strong>⚖️ Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).
                             </div>
-                            <a href="#contact" class="btn btn-primary calc-cta">Demander un devis ferme sous 24h avec le Copilote IA ↗</a>
+
+                            <!-- MODULE PROACTIF : VÉRIFICATEUR PROTECTION JURIDIQUE & GÉNÉRATEUR DE COURRIER ART. L. 127-2-3 -->
+                            <div id="pjVerifierPanel" style="margin-top: 0.85rem; padding: 0.85rem 1rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; text-align: left;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
+                                    <span style="font-size: 0.82rem; font-weight: 700; color: #10b981;">🛡️ Vérificateur de Prise en Charge & Libre Choix d'Expert (Art. L. 127-2-3)</span>
+                                    <button type="button" id="btnTogglePjLetter" style="background: #059669; color: #fff; border: none; border-radius: 6px; padding: 0.35rem 0.7rem; font-size: 0.76rem; font-weight: 700; cursor: pointer;">
+                                        📄 Générer ma lettre d'exercice du libre choix d'expert
+                                    </button>
+                                </div>
+                                <div id="pjLetterBox" hidden style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed rgba(16, 185, 129, 0.35);">
+                                    <p style="font-size: 0.78rem; margin: 0 0 0.5rem 0; opacity: 0.9;">Courrier officiel pré-rempli à adresser à votre assureur Protection Juridique ou Multirisque Habitation pour imposer votre expert indépendant (M. Sébastien MATHE) :</p>
+                                    <textarea id="pjLetterTextarea" rows="6" readonly style="width: 100%; font-family: monospace; font-size: 0.75rem; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(148, 163, 184, 0.4); background: rgba(15, 23, 42, 0.85); color: #f8fafc; resize: vertical;"></textarea>
+                                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap;">
+                                        <button type="button" id="btnCopyPjLetter" style="background: #0284c7; color: #fff; border: none; border-radius: 5px; padding: 0.35rem 0.75rem; font-size: 0.75rem; font-weight: 600; cursor: pointer;">📋 Copier le courrier officiel</button>
+                                        <span id="pjCopyConfirm" style="font-size: 0.75rem; color: #10b981; font-weight: 700; align-self: center;" hidden>✓ Copié dans le presse-papiers !</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.9rem;">
+                                <button type="button" id="btnApplyCalcToRdv" class="btn btn-primary calc-cta" style="width: 100%; cursor: pointer; font-weight: 700;">
+                                    📅 Réserver cette mission au tarif estimé avec M. MATHE (Pré-remplissage 1-clic) ↗
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -728,6 +720,9 @@
                         <label for="dropzone-file-input">Pièces justificatives (photos de désordres, devis, DPE - facultatif)</label>
                         <div id="fileUploadContainer" style="margin-bottom: 1.25rem;"></div>
                         <p id="contactPrivacyNote" class="contact-privacy-note">Votre demande est transmise à Netlify pour être reçue par EFFICIENS ENERGIA. Évitez toute donnée sensible et pièce confidentielle. Consultez les <a href="informations-legales.html#privacy-title">informations de confidentialité</a>.</p>
+                        <div id="aiActTransparencyBadge" style="margin: 0.65rem 0 0.85rem 0; padding: 0.65rem 0.85rem; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 6px; font-size: 0.76rem; line-height: 1.45;">
+                            <strong>🇪🇺 Transparence IA (EU AI Act Art. 50) &amp; Sécurité RGPD (Art. 32) :</strong> La pré-qualification de votre créneau et l'estimation d'honoraires sont assistées par notre Copilote déterministe local. <strong>100 % des conclusions techniques et rapports d'expertise sont rédigés et validés humainement par M. Sébastien MATHE</strong> (Zéro prise de décision automatisée au sens de l'Art. 22 RGPD).
+                        </div>
                         <button class="btn btn-primary" type="submit">Envoyer ma demande <span aria-hidden="true">↗</span></button>
                         <p class="contact-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
                         <p class="contact-form-fallback">Un problème avec le formulaire&nbsp;? Écrivez-nous directement à <a href="mailto:contact@efficiens-energia.fr">contact@efficiens-energia.fr</a>.</p>
