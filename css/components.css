@@ -5130,3 +5130,111 @@ a.contact-coord-item:hover {
     font-weight: 700 !important;
     color: #ffffff !important;
 }
+
+
+/* ==========================================================================
+   ONGLET CONTACT OFFICIEL DÉDIÉ (CENTRÉ, ÉPURÉ & VISIBILITÉ HAUTE PERFORMANCE)
+   ========================================================================== */
+.site-contact-section {
+    padding: clamp(4rem, 7vw, 6rem) 0 !important;
+    background: var(--bg-secondary) !important;
+}
+
+.contact-header-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.85rem !important;
+    padding: 0.85rem 1.4rem !important;
+    border-radius: 12px !important;
+    background: var(--bg-primary) !important;
+    border: 1.5px solid var(--color-border) !important;
+    color: var(--text-primary) !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s, border-color 0.2s !important;
+}
+
+a.contact-header-badge:hover {
+    border-color: #2563eb !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.15) !important;
+}
+
+.contact-header-badge .badge-icon {
+    font-size: 1.25rem !important;
+    display: inline-flex !important;
+}
+
+.contact-header-badge .badge-sub {
+    display: block !important;
+    font-size: 0.72rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 0.15rem !important;
+}
+
+.contact-header-badge .badge-main {
+    display: block !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+}
+
+.contact-form-wrapper {
+    background: var(--bg-primary) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: 16px !important;
+    padding: clamp(1.75rem, 4vw, 3rem) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="dark"] .contact-form-wrapper {
+    background: #13151b !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .contact-header-badge {
+    background: #13151b !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.contact-form-wrapper input,
+.contact-form-wrapper select,
+.contact-form-wrapper textarea {
+    width: 100% !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 1.25rem !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+
+[data-theme="dark"] .contact-form-wrapper input,
+[data-theme="dark"] .contact-form-wrapper select,
+[data-theme="dark"] .contact-form-wrapper textarea {
+    background: #1a1d24 !important;
+    border-color: #374151 !important;
+    color: #f9fafb !important;
+}
+
+.contact-form-wrapper input:focus,
+.contact-form-wrapper select:focus,
+.contact-form-wrapper textarea:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+    outline: none !important;
+}
+
+.contact-form-wrapper label {
+    display: block !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.4rem !important;
+    color: var(--text-primary) !important;
+}
