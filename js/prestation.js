@@ -297,17 +297,79 @@ const prestations = {
     }
 };
 
-const serviceId = new URLSearchParams(window.location.search).get('service');
-const prestation = serviceId ? prestations[serviceId] : undefined;
+// Normalisation des alias et tolérance aux variantes d'URL
+const ALIAS_MAP = {
+    // 1. Sinistres
+    'sinistres': 'sinistres',
+    'sinistre': 'sinistres',
+    'sinistres-construction': 'sinistres',
+    'sinistre-construction': 'sinistres',
+    'fissures': 'sinistres',
+    'dommages': 'sinistres',
+
+    // 2. Visite avant achat
+    'visite-achat': 'visite-achat',
+    'visite_achat': 'visite-achat',
+    'visite-avant-achat': 'visite-achat',
+    'visite_avant_achat': 'visite-achat',
+    'achat': 'visite-achat',
+
+    // 3. Diagnostics & DPE
+    'diagnostics': 'diagnostics',
+    'diagnostic': 'diagnostics',
+    'dpe': 'diagnostics',
+    'dpe_contestation': 'diagnostics',
+    'dpe-contestation': 'diagnostics',
+    'diagnostics-contestes': 'diagnostics',
+
+    // 4. Protection Juridique
+    'protection-juridique': 'protection-juridique',
+    'protection_juridique': 'protection-juridique',
+    'juridique': 'protection-juridique',
+
+    // 5. Énergies Renouvelables
+    'renouvelables': 'renouvelables',
+    'energies_renouvelables': 'renouvelables',
+    'energies-renouvelables': 'renouvelables',
+    'solaire': 'renouvelables',
+    'photovoltaique': 'renouvelables',
+
+    // 6. Performance Énergétique
+    'performance': 'performance',
+    'performance_energetique': 'performance',
+    'performance-energetique': 'performance',
+    'audit_energetique': 'performance',
+    'audit': 'performance',
+
+    // 7. Incendie
+    'incendie': 'incendie',
+    'incendies': 'incendie',
+    'incendie-dommages': 'incendie',
+
+    // 8. Industrie & BTP
+    'industrie': 'industrie',
+    'industriel': 'industrie',
+    'expertise-industrielle': 'industrie',
+    'btp': 'industrie'
+};
+
+const rawParam = new URLSearchParams(window.location.search).get('service');
+const canonicalKey = rawParam && ALIAS_MAP[rawParam.toLowerCase()] ? ALIAS_MAP[rawParam.toLowerCase()] : 'sinistres';
+const prestation = prestations[canonicalKey];
+
 const content = document.getElementById('prestationContent');
 const notFound = document.getElementById('prestationNotFound');
 const detailSection = document.getElementById('prestationDetails');
 
 if (!prestation) {
-    if (notFound) {
-        notFound.hidden = false;
-    }
+    if (notFound) notFound.hidden = false;
+    if (content) content.hidden = true;
+    if (detailSection) detailSection.hidden = true;
 } else {
+    if (notFound) notFound.hidden = true;
+    if (content) content.hidden = false;
+    if (detailSection) detailSection.hidden = false;
+
     const breadcrumb = document.getElementById('prestationBreadcrumb');
     const eyebrow = document.getElementById('prestationEyebrow');
     const title = document.getElementById('prestationTitle');
@@ -325,62 +387,56 @@ if (!prestation) {
     const openGraphTitle = document.querySelector('meta[property="og:title"]');
     const openGraphDescription = document.querySelector('meta[property="og:description"]');
 
-    if (
-        content instanceof HTMLElement &&
-        detailSection instanceof HTMLElement &&
-        breadcrumb &&
-        eyebrow &&
-        title &&
-        summary &&
-        image instanceof HTMLImageElement &&
-        detailTitle &&
-        detailIntro &&
-        detailCards &&
-        contextText &&
-        sourcesList instanceof HTMLUListElement &&
-        scopeNote instanceof HTMLElement &&
-        scopeText
-    ) {
-        breadcrumb.textContent = prestation.category;
-        eyebrow.textContent = prestation.category;
-        title.textContent = prestation.title;
-        summary.textContent = prestation.summary;
+    if (breadcrumb) breadcrumb.textContent = prestation.category;
+    if (eyebrow) eyebrow.textContent = prestation.category;
+    if (title) title.textContent = prestation.title;
+    if (summary) summary.textContent = prestation.summary;
+
+    if (image instanceof HTMLImageElement) {
         image.src = prestation.image;
-        if (webpImage instanceof HTMLSourceElement) {
-            webpImage.srcset = prestation.image.replace(/\.(?:jpe?g|png)$/i, '.webp');
-        }
-        image.alt = prestation.imageAlt;
-        detailTitle.textContent = prestation.detailTitle;
-        detailIntro.textContent = prestation.detailIntro;
-        contextText.textContent = prestation.context;
-
-        const pdfServiceMap = {
-            'sinistres': 'assets/pdf/Fiche_Expertise_Sinistres_et_Dommages.pdf',
-            'industrie': 'assets/pdf/Fiche_Expertise_Industrielle.pdf',
-            'renouvelables': 'assets/pdf/Fiche_Expertise_Energies_Renouvelables.pdf',
-            'performance': 'assets/pdf/Fiche_Expertise_Performance_Energetique.pdf',
-            'incendie': 'assets/pdf/Fiche_Expertise_Incendie.pdf',
-            'diagnostics': 'assets/pdf/Fiche_Expertise_Diagnostics_Contestes.pdf',
-            'visite-achat': 'assets/pdf/Fiche_Expertise_Visite_Avant_Achat.pdf',
-            'protection-juridique': 'assets/pdf/Fiche_Expertise_Protection_Juridique.pdf'
+        image.alt = prestation.imageAlt || prestation.category;
+        image.onerror = function() {
+            this.src = 'assets/logo_efficiens_energia.png';
         };
-        const pdfLinkEl = document.getElementById('prestationPdfLink');
-        if (pdfLinkEl && pdfServiceMap[serviceKey]) {
-            pdfLinkEl.href = pdfServiceMap[serviceKey];
-        }
+    }
+    if (webpImage instanceof HTMLSourceElement) {
+        webpImage.srcset = prestation.image.replace(/\.(?:jpe?g|png)$/i, '.webp');
+    }
 
-        document.title = `${prestation.category} | EFFICIENS ENERGIA`;
-        if (metaDescription instanceof HTMLMetaElement) {
-            metaDescription.content = `${prestation.summary} Expertise indépendante dans l’Ain et les départements voisins.`;
-        }
-        if (openGraphTitle instanceof HTMLMetaElement) {
-            openGraphTitle.content = `${prestation.category} | EFFICIENS ENERGIA`;
-        }
-        if (openGraphDescription instanceof HTMLMetaElement) {
-            openGraphDescription.content = `${prestation.summary} Expertise dans l’Ain et les départements voisins.`;
-        }
+    if (detailTitle) detailTitle.textContent = prestation.detailTitle;
+    if (detailIntro) detailIntro.textContent = prestation.detailIntro;
+    if (contextText) contextText.textContent = prestation.context;
 
-        prestation.sources.forEach((source) => {
+    // Fiche PDF dédiée
+    const pdfServiceMap = {
+        'sinistres': 'assets/pdf/Fiche_Expertise_Sinistres_et_Dommages.pdf',
+        'industrie': 'assets/pdf/Fiche_Expertise_Industrielle.pdf',
+        'renouvelables': 'assets/pdf/Fiche_Expertise_Energies_Renouvelables.pdf',
+        'performance': 'assets/pdf/Fiche_Expertise_Performance_Energetique.pdf',
+        'incendie': 'assets/pdf/Fiche_Expertise_Incendie.pdf',
+        'diagnostics': 'assets/pdf/Fiche_Expertise_Diagnostics_Contestes.pdf',
+        'visite-achat': 'assets/pdf/Fiche_Expertise_Visite_Avant_Achat.pdf',
+        'protection-juridique': 'assets/pdf/Fiche_Expertise_Protection_Juridique.pdf'
+    };
+    const pdfLinkEl = document.getElementById('prestationPdfLink');
+    if (pdfLinkEl) {
+        pdfLinkEl.href = pdfServiceMap[canonicalKey] || 'Dossier_Prestations_EFFICIENS_ENERGIA.pdf';
+    }
+
+    document.title = `${prestation.category} | EFFICIENS ENERGIA`;
+    if (metaDescription instanceof HTMLMetaElement) {
+        metaDescription.content = `${prestation.summary} Cabinet d'Expertise Technique Indépendant.`;
+    }
+    if (openGraphTitle instanceof HTMLMetaElement) {
+        openGraphTitle.content = `${prestation.category} | EFFICIENS ENERGIA`;
+    }
+    if (openGraphDescription instanceof HTMLMetaElement) {
+        openGraphDescription.content = `${prestation.summary} Expertise dans l'Ain et les départements voisins.`;
+    }
+
+    if (sourcesList instanceof HTMLUListElement) {
+        sourcesList.innerHTML = '';
+        (prestation.sources || []).forEach((source) => {
             const item = document.createElement('li');
             const link = document.createElement('a');
             link.href = source.url;
@@ -390,8 +446,11 @@ if (!prestation) {
             item.append(link);
             sourcesList.append(item);
         });
+    }
 
-        prestation.details.forEach((detail) => {
+    if (detailCards) {
+        detailCards.innerHTML = '';
+        (prestation.details || []).forEach((detail) => {
             const card = document.createElement('article');
             card.className = 'prestation-detail-card';
 
@@ -408,10 +467,8 @@ if (!prestation) {
             card.append(label, heading, description);
             detailCards.append(card);
         });
-
-        scopeText.textContent = prestation.scope;
-        scopeNote.hidden = false;
-        content.hidden = false;
-        detailSection.hidden = false;
     }
+
+    if (scopeText) scopeText.textContent = prestation.scope;
+    if (scopeNote) scopeNote.hidden = false;
 }
