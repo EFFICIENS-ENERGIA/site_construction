@@ -165,11 +165,11 @@ function initApplication() {
         }
     });
 
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
                 .then((registration) => registration.update())
-                .catch((error) => console.error('Impossible de mettre à jour le service worker.', error));
+                .catch((error) => console.warn('Service worker indisponible:', error));
         });
     }
 

@@ -4,7 +4,7 @@
 (function() {
     'use strict';
 
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
         navigator.serviceWorker.register('./sw.js').then(reg => {
             reg.addEventListener('updatefound', () => {
                 const newWorker = reg.installing;
