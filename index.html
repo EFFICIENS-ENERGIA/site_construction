@@ -147,10 +147,10 @@
     <header class="site-header" role="banner">
         <div id="scrollProgressBar" class="scroll-progress-bar" aria-hidden="true"></div>
         <div class="container header-inner">
-            <a href="#accueil" class="logo-brand" aria-label="EFFICIENS ENERGIA, accueil">
-                <img src="assets/logo_efficiens_energia.png" alt="" class="logo-img" width="377" height="270">
-                <span class="logo-text">EFFICIENS ENERGIA</span>
-            </a>
+            <div class="logo-brand" aria-label="EFFICIENS ENERGIA">
+                <img src="assets/logo_efficiens_energia.png" alt="EFFICIENS ENERGIA" class="logo-img" width="377" height="270">
+                <span class="logo-text"><span class="logo-part-blue">EFFICIENS</span> <span class="logo-part-light">ENERGIA</span></span>
+            </div>
             <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
                 <a href="#expertises">Nos expertises</a>
                 <a href="#methode">Notre méthode</a>
@@ -161,7 +161,7 @@
             </nav>
             <div class="header-actions">
                 <button type="button" class="btn-theme-toggle" id="themeToggleBtn" aria-label="Passer en mode sombre">Mode sombre</button>
-                <a href="#contact" class="btn btn-primary header-contact">Parler à un expert</a>
+                
                 <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Ouvrir le menu">☰</button>
             </div>
         </div>
@@ -419,7 +419,7 @@
         <section class="section tarifs-section site-tab-panel" id="tarifs" aria-labelledby="fees-title">
             <div class="container">
                 <div class="section-header tarifs-section-heading" style="text-align: center; margin: 0 auto 2.5rem auto; max-width: 820px;">
-                    <p class="section-tag" style="justify-content: center;">03 / Tarifs & Honoraires</p>
+                    <p class="section-tag" style="justify-content: center;">04 / Tarifs & Honoraires</p>
                     <h2 id="fees-title">Honoraires & Transparence</h2>
                     <p class="section-desc" style="font-size: 1.15rem; font-weight: 600; color: var(--text-primary); margin-top: 0.5rem;">Un devis adapté à la mission, avant intervention</p>
                     <p class="section-desc">Barème & estimation d'honoraires déterministe : chaque situation est différente. Le premier échange permet de comprendre votre demande et ne vous engage pas à confier une mission.</p>
@@ -542,17 +542,7 @@
                         </table>
                     </div>
                     <p class="fees-note">Avant votre accord, le devis détaille le périmètre, les honoraires, les frais éventuels de déplacement ou d’investigation ainsi que les livrables prévus. Aucune mission ne débute sans validation préalable du devis. Les honoraires sont définis pour la mission convenue, et non présentés comme un pourcentage d’une indemnité.</p>
-                <!-- Bannière d'orientation tarifaire & simulation -->
-                <div class="light-transition-banner" style="margin: 2.5rem 0;">
-                    <p class="section-tag">Transparence & Indépendance</p>
-                    <h3>Chaque dossier est unique : estimons votre accompagnement</h3>
-                    <p>Découvrez nos honoraires forfaitaires clairs ou échangez directement avec Sébastien MATHE pour cadrer votre mission sans engagement.</p>
-                    <div class="light-transition-actions">
-                        <a class="btn btn-primary" href="#estimateur-direct">Simuler mon tarif indicatif <span aria-hidden="true">📊</span></a>
-                        <a class="btn btn-secondary" href="#contact">Prendre contact directement <span aria-hidden="true">✉️</span></a>
-                    </div>
-                </div>
-                <p class="method-note">Une expertise technique ne se substitue pas à un conseil juridique ni aux décisions d'un assureur ou d'une juridiction.</p>
+                
             </div>
         </section>
 
@@ -560,7 +550,7 @@
             <span id="zones-intervention" style="display:block; position:relative; top:-90px; visibility:hidden;"></span>
             <div class="container">
                 <div class="section-header zones-section-heading" style="text-align: center; margin: 0 auto 2.5rem auto; max-width: 820px;">
-                    <p class="section-tag" style="justify-content: center;">04 / Zones d'intervention</p>
+                    <p class="section-tag" style="justify-content: center;">05 / Zones d'intervention</p>
                     <h2 id="intervention-area-title">Zones d'intervention & Frais de déplacement</h2>
                     <p class="section-desc">Intervention sur site dans les départements ci-dessous. Les frais de déplacement sont forfaitisés et précisés en toute transparence avant chaque mission.</p>
                 </div>
@@ -651,13 +641,13 @@
         </section>
 
         <section class="section faq-section site-tab-panel" id="faq" aria-labelledby="faq-title">
-            <div class="container">
+            <div class="container" style="max-width: 860px; margin: 0 auto;">
                 <div class="section-header faq-section-heading" style="text-align: center; margin: 0 auto 2.5rem auto; max-width: 820px;">
-                    <p class="section-tag" style="justify-content: center;">05 / Vos questions</p>
-                    <h2 id="faq-title">Questions fréquentes</h2>
-                    <p class="section-desc">Retrouvez les réponses aux questions les plus courantes sur le cadre d'intervention, les honoraires, les délais et l'indépendance de notre cabinet.</p>
+                    <p class="section-tag" style="justify-content: center;">06 / Vos questions</p>
+                    <h2 id="faq-title" style="text-align: center;">Questions fréquentes</h2>
+                    <p class="section-desc" style="text-align: center; margin: 1rem auto 0 auto; max-width: 780px;">Retrouvez les réponses aux questions les plus courantes sur le cadre d'intervention, les honoraires, les délais et l'indépendance de notre cabinet.</p>
                 </div>
-                <div class="faq-list">
+                <div class="faq-list" style="max-width: 820px; margin: 0 auto;">
                     <details class="faq-item">
                         <summary>Quels éléments préparer pour un premier échange&nbsp;?</summary>
                         <p>Décrivez brièvement la situation, le lieu concerné et votre objectif. Des photos, rapports, devis, factures ou courriers peuvent aider à cadrer la demande, mais leur absence ne doit pas retarder le premier contact. N’envoyez pas de pièce confidentielle dans le formulaire.</p>
@@ -685,7 +675,7 @@
         <section class="section site-contact-section site-tab-panel" id="contact" aria-labelledby="contact-title">
             <div class="container">
                 <div class="section-header contact-section-header" style="text-align: center; margin: 0 auto 2.5rem auto; max-width: 820px;">
-                    <p class="section-tag" style="justify-content: center;">Contact & Prise de rendez-vous</p>
+                    <p class="section-tag" style="justify-content: center;">07 / Contact & Prise de rendez-vous</p>
                     <h2 id="contact-title">Contactez directement le cabinet</h2>
                     <p class="section-desc">Transmettez les premiers éléments de votre dossier. M. Sébastien MATHE prend directement connaissance de votre demande pour qualifier les désordres et convenir du cadre d'intervention sous 24h ouvrées.</p>
                 </div>
