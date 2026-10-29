@@ -5241,3 +5241,37 @@ a.contact-header-badge:hover {
     margin-bottom: 0.4rem !important;
     color: var(--text-primary) !important;
 }
+
+/* ==========================================================================
+   NAVIGATION PAR ONGLETS EXCLUSIFS INDÉPENDANTS (@UIX)
+   ========================================================================== */
+.site-tab-panel {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+}
+
+.site-tab-panel.active-tab {
+    display: block !important;
+    opacity: 1 !important;
+    animation: fadeInTab 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.site-tab-subpanel {
+    display: none;
+}
+
+.site-tab-subpanel.active-subpanel {
+    display: block !important;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

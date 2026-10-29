@@ -679,46 +679,111 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // GESTION DYNAMIQUE DE L'ONGLET ACTIF DANS LA NAVBAR (SCROLLSPY)
+    
     // ==========================================================================
+    // MOTEUR DE NAVIGATION PAR ONGLETS EXCLUSIFS INDÉPENDANTS (@UIX & @DEV)
+    // ==========================================================================
+    const tabPanels = document.querySelectorAll('.site-tab-panel');
+    const prepVisiteSub = document.getElementById('preparer-visite');
     const mainNavLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-    if (mainNavLinks.length > 0) {
-        const sections = Array.from(mainNavLinks)
-            .map(link => document.querySelector(link.getAttribute('href')))
-            .filter(Boolean);
+    const validTabs = ['expertises', 'methode', 'tarifs', 'zones', 'faq', 'contact'];
 
-        function setActiveNavLink(activeId) {
-            mainNavLinks.forEach(link => {
-                const href = link.getAttribute('href').replace('#', '');
-                const isMatch = (href === activeId) ||
-                    (activeId === 'zones-intervention' && href === 'zones') ||
-                    (activeId === 'zones' && href === 'zones-intervention');
-                if (isMatch) {
-                    link.classList.add('nav-highlight', 'active');
-                } else {
-                    link.classList.remove('nav-highlight', 'active');
-                }
-            });
+    function activateTab(targetId, doScroll) {
+        if (typeof doScroll === 'undefined') doScroll = true;
+        if (!targetId) targetId = 'expertises';
+        targetId = targetId.replace('#', '');
+        if (targetId === 'zones-intervention') targetId = 'zones';
+        if (targetId === 'accueil' || targetId === 'contenu' || targetId === 'cabinet') {
+            targetId = 'expertises';
         }
 
-        mainNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                const targetId = link.getAttribute('href').replace('#', '');
-                setActiveNavLink(targetId);
-            });
+        // Si ce n'est pas un des 6 onglets connus, ne rien faire
+        if (!validTabs.includes(targetId)) return;
+
+        // 1. Basculer l'affichage des panneaux
+        tabPanels.forEach(panel => {
+            if (panel.id === targetId) {
+                panel.classList.add('active-tab');
+                panel.style.display = 'block';
+            } else {
+                panel.classList.remove('active-tab');
+                panel.style.display = 'none';
+            }
         });
 
-        if ('IntersectionObserver' in window && sections.length > 0) {
-            const navObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setActiveNavLink(entry.target.id);
-                    }
-                });
-            }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.1 });
+        // 2. Gestion du sous-panneau préparation visite (lié à la méthode)
+        if (prepVisiteSub) {
+            if (targetId === 'methode') {
+                prepVisiteSub.classList.add('active-subpanel');
+                prepVisiteSub.style.display = 'block';
+            } else {
+                prepVisiteSub.classList.remove('active-subpanel');
+                prepVisiteSub.style.display = 'none';
+            }
+        }
 
-            sections.forEach(sec => navObserver.observe(sec));
+        // 3. Mise à jour de l'onglet actif dans la barre de navigation
+        mainNavLinks.forEach(link => {
+            const href = link.getAttribute('href').replace('#', '');
+            const isMatch = (href === targetId) || (targetId === 'zones' && href === 'zones-intervention');
+            link.classList.toggle('nav-highlight', isMatch);
+            link.classList.toggle('active', isMatch);
+            link.setAttribute('aria-selected', String(isMatch));
+        });
+
+        // 4. Défilement propre vers l'onglet sélectionné
+        if (doScroll) {
+            const activePanel = document.getElementById(targetId);
+            if (activePanel) {
+                const header = document.querySelector('.site-header');
+                const headerH = header ? header.offsetHeight : 70;
+                const panelTop = activePanel.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
+                window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
+            }
         }
     }
-});
 
+    // Intercepter les clics sur la navigation principale
+    mainNavLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href').replace('#', '');
+            if (validTabs.includes(targetId) || targetId === 'zones-intervention') {
+                e.preventDefault();
+                activateTab(targetId, true);
+                if (history.pushState) {
+                    history.pushState(null, '', '#' + (targetId === 'zones-intervention' ? 'zones' : targetId));
+                }
+            }
+        });
+    });
+
+    // Intercepter les liens d'action internes (ex: "Prendre contact", "Toutes nos expertises")
+    document.addEventListener('click', (e) => {
+        const targetA = e.target.closest('a[href^="#"]');
+        if (!targetA) return;
+        const href = targetA.getAttribute('href');
+        if (!href) return;
+        const targetId = href.replace('#', '');
+        if (validTabs.includes(targetId) || targetId === 'zones-intervention') {
+            e.preventDefault();
+            activateTab(targetId, true);
+            if (history.pushState) {
+                history.pushState(null, '', '#' + (targetId === 'zones-intervention' ? 'zones' : targetId));
+            }
+        }
+    });
+
+    // Écouter le hash de l'URL au chargement et au changement
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) activateTab(hash, true);
+    });
+
+    // Activation initiale au chargement selon le hash
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash && validTabs.includes(initialHash)) {
+        activateTab(initialHash, false);
+    } else {
+        activateTab('expertises', false);
+    }
+});
