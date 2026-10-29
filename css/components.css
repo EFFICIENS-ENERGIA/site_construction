@@ -4742,12 +4742,72 @@
 
 /* 3. Agencement des Boutons en Duo Côte-à-Côte */
 .expertise-card-actions {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 0.5rem !important;
     width: 100% !important;
     margin-top: auto !important;
-    padding-top: 0.5rem !important;
+    padding-top: 0.75rem !important;
+}
+
+.btn-card-primary,
+.btn-card-secondary {
+    width: 100% !important;
+    height: 38px !important;
+    padding: 0 0.85rem !important;
+    font-size: 0.84rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.45rem !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s !important;
+}
+
+.btn-card-primary {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28) !important;
+}
+
+.btn-card-primary:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 14px rgba(37, 99, 235, 0.42) !important;
+    color: #ffffff !important;
+}
+
+.btn-card-secondary {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+.btn-card-secondary:hover {
+    background: #f8fafc !important;
+    border-color: #2563eb !important;
+    color: #1d4ed8 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15) !important;
+}
+
+[data-theme="dark"] .btn-card-secondary {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+[data-theme="dark"] .btn-card-secondary:hover {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: #60a5fa !important;
+    color: #93c5fd !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Bouton 1 (Primaire) : Fiche détaillée */
