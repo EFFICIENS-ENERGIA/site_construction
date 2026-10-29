@@ -4603,3 +4603,270 @@
     gap: 1.25rem;
     flex-wrap: wrap;
 }
+
+
+/* ==========================================================================
+   GRILLE 4 VIGNETTES CÔTE-À-CÔTE & BOUTONS ÉLÉGANTS SUR TOUT LE SITE
+   ========================================================================== */
+
+/* 1. Grille à 4 colonnes strictes sur Desktop */
+.expertise-card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0.5rem 0 2rem 0 !important;
+}
+
+@media (max-width: 1080px) {
+    .expertise-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 620px) {
+    .expertise-card-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 2. Vignettes / Cartes épurées sans aucun texte superflu */
+.expertise-card {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.09) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s !important;
+    cursor: pointer !important;
+}
+
+[data-theme="dark"] .expertise-card {
+    background: #13151b !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+.expertise-card:hover {
+    transform: translateY(-5px) !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.16) !important;
+}
+
+[data-theme="dark"] .expertise-card:hover {
+    border-color: #60a5fa !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Image et pastille index */
+.expertise-card-media-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: 165px !important;
+    overflow: hidden !important;
+    background: #0b0c0e !important;
+}
+
+.expertise-card-media {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+.expertise-card-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.expertise-card:hover .expertise-card-image {
+    transform: scale(1.06) !important;
+}
+
+.expertise-card-index {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: rgba(15, 23, 42, 0.78) !important;
+    backdrop-filter: blur(6px) !important;
+    color: #f8fafc !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    padding: 0.2rem 0.55rem !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    z-index: 2 !important;
+}
+
+/* Corps de la vignette : Titre + Boutons */
+.expertise-card-body {
+    padding: 1.15rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    justify-content: space-between !important;
+}
+
+.expertise-card h3 {
+    margin: 0 0 1rem 0 !important;
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    min-height: 2.7rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.expertise-card h3 a.expertise-card-title-link {
+    color: var(--text-primary) !important;
+    text-decoration: none !important;
+    transition: color 0.18s ease !important;
+}
+
+.expertise-card:hover h3 a.expertise-card-title-link {
+    color: #2563eb !important;
+}
+
+[data-theme="dark"] .expertise-card:hover h3 a.expertise-card-title-link {
+    color: #60a5fa !important;
+}
+
+/* 3. Agencement des Boutons en Duo Côte-à-Côte */
+.expertise-card-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    padding-top: 0.5rem !important;
+}
+
+/* Bouton 1 (Primaire) : Fiche détaillée */
+.btn-card-primary {
+    height: 38px !important;
+    padding: 0 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-card-primary:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 14px rgba(37, 99, 235, 0.42) !important;
+    color: #ffffff !important;
+}
+
+/* Bouton 2 (Secondaire) : Contact / RDV */
+.btn-card-secondary {
+    height: 38px !important;
+    padding: 0 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-card-secondary:hover {
+    background: #e2e8f0 !important;
+    border-color: #2563eb !important;
+    color: #1d4ed8 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15) !important;
+}
+
+[data-theme="dark"] .btn-card-secondary {
+    background: rgba(255, 255, 255, 0.07) !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+[data-theme="dark"] .btn-card-secondary:hover {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: #60a5fa !important;
+    color: #93c5fd !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 4. Raffinement des Boutons sur TOUT LE SITE */
+.btn {
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.6rem !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, border-color 0.2s !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.32) !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.48) !important;
+}
+
+.btn-secondary {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc !important;
+    border-color: #2563eb !important;
+    color: #1d4ed8 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.12) !important;
+}
+
+[data-theme="dark"] .btn-secondary {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: #334155 !important;
+    border-color: #60a5fa !important;
+    color: #93c5fd !important;
+}
+
+.site-header .header-contact {
+    border-radius: 10px !important;
+    padding: 0.6rem 1.3rem !important;
+}
