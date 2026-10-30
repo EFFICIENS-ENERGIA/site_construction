@@ -1,0 +1,17 @@
+{
+  "portal_name": "Espace Suivi de Dossier EFFICIENS ENERGIA",
+  "version": "1.0.0",
+  "status": "ready",
+  "description": "Portail client securise pour le suivi contradictoire et transmission de rapports d expertise",
+  "features": [
+    "authentification_securisee",
+    "televersement_pieces_justificatives",
+    "suivi_avancement_expertise",
+    "telechargement_rapports_contradictoires"
+  ],
+  "endpoints": {
+    "tracking": "/api/dossier/status",
+    "upload": "/api/dossier/upload",
+    "reports": "/api/dossier/reports"
+  }
+}

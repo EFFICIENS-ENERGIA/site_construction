@@ -1,0 +1,419 @@
+/**
+ * 🏛️ Design System EFFICIENS ENERGIA — Expertise technique & énergétique
+ * Typographie Suisse / Neue Haas Grotesk, grille géométrique rigoureuse,
+ * palette monochrome minérale & bordures filaires 1px de haute précision.
+ * Conforme WCAG 2.1 AA/AAA, Mobile-First.
+ */
+
+:root {
+    /* Palette monochrome et minérale (mode clair) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #fbfbfb;
+    --bg-tertiary: #f4f4f5;
+    --bg-elevated: #ffffff;
+    --bg-inverse: #111215;
+
+    --text-primary: #111215;
+    --text-secondary: #4a4d55;
+    --text-muted: #787d89;
+    --text-inverse: #ffffff;
+    --text-on-accent: #ffffff;
+
+    /* Palette de marque EFFICIENS ENERGIA */
+    --color-primary: #111215;        /* Noir d'encre d'architecte */
+    --color-primary-light: #22242a;
+    --color-accent: #2f6534;
+    --color-accent-hover: #24512a;
+    --color-accent-dark: #000000;
+    --color-brand-green: #2f6534;
+    --color-brand-lime: #a2bd30;
+    --color-brand-yellow: #e6b82e;
+    --color-brand-blue: #2f78b7;
+    --color-brand-red: #c94b45;
+    --color-success: #15803d;
+    --color-info: #0f172a;
+    --color-border: rgba(17, 18, 21, 0.12);
+    --color-border-hover: rgba(17, 18, 21, 0.35);
+    --color-border-strong: #111215;
+
+    /* Ombres Ultra-Subtiles & Réflectance Minérale */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.06);
+    --shadow-xl: 0 20px 32px -6px rgba(0, 0, 0, 0.08);
+
+    /* Typographie Géométrique Suisse & Espacements */
+    --font-family: "Neue Haas Grotesk", "Suisse Int'l", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
+
+    --border-radius-xs: 2px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 8px;
+    --border-radius-full: 9999px;
+
+    --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme=dark] {
+    --bg-primary: #0b0c0e;
+    --bg-secondary: #121317;
+    --bg-tertiary: #191a20;
+    --bg-elevated: #16181e;
+    --bg-inverse: #ffffff;
+
+    --text-primary: #f5f6f8;
+    --text-secondary: #a3a8b5;
+    --text-muted: #6f7482;
+    --text-inverse: #0b0c0e;
+    --text-on-accent: #0b0c0e;
+
+    --color-primary: #f5f6f8;
+    --color-primary-light: #ffffff;
+    --color-accent: #a2bd30;
+    --color-accent-hover: #b7ce61;
+    --color-brand-green: #a2bd30;
+    --color-border: rgba(255, 255, 255, 0.12);
+    --color-border-hover: rgba(255, 255, 255, 0.3);
+    --color-border-strong: #ffffff;
+
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 32px rgba(0, 0, 0, 0.7);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typographie éditoriale et épurée */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+}
+
+h1 {
+    font-size: clamp(2.8rem, 5.8vw, 4.8rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+}
+
+h2 {
+    font-size: clamp(1.85rem, 3.2vw, 2.85rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+}
+
+h3 {
+    font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+}
+
+h4 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+a {
+    color: var(--color-brand-blue, #1d4ed8);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-accent-hover, #1e40af);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+[data-theme=dark] a {
+    color: #60a5fa;
+}
+
+[data-theme=dark] a:hover {
+    color: #93c5fd;
+}
+
+/* Conteneurs & Grille Modulaire */
+.container {
+    width: 100%;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.section {
+    padding: 6.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* En-tête de section numéroté */
+.section-header {
+    text-align: left;
+    max-width: 880px;
+    margin: 0 0 4rem 0;
+}
+
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.25rem;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.section-tag::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--color-brand-yellow) 0 33.33%,
+        var(--color-brand-blue) 33.33% 66.66%,
+        var(--color-brand-red) 66.66% 100%
+    );
+}
+
+.section-desc {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-top: 1.25rem;
+}
+
+/* Boutons arrondis */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.85rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--transition-normal);
+    text-decoration: none !important;
+    position: relative;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: #ffffff !important;
+    border-color: #2563eb;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+    color: #ffffff !important;
+    border-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: #0f172a !important;
+    border: 2px solid #94a3b8;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover {
+    background: #e2e8f0;
+    border-color: #2563eb;
+    color: #1d4ed8 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.15);
+}
+
+[data-theme=dark] .btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    color: #ffffff !important;
+    border-color: #60a5fa;
+    box-shadow: 0 4px 18px rgba(59, 130, 246, 0.4);
+}
+
+[data-theme=dark] .btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.55);
+}
+
+[data-theme=dark] .btn-secondary {
+    background: #1e293b;
+    color: #f8fafc !important;
+    border: 2px solid #475569;
+}
+
+[data-theme=dark] .btn-secondary:hover {
+    background: #334155;
+    border-color: #60a5fa;
+    color: #93c5fd !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #1d4ed8 !important;
+    border: 2px solid #2563eb;
+    font-weight: 600;
+}
+
+.btn-outline:hover {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: #1d4ed8;
+    color: #1e40af !important;
+    transform: translateY(-2px);
+}
+
+/* Badges & Tags Architecturaux */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.badge-success {
+    background: rgba(21, 128, 61, 0.1);
+    color: var(--color-success);
+    border: 1px solid rgba(21, 128, 61, 0.25);
+}
+
+.badge-warning {
+    background: rgba(17, 18, 21, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+}
+
+/* Chiffres clés éditoriaux */
+.key-figure-xxl {
+    font-size: clamp(3.2rem, 5.5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.key-figure-label {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Lignes Séparatrices 1px d'Atelier */
+.divider-hairline {
+    width: 100%;
+    height: 1px;
+    background: var(--color-border);
+    border: none;
+    margin: 2.5rem 0;
+}
+
+/* Focus Clavier Neutre & Accessible */
+:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 3px;
+}
+
+/* Boutons Réseaux Sociaux Professionnels (Facebook & LinkedIn) */
+.social-links-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--color-border);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all var(--transition-fast);
+}
+
+.btn-social:hover {
+    background: var(--text-primary);
+    color: var(--text-inverse);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.btn-social.social-fb:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+    color: #ffffff;
+}
+
+.btn-social.social-in:hover {
+    background: #0a66c2;
+    border-color: #0a66c2;
+    color: #ffffff;
+}
