@@ -439,61 +439,74 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="calc-result-box">
-                            <div class="calc-result-label">Forfait global indicatif de la mission :</div>
-                            <div class="calc-result-price" id="calcResultPrice">790 € – 1 090 € TTC</div>
-                            <div class="calc-scope-tag">🔒 Forfait global mission · Zéro facturation à l'heure</div>
-                            <div class="calc-result-sub" id="calcResultSub">Forfait global mission complète (déplacement + examen sur site + mesures instrumentées + rapport officiel opposable).</div>
-                            <div class="calc-inclusions" id="calcInclusions">
-                                <span class="calc-inc-item">✓ Déplacement Ain (01) & Métropole de Lyon (69)</span>
-                                <span class="calc-inc-item">✓ Instrumentation de mesure (Thermique & Humidité)</span>
-                                <span class="calc-inc-item" id="calcIncDeliverable">✓ Rapport d'expertise écrit opposable aux assurances</span>
+                        <div class="calc-result-box" style="text-align: center;">
+                            <div class="calc-result-label" style="text-align: center; margin: 0 auto;">Forfait global indicatif de la mission :</div>
+                            <div class="calc-result-price" id="calcResultPrice" style="text-align: center; margin: 0.35rem auto;">790 € – 1 090 € TTC</div>
+                            <div style="text-align: center; margin: 0.2rem auto 0.65rem auto;">
+                                <div class="calc-scope-tag">🔒 Forfait global mission · Zéro facturation à l'heure</div>
                             </div>
-                            <!-- ENCADRÉ UNIQUE HARMONISÉ PRISE EN CHARGE ASSURANCE MRH & PROTECTION JURIDIQUE (@PO SEB) -->
-                            <div class="insurance-reimbursement-box" style="margin-top: 0.85rem; padding: 1.15rem 1.25rem; text-align: left;">
-                                <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                                    <span style="font-size: 1.35rem; line-height: 1.2; flex-shrink: 0;" aria-hidden="true">💡</span>
-                                    <div>
-                                        <p class="mrh-question-title" style="font-size: 0.98rem; font-weight: 800; margin: 0 0 0.5rem 0; line-height: 1.45;">
-                                            « Saviez-vous que votre contrat d'assurance prend en charge tout ou partie des honoraires de votre expert d'assuré ? »
-                                        </p>
-                                        <p style="font-size: 0.86rem; line-height: 1.55; margin: 0 0 0.65rem 0; opacity: 0.95;">
-                                            Dans la très grande majorité des dossiers (sinistre, fissures, dégât des eaux, malfaçons ou litige décennal), votre contrat <strong>Multirisque Habitation (MRH)</strong> ou votre contrat de <strong>Protection Juridique</strong> intègre une garantie « Honoraires d'expert d'assuré ». <strong>L'assuré ne paie souvent rien ou presque :</strong> nos honoraires sont alors intégralement ou très largement pris en charge selon le barème contractuel de votre assureur.
-                                        </p>
-                                        <div id="calcPjBadge" class="calc-pj-badge" style="margin: 0; padding-top: 0.55rem; border-top: 1px dashed rgba(16, 185, 129, 0.35); background: transparent; border-left: none; border-right: none; border-bottom: none; border-radius: 0; font-size: 0.82rem; line-height: 1.45;">
-                                            <strong>⚖️ Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).
-                                        </div>
-                                        <!-- BLOC MISE EN CAUSE DU RESPONSABLE (@PO SEB) -->
-                                        <div class="third-party-liability-block" style="margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px dashed rgba(16, 185, 129, 0.35); font-size: 0.82rem; line-height: 1.5;">
-                                            <div style="display: flex; align-items: baseline; gap: 0.45rem; font-weight: 700; margin-bottom: 0.35rem;" class="mrh-subhead">
-                                                <span aria-hidden="true">🎯</span>
-                                                <span>Mise en cause du responsable (artisan, voisin, constructeur) :</span>
-                                            </div>
-                                            <ul style="margin: 0; padding-left: 1.35rem; display: flex; flex-direction: column; gap: 0.3rem; opacity: 0.95;">
-                                                <li><strong>À l’amiable :</strong> nos honoraires sont intégrés au préjudice et réglés par l’assurance adverse (RC Pro, décennale).</li>
-                                                <li><strong>Au tribunal :</strong> ils sont remboursés par la partie condamnée au titre de l’article 700 du CPC.</li>
-                                            </ul>
-                                        </div>
-                                        <!-- BLOC PRISE EN CHARGE ENTREPRISES & INDUSTRIE (@PO SEB) -->
-                                        <div class="enterprise-coverage-block" style="margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px dashed rgba(16, 185, 129, 0.35); font-size: 0.82rem; line-height: 1.5;">
-                                            <div style="display: flex; align-items: baseline; gap: 0.45rem; font-weight: 700; margin-bottom: 0.35rem;" class="mrh-subhead">
-                                                <span aria-hidden="true">🏭</span>
-                                                <span>Prise en charge Entreprises &amp; Industrie :</span>
-                                            </div>
-                                            <ul style="margin: 0; padding-left: 1.35rem; display: flex; flex-direction: column; gap: 0.3rem; opacity: 0.95;">
-                                                <li><strong>Contrat MRI / Pertes d'exploitation :</strong> remboursement garanti de vos honoraires d'expert d'assuré.</li>
-                                                <li><strong>Tiers responsable :</strong> frais réglés par l'assurance adverse (amiable) ou ordonnés par le juge (art. 700 CPC).</li>
-                                                <li><strong>Protection Juridique Pro :</strong> financement de l'audit contradictoire (libre choix de l'expert, art. L. 127-3).</li>
-                                            </ul>
-                                        </div>
+                            <div class="calc-result-sub" id="calcResultSub" style="text-align: center; max-width: 520px; margin: 0 auto 0.85rem auto;">Forfait global mission complète (déplacement + examen sur site + mesures instrumentées + rapport officiel opposable).</div>
+                            
+                            <div class="calc-inclusions" id="calcInclusions" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.45rem; padding: 0.85rem 0; border-top: 1px dashed rgba(2, 132, 199, 0.25); border-bottom: 1px dashed rgba(2, 132, 199, 0.25); margin-bottom: 0.85rem;">
+                                <span class="calc-inc-item">✓ Déplacement Ain (01) &amp; Métropole de Lyon (69)</span>
+                                <span class="calc-inc-item">✓ Instrumentation de mesure (Thermique &amp; Humidité)</span>
+                                <span class="calc-inc-item" id="calcIncDeliverable">✓ Rapport d'expertise écrit circonstancié opposable (DTU / Eurocodes)</span>
+                            </div>
+
+                            <!-- ENCADRÉ HARMONISÉ & CENTRÉ : PRISE EN CHARGE ASSURANCE & RECOURS (@PO SEB) -->
+                            <div class="insurance-reimbursement-box" style="margin-top: 0.85rem; padding: 1.35rem 1.4rem; text-align: left; border-radius: 12px;">
+                                <!-- En-tête centré avec icône -->
+                                <div style="text-align: center; margin-bottom: 1.15rem;">
+                                    <span style="font-size: 1.6rem; display: block; margin-bottom: 0.35rem;" aria-hidden="true">💡</span>
+                                    <h4 class="mrh-question-title" style="font-size: 1.05rem; font-weight: 800; line-height: 1.45; margin: 0 auto 0.6rem auto; text-align: center;">
+                                        « Saviez-vous que votre contrat d'assurance prend en charge tout ou partie des honoraires de votre expert d'assuré ? »
+                                    </h4>
+                                    <p style="font-size: 0.88rem; line-height: 1.6; margin: 0 auto; max-width: 520px; text-align: center; opacity: 0.95;">
+                                        Dans la très grande majorité des dossiers (sinistre, fissures, dégât des eaux, malfaçons ou litige décennal), votre contrat <strong>Multirisque Habitation (MRH)</strong> ou votre contrat de <strong>Protection Juridique</strong> intègre une garantie « Honoraires d'expert d'assuré ». <strong>L'assuré ne paie souvent rien ou presque :</strong> nos honoraires sont alors intégralement ou très largement pris en charge selon le barème contractuel de votre assureur.
+                                    </p>
+                                </div>
+
+                                <!-- 3 Volets de prise en charge parfaitement alignés -->
+                                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                    
+                                    <!-- Volet 1 : Protection Juridique -->
+                                    <div id="calcPjBadge" class="calc-pj-badge" style="margin: 0; padding: 0.75rem 0.95rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.5; text-align: left; display: flex; align-items: flex-start; gap: 0.5rem;">
+                                        <span aria-hidden="true" style="font-size: 1rem; flex-shrink: 0;">⚖️</span>
+                                        <span><strong>Prise en charge Protection Juridique :</strong> Jusqu'à 100% de ces honoraires peuvent être remboursés par votre assurance (Art. L. 127-2-3 Code des assurances).</span>
                                     </div>
+
+                                    <!-- Volet 2 : Tiers Responsable -->
+                                    <div class="third-party-liability-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 0.75rem 0.95rem; font-size: 0.83rem; line-height: 1.5; text-align: left;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 700; margin-bottom: 0.35rem;" class="mrh-subhead">
+                                            <span aria-hidden="true" style="font-size: 1rem; flex-shrink: 0;">🎯</span>
+                                            <span>Mise en cause du responsable (artisan, voisin, constructeur) :</span>
+                                        </div>
+                                        <ul style="margin: 0; padding-left: 1.45rem; display: flex; flex-direction: column; gap: 0.25rem; opacity: 0.95;">
+                                            <li><strong>À l’amiable :</strong> nos honoraires sont intégrés au préjudice et réglés par l’assurance adverse (RC Pro, décennale).</li>
+                                            <li><strong>Au tribunal :</strong> ils sont remboursés par la partie condamnée au titre de l’article 700 du CPC.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Volet 3 : Entreprises & Industrie -->
+                                    <div class="enterprise-coverage-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 0.75rem 0.95rem; font-size: 0.83rem; line-height: 1.5; text-align: left;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 700; margin-bottom: 0.35rem;" class="mrh-subhead">
+                                            <span aria-hidden="true" style="font-size: 1rem; flex-shrink: 0;">🏭</span>
+                                            <span>Prise en charge Entreprises &amp; Industrie :</span>
+                                        </div>
+                                        <ul style="margin: 0; padding-left: 1.45rem; display: flex; flex-direction: column; gap: 0.25rem; opacity: 0.95;">
+                                            <li><strong>Contrat MRI / Pertes d'exploitation :</strong> remboursement garanti de vos honoraires d'expert d'assuré.</li>
+                                            <li><strong>Tiers responsable :</strong> frais réglés par l'assurance adverse (amiable) ou ordonnés par le juge (art. 700 CPC).</li>
+                                            <li><strong>Protection Juridique Pro :</strong> financement de l'audit contradictoire (libre choix de l'expert, art. L. 127-3).</li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
 
                             <!-- MODULE PROACTIF : VÉRIFICATEUR PROTECTION JURIDIQUE & GÉNÉRATEUR DE COURRIER ART. L. 127-2-3 -->
                             <div id="pjVerifierPanel" style="margin-top: 0.85rem; padding: 0.85rem 1rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; text-align: left;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
-                                    <span style="font-size: 0.82rem; font-weight: 700; color: #10b981;">🛡️ Vérificateur de Prise en Charge & Libre Choix d'Expert (Art. L. 127-2-3)</span>
+                                    <span style="font-size: 0.82rem; font-weight: 700; color: #10b981;">🛡️ Vérificateur de Prise en Charge &amp; Libre Choix d'Expert (Art. L. 127-2-3)</span>
                                     <button type="button" id="btnTogglePjLetter" style="background: #059669; color: #fff; border: none; border-radius: 6px; padding: 0.35rem 0.7rem; font-size: 0.76rem; font-weight: 700; cursor: pointer;">
                                         📄 Générer ma lettre d'exercice du libre choix d'expert
                                     </button>

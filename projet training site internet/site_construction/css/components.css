@@ -3797,11 +3797,13 @@
 }
 
 .calc-result-label {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    text-align: center !important;
+    margin: 0 auto !important;
 }
 
 .calc-scope-tag {
@@ -5779,4 +5781,44 @@ div.logo-brand:hover .logo-img {
 
 [data-theme="dark"] .enterprise-coverage-block li strong {
     color: #ffffff !important;
+}
+
+
+/* Centrage & Harmonisation de la colonne de resultat (@PO Seb) */
+.calc-result-box {
+    text-align: center;
+}
+
+.calc-result-price {
+    text-align: center !important;
+    margin: 0.35rem auto 0.25rem auto !important;
+}
+
+.calc-scope-tag {
+    display: inline-block !important;
+    margin: 0.2rem auto 0.65rem auto !important;
+    text-align: center !important;
+}
+
+.calc-result-sub {
+    text-align: center !important;
+    max-width: 520px !important;
+    margin: 0 auto 0.85rem auto !important;
+}
+
+.calc-inclusions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 0.45rem !important;
+    padding: 0.85rem 0 !important;
+    border-top: 1px dashed rgba(2, 132, 199, 0.25) !important;
+    border-bottom: 1px dashed rgba(2, 132, 199, 0.25) !important;
+    margin-bottom: 0.85rem !important;
+}
+
+.calc-inc-item {
+    text-align: center !important;
 }
