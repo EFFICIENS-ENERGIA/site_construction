@@ -5388,3 +5388,56 @@ div.logo-brand:hover .logo-img {
     max-width: 980px !important;
     margin: 0 auto !important;
 }
+
+/* ==========================================================================
+   SECTION LE CABINET : DARK & LIGHT MODE HIGH CONTRAST (@PO SEB)
+   ========================================================================== */
+.cabinet-section {
+    color: var(--text-primary);
+}
+
+.cabinet-card-block,
+.case-study-card {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.cabinet-card-block h3,
+.cabinet-card-block strong,
+.case-study-card h4,
+.case-study-card strong {
+    color: #0f172a !important;
+}
+
+.cabinet-card-block p,
+.cabinet-card-block li,
+.case-study-card p {
+    color: #334155 !important;
+}
+
+/* Mode sombre */
+[data-theme="dark"] .cabinet-card-block,
+[data-theme="dark"] .case-study-card {
+    background: #111318 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #f1f5f9 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .cabinet-card-block h3,
+[data-theme="dark"] .cabinet-card-block strong,
+[data-theme="dark"] .case-study-card h4,
+[data-theme="dark"] .case-study-card strong {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .cabinet-card-block p,
+[data-theme="dark"] .cabinet-card-block li,
+[data-theme="dark"] .case-study-card p {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .case-study-card {
+    border-left: 4px solid #38bdf8 !important;
+}
