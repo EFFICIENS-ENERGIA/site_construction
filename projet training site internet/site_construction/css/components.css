@@ -7073,3 +7073,420 @@ html, body {
   border-color: #475569;
   color: #f1f5f9;
 }
+
+/* --- COMPOSANT AVIS CLIENTS CERTIFIÉS & CHIFFRES CLÉS (@PO SEB) --- */
+.certified-reviews-widget {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.45rem 1.1rem;
+  margin: 0 auto 1.5rem auto;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  flex-wrap: wrap;
+}
+
+.reviews-stars {
+  color: #f59e0b;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.reviews-score {
+  font-size: 0.85rem;
+  color: #0f172a;
+}
+
+.reviews-score strong {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.reviews-count {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.reviews-guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: #15803d;
+  background: #f0fdf4;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid #bbf7d0;
+}
+
+.guarantee-icon {
+  font-weight: 800;
+  font-size: 0.75rem;
+}
+
+/* Grille Chiffres Clés */
+.key-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  max-width: 1040px;
+  margin: 1.75rem auto 2.5rem auto;
+}
+
+@media (max-width: 900px) {
+  .key-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .key-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.4rem 1.1rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.metric-card.highlight {
+  border-color: #0284c7;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 50%);
+}
+
+.metric-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0284c7;
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.metric-card.highlight .metric-value {
+  color: #0369a1;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.metric-desc {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Mode sombre */
+[data-theme="dark"] .certified-reviews-widget {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .reviews-score {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .reviews-score strong {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .reviews-count {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .reviews-guarantee {
+  background: #052e16;
+  border-color: #166534;
+  color: #86efac;
+}
+
+[data-theme="dark"] .metric-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .metric-card.highlight {
+  border-color: #0284c7;
+  background: linear-gradient(180deg, #082f49 0%, #0f172a 50%);
+}
+
+[data-theme="dark"] .metric-value {
+  color: #38bdf8;
+}
+
+[data-theme="dark"] .metric-label {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .metric-desc {
+  color: #94a3b8;
+}
+
+
+/* --- ACCRÉDITATIONS & NORMES DÈS LE HAUT DE PAGE (@PO SEB) --- */
+.technical-standards-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin: 0 auto 1.5rem auto;
+  max-width: 980px;
+}
+
+.standard-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  color: #334155;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.standard-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.badge-dtu {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-eurocodes {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badge-loi {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.badge-opposable {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.standard-text {
+  font-weight: 500;
+}
+
+/* --- SECTION GUIDES & CONSEILS TECHNIQUES (SEO) (@PO SEB) --- */
+.guides-section {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.guides-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 2.2rem auto;
+}
+
+.guides-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.65rem;
+}
+
+.guides-header h3 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.guides-header p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.guide-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.guide-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.74rem;
+}
+
+.guide-tag {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.tag-dpe {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.tag-dde {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.tag-fissures {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.tag-malfacon {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.guide-read-time {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.guide-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.6rem 0;
+  line-height: 1.35;
+}
+
+.guide-card p {
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.45;
+  margin: 0 0 1rem 0;
+}
+
+.guide-takeaway {
+  background: #f8fafc;
+  border-left: 3px solid #0284c7;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.78rem;
+  color: #334155;
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+  margin-top: auto;
+}
+
+.guide-takeaway strong {
+  color: #0369a1;
+}
+
+.guide-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0284c7;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.2s ease;
+}
+
+.guide-link:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+/* Mode sombre */
+[data-theme="dark"] .standard-pill {
+  background: #0f172a;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .guides-section {
+  border-top-color: #334155;
+}
+
+[data-theme="dark"] .guides-header h3 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .guides-header p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .guide-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .guide-card h4 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .guide-card p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .guide-takeaway {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .guide-link {
+  color: #38bdf8;
+}

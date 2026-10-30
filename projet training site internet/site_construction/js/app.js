@@ -714,6 +714,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!targetId) targetId = 'expertises';
         targetId = targetId.replace('#', '');
         if (targetId === 'zones-intervention') targetId = 'zones';
+        let isGuidesTarget = false;
+        if (targetId === 'guides') { targetId = 'faq'; isGuidesTarget = true; }
         if (targetId === 'accueil' || targetId === 'contenu' || targetId === 'simulateur') {
             targetId = 'expertises';
         }
@@ -745,6 +747,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 prepVisiteSub.classList.remove('active-subpanel');
                 prepVisiteSub.style.display = 'none';
             }
+        }
+
+        if (isGuidesTarget) {
+            const gEl = document.getElementById('guides');
+            if (gEl) gEl.scrollIntoView({ behavior: 'smooth' });
         }
 
         // 3. Mise à jour de l'onglet actif dans la barre de navigation
