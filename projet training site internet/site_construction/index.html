@@ -20,8 +20,8 @@
     <link rel="manifest" href="manifest.webmanifest?v=15">
     <link rel="icon" type="image/png" href="assets/logo_efficiens_energia.png">
     <link rel="apple-touch-icon" href="assets/logo_efficiens_energia.png">
-    <link rel="stylesheet" href="css/design_system.css?v=20">
-    <link rel="stylesheet" href="css/components.css?v=30">
+    <link rel="stylesheet" href="css/design_system.css?v=45">
+    <link rel="stylesheet" href="css/components.css?v=45">
     <script type="application/ld+json" id="geoSchemaJsonLd">
         {
             "@context": "https://schema.org",
@@ -800,7 +800,7 @@
                         </p>
                     </div>
 
-                    <div class="case-studies-grid">
+                    <div class="case-studies-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.15rem;">
                         
                         <!-- Cas 1 : Sinistres -->
                         <div class="case-study-card" style="border-radius: 8px; padding: 1.35rem; border-left: 4px solid #0284c7;">
@@ -923,7 +923,6 @@
 
             <!-- Grille épurée : Uniquement les accès utiles réels -->
             <!-- Grille épurée : 3 colonnes thématiques nettes et séparées -->
-            <!-- Grille épurée : 3 colonnes thématiques nettes et séparées -->
             <div class="footer-columns-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; max-width: 1050px; margin: 0 auto 2.5rem auto;">
                 <!-- Colonne 1 : LE CABINET -->
                 <div class="footer-col">
@@ -935,14 +934,12 @@
                     </ul>
                 </div>
 
-                <!-- Colonne 2 : DOCUMENTS & TÉLÉCHARGEMENTS -->
+                                <!-- Colonne 2 : DOCUMENTS & TÉLÉCHARGEMENTS -->
                 <div class="footer-col">
                     <h4 class="footer-col-title">Documents &amp; Téléchargements</h4>
-                    <ul class="footer-col-list">
-                        <li><a href="Dossier_Prestations_EFFICIENS_ENERGIA.pdf" target="_blank" rel="noopener noreferrer">Dossier de Présentation Complet (PDF) ↗</a></li>
-                        <li><a href="prestation.html">8 Fiches Techniques Prestations (Détail) ↗</a></li>
-                        <li><a href="informations-legales.html">Mentions Légales &amp; Déontologie</a></li>
-                        <li><a href="informations-legales.html#privacy-title">Politique de Confidentialité</a></li>
+                    <ul class="footer-col-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem;">
+                        <li><a href="informations-legales.html">Mentions Légales &amp; Déontologie ↗</a></li>
+                        <li><a href="informations-legales.html#privacy-title">Politique de Confidentialité ↗</a></li>
                     </ul>
                 </div>
 
@@ -977,7 +974,7 @@
             <span class="action-text"><strong>WhatsApp</strong><small>Réponse rapide</small></span>
         </a>
     </aside>
-    <script src="js/app.js?v=21"></script>
+    <script src="js/app.js?v=45"></script>
     <script src="js/breadcrumb.js"></script>
     <script src="js/toc_reading_time.js"></script>
     <script src="js/price_calculator.js"></script>
