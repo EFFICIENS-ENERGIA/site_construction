@@ -5526,3 +5526,20 @@ div.logo-brand:hover .logo-img {
     color: #ffffff !important;
 }
 
+
+/* Bloc Mise en cause tiers responsable (@PO Seb) */
+.mrh-subhead {
+    color: #059669;
+}
+
+[data-theme="dark"] .mrh-subhead {
+    color: #34d399 !important;
+}
+
+.third-party-liability-block li strong {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .third-party-liability-block li strong {
+    color: #ffffff !important;
+}
