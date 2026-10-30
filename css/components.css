@@ -5682,3 +5682,11 @@ div.logo-brand:hover .logo-img {
 [data-theme="dark"] .visit-prep-fallback strong {
     color: #38bdf8 !important;
 }
+
+.enterprise-coverage-block li strong {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .enterprise-coverage-block li strong {
+    color: #ffffff !important;
+}
