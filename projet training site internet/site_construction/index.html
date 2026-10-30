@@ -141,6 +141,69 @@
         }
     </script>
     <link rel="stylesheet" href="css/print.css" media="print">
+    <script>
+    function goToTarifsTab(e) {
+        if (e) {
+            if (e.preventDefault) e.preventDefault();
+            if (e.stopPropagation) e.stopPropagation();
+        }
+        // 1. Basculer tous les panneaux d'onglets
+        var panels = document.querySelectorAll('.site-tab-panel');
+        for (var i = 0; i < panels.length; i++) {
+            var p = panels[i];
+            if (p.id === 'tarifs') {
+                p.classList.add('active-tab');
+                p.style.display = 'block';
+            } else {
+                p.classList.remove('active-tab');
+                p.style.display = 'none';
+            }
+        }
+        // 2. Mettre à jour la navigation
+        var links = document.querySelectorAll('.main-nav a[href^="#"]');
+        for (var j = 0; j < links.length; j++) {
+            var a = links[j];
+            var isTarif = (a.getAttribute('href') === '#tarifs');
+            a.classList.toggle('nav-highlight', isTarif);
+            a.classList.toggle('active', isTarif);
+            a.setAttribute('aria-selected', String(isTarif));
+        }
+        // 3. Masquer le hero d'accueil
+        var hero = document.getElementById('accueil');
+        if (hero) hero.style.display = 'none';
+
+        // 4. Mettre à jour l'URL sans rechargement
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, '', '#tarifs');
+        } else {
+            window.location.hash = '#tarifs';
+        }
+
+        // 5. Scroller immédiatement vers la section tarifs / encadré remboursement
+        setTimeout(function() {
+            var target = document.querySelector('.insurance-reimbursement-box') || document.getElementById('estimateur-direct') || document.getElementById('tarifs');
+            if (target) {
+                var header = document.querySelector('.site-header');
+                var headerH = header ? header.offsetHeight : 76;
+                var pos = target.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - headerH - 15;
+                window.scrollTo({ top: Math.max(0, pos), behavior: 'smooth' });
+            }
+        }, 50);
+        return false;
+    }
+    window.goToTarifsTab = goToTarifsTab;
+
+    // Écouteur en phase de capture (priorité absolue) pour garantir la redirection
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.badge-prise-en-charge');
+        if (btn) {
+            if (e.preventDefault) e.preventDefault();
+            if (e.stopPropagation) e.stopPropagation();
+            goToTarifsTab(e);
+            return false;
+        }
+    }, true);
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -244,9 +307,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=sinistres">Sinistres & dommages construction</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Rapport d'expertise écrit circonstancié opposable (DTU / Eurocodes).</span>
                             <div class="expertise-card-actions">
@@ -266,9 +329,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=industrie">Expertise industrielle</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Rapport technique contradictoire & audit pertes d'exploitation.</span>
                             <div class="expertise-card-actions">
@@ -288,9 +351,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=renouvelables">Énergies renouvelables</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Bilan de conformité photovoltaïque / PAC & rapport de désordres.</span>
                             <div class="expertise-card-actions">
@@ -310,9 +373,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=performance">Performance énergétique du bâti</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Audit thermique instrumenté (infrarouge) & préconisations normées.</span>
                             <div class="expertise-card-actions">
@@ -332,9 +395,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=incendie">Incendie & dommages associés</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Rapport de recherche des causes, origines & chiffrage des dommages.</span>
                             <div class="expertise-card-actions">
@@ -354,9 +417,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=diagnostics">Diagnostics contestés (DPE...)</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Contre-expertise contradictoire opposable au diagnostiqueur ou vendeur.</span>
                             <div class="expertise-card-actions">
@@ -376,9 +439,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=visite-achat">Visite technique avant achat</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Bilan technique global avant acquisition & estimation des travaux.</span>
                             <div class="expertise-card-actions">
@@ -398,9 +461,9 @@
                         </div>
                         <div class="expertise-card-body">
                             <h3><a class="expertise-card-title-link" href="prestation.html?service=protection-juridique">Expertise & protection juridique</a></h3>
-                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="if(window.activateTab){window.activateTab('tarifs', true);}" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                <span>Prise en charge assurance possible</span>
+                            <a href="#tarifs" class="badge-prise-en-charge" data-tab-target="tarifs" onclick="return goToTarifsTab(event);" title="Prise en charge financière possible par votre assurance (PJ, MRH ou recours tiers)">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style="pointer-events: none;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                <span style="pointer-events: none;">Prise en charge assurance possible</span>
                             </a>
                             <span class="card-deliverable"><strong>Livrable :</strong> Rapport d'expert d'assuré opposable aux compagnies (Art. L. 127-2-3).</span>
                             <div class="expertise-card-actions">
@@ -653,6 +716,7 @@
         </section>
 
         <section class="section visit-preparation-section site-tab-subpanel" id="preparer-visite" aria-labelledby="visit-preparation-title">
+            <div class="container" style="max-width: 1200px !important; margin: 0 auto !important;">
             <div class="container">
                 <div class="section-header expertise-section-heading" style="text-align: center; margin: 0 auto 2.5rem auto; max-width: 820px;">
                     <p class="section-tag" style="justify-content: center;">03 / Préparer votre visite</p>
