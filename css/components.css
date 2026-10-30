@@ -5490,3 +5490,31 @@ div.logo-brand:hover .logo-img {
     color: #38bdf8 !important;
     text-decoration: underline !important;
 }
+
+/* Encadre Explicatif Prise en charge MRH / Protection Juridique (@PO Seb) */
+.insurance-reimbursement-box {
+    background: #ffffff;
+    border: 1.5px solid #0284c7;
+    color: #0f172a;
+    transition: all 0.25s ease;
+}
+
+.insurance-reimbursement-box:hover {
+    border-color: #0369a1;
+    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.14) !important;
+}
+
+[data-theme="dark"] .insurance-reimbursement-box {
+    background: #111318 !important;
+    border-color: #38bdf8 !important;
+    color: #f1f5f9 !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .insurance-reimbursement-box p {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .insurance-reimbursement-box strong {
+    color: #ffffff !important;
+}
