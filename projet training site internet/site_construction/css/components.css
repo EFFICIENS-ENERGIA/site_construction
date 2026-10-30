@@ -6017,3 +6017,108 @@ div.logo-brand:hover .logo-img {
         line-height: 1.45 !important;
     }
 }
+
+
+/* ==========================================================================
+   OPTIMISATION MOBILE GLOBALE 100% RESPONSIVE (@PO SEB)
+   ========================================================================== */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+}
+
+@media (max-width: 680px) {
+    /* Sécurité conteneurs généraux */
+    .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .section {
+        padding: 2.5rem 0 !important;
+    }
+
+    .section-header h1,
+    .section-header h2 {
+        font-size: 1.45rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .section-desc {
+        font-size: 0.88rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Grille Le Cabinet & Instrumentation */
+    .cabinet-grid-2col {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .cabinet-card-block {
+        padding: 1.25rem 1rem !important;
+    }
+
+    .cabinet-social-links {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+
+    .cabinet-social-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+        padding: 0.75rem 1rem !important;
+    }
+
+    /* Grille des 8 cas d'études réels */
+    .case-studies-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .case-study-card {
+        padding: 1.15rem 1rem !important;
+    }
+
+    /* Grille des 5 cartes Préparer sa visite */
+    .visit-prep-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.15rem !important;
+    }
+
+    .visit-prep-card {
+        padding: 1.25rem 1rem !important;
+    }
+
+    /* Footer sur smartphone : 1 colonne propre et aérée */
+    .footer-columns-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.75rem !important;
+        text-align: center !important;
+    }
+
+    .footer-col {
+        text-align: center !important;
+    }
+
+    .footer-col-list {
+        align-items: center !important;
+    }
+
+    .footer-brand-baseline span {
+        display: block !important;
+        margin-top: 0.35rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Garantie dégagement barre d'action mobile flottante */
+    .site-footer.kapia-style-footer {
+        padding-bottom: 6rem !important;
+    }
+}
