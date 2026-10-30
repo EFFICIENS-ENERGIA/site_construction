@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page non trouvée (404) | EFFICIENS ENERGIA</title>
+    <!-- Redirection intelligente automatique si accès hors sous-dossier GitHub Pages -->
+    <script>
+      (function() {
+        var path = window.location.pathname;
+        if (window.location.hostname.indexOf('github.io') !== -1 && path.indexOf('/site_construction') === -1) {
+          var target = '/site_construction/' + window.location.search + window.location.hash;
+          window.location.replace(target);
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="css/design_system.css?v=21">
     <link rel="stylesheet" href="css/components.css?v=31">
     <link rel="stylesheet" href="css/print.css" media="print">
@@ -59,6 +69,7 @@
             font-weight: 600;
             margin-bottom: 1.25rem;
             border: 1px solid #bfdbfe;
+            line-height: 1.4;
         }
         .desc-404 {
             font-size: 0.95rem;
@@ -102,17 +113,29 @@
 </head>
 <body>
     <div class="card-404">
-        <img src="assets/logo_efficiens_energia.png" alt="EFFICIENS ENERGIA" class="logo-404">
-        <div class="badge-404">Cabinet d'Expertise Technique Indépendant · Particuliers, Entreprises, Collectivités & Institutionnels</div>
+        <img src="assets/logo_efficiens_energia.png"
+             onerror="this.onerror=null;if(window.location.pathname.indexOf('/site_construction')===-1){this.src='/site_construction/assets/logo_efficiens_energia.png';}"
+             alt="EFFICIENS ENERGIA" class="logo-404">
+        <div class="badge-404">Cabinet d'Expertise Technique Indépendant · Particuliers, Entreprises, Collectivités &amp; Institutionnels</div>
         <div class="code-404">404</div>
         <h1 class="title-404">Page introuvable</h1>
         <p class="desc-404">
             La page que vous tentez d'atteindre n'existe pas ou a été déplacée. Vous pouvez retourner à l'accueil pour découvrir nos expertises ou nous contacter directement.
         </p>
         <div class="actions-404">
-            <a href="index.html" class="btn-404 btn-primary-404">Retour à l'accueil</a>
-            <a href="index.html#contact" class="btn-404 btn-secondary-404">Contacter l'expert</a>
+            <a href="./" id="link-home-404" class="btn-404 btn-primary-404">Retour à l'accueil</a>
+            <a href="./#contact" id="link-contact-404" class="btn-404 btn-secondary-404">Contacter l'expert</a>
         </div>
     </div>
+    <script>
+      (function() {
+        if (window.location.hostname.indexOf('github.io') !== -1 && window.location.pathname.indexOf('/site_construction') === -1) {
+          var h = document.getElementById('link-home-404');
+          var c = document.getElementById('link-contact-404');
+          if (h) h.href = '/site_construction/';
+          if (c) c.href = '/site_construction/#contact';
+        }
+      })();
+    </script>
 </body>
 </html>
