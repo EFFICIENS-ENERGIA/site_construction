@@ -5716,22 +5716,33 @@ div.logo-brand:hover .logo-img {
    SECTION PRÉPARATION VISITE : GRILLE DE CARTES ATTRACTIVES (@PO SEB)
    ========================================================================== */
 .visit-prep-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    gap: 1.5rem !important;
+    margin: 2rem auto !important;
+    max-width: 1140px !important;
 }
 
 .visit-prep-card {
+    flex: 0 1 340px !important;
+    width: 340px !important;
+    max-width: 100% !important;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 1.6rem 1.4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[data-theme="dark"] .visit-prep-card {
+    background: #111827;
+    border-color: #374151;
 }
 
 .visit-prep-card:hover {
@@ -6155,13 +6166,34 @@ html, body {
 
     /* Grille des 5 cartes Préparer sa visite */
     .visit-prep-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.15rem !important;
-    }
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    gap: 1.5rem !important;
+    margin: 2rem auto !important;
+    max-width: 1140px !important;
+}
 
-    .visit-prep-card {
-        padding: 1.25rem 1rem !important;
-    }
+.visit-prep-card {
+    flex: 0 1 340px !important;
+    width: 340px !important;
+    max-width: 100% !important;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.6rem 1.4rem;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[data-theme="dark"] .visit-prep-card {
+    background: #111827;
+    border-color: #374151;
+}
 
     /* Footer sur smartphone : 1 colonne propre et aérée */
     .footer-columns-grid {
