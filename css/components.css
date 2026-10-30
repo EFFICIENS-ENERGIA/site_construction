@@ -5280,8 +5280,7 @@ a.contact-header-badge:hover {
 /* ==========================================================================
    MASQUAGE DU HERO D'ACCUEIL & DE L'INTRO CABINET (@PO SEB)
    ========================================================================== */
-#accueil,
-#cabinet {
+#accueil {
     display: none !important;
 }
 

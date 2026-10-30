@@ -686,14 +686,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabPanels = document.querySelectorAll('.site-tab-panel');
     const prepVisiteSub = document.getElementById('preparer-visite');
     const mainNavLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-    const validTabs = ['expertises', 'methode', 'tarifs', 'zones', 'faq', 'contact'];
+    const validTabs = ['expertises', 'methode', 'tarifs', 'zones', 'faq', 'contact', 'cabinet'];
 
     function activateTab(targetId, doScroll) {
         if (typeof doScroll === 'undefined') doScroll = true;
         if (!targetId) targetId = 'expertises';
         targetId = targetId.replace('#', '');
         if (targetId === 'zones-intervention') targetId = 'zones';
-        if (targetId === 'accueil' || targetId === 'contenu' || targetId === 'cabinet') {
+        if (targetId === 'accueil' || targetId === 'contenu') {
             targetId = 'expertises';
         }
 
@@ -702,9 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 0. Hero & Intro Cabinet masqués sur tous les onglets
         const heroSection = document.getElementById('accueil');
-        const introSection = document.getElementById('cabinet');
         if (heroSection) heroSection.style.display = 'none';
-        if (introSection) introSection.style.display = 'none';
 
         // 1. Basculer l'affichage des panneaux
         tabPanels.forEach(panel => {
