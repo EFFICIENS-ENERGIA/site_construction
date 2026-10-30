@@ -5441,3 +5441,28 @@ div.logo-brand:hover .logo-img {
 [data-theme="dark"] .case-study-card {
     border-left: 4px solid #38bdf8 !important;
 }
+
+/* Grille des cas d'études : 4 cas par ligne sur desktop (@PO Seb) */
+.case-studies-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1.15rem !important;
+}
+
+.case-study-card {
+    padding: 1.2rem 1.05rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+@media (max-width: 1100px) {
+    .case-studies-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .case-studies-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
