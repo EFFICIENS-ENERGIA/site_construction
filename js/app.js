@@ -688,6 +688,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainNavLinks = document.querySelectorAll('.main-nav a[href^="#"]');
     const validTabs = ['expertises', 'methode', 'tarifs', 'zones', 'faq', 'contact', 'cabinet'];
 
+    window.activateTab = activateTab;
     function activateTab(targetId, doScroll) {
         if (typeof doScroll === 'undefined') doScroll = true;
         if (!targetId) targetId = 'expertises';
@@ -759,6 +760,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    });
+
+    
+    // Redirection garantie au clic sur les badges de prise en charge vers l'onglet tarifs (@PO Seb)
+    document.addEventListener('click', function(e) {
+        const badge = e.target.closest('.badge-prise-en-charge');
+        if (badge) {
+            e.preventDefault();
+            activateTab('tarifs', true);
+            if (history.pushState) {
+                history.pushState(null, '', '#tarifs');
+            }
+            setTimeout(function() {
+                const targetEl = document.querySelector('.insurance-reimbursement-box') || document.getElementById('tarifs');
+                if (targetEl) {
+                    const headerH = document.querySelector('.site-header') ? document.querySelector('.site-header').offsetHeight : 76;
+                    const topPos = targetEl.getBoundingClientRect().top + window.pageYOffset - headerH - 20;
+                    window.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
+                }
+            }, 100);
+        }
     });
 
     // Intercepter les liens d'action internes (ex: "Prendre contact", "Toutes nos expertises")
