@@ -6221,3 +6221,855 @@ html, body {
         padding-bottom: 6rem !important;
     }
 }
+
+
+/* ==========================================================================
+   4 CAS CONCRETS CHIFFRÉS (AVANT / APRÈS CONTRE-EXPERTISE) (@PO SEB)
+   ========================================================================== */
+.cas-concrets-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2.2rem 1.8rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .cas-concrets-container {
+    background: #0f172a;
+    border-color: #334155;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.cas-concrets-header {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto 2rem auto;
+}
+
+.cas-concrets-subtitle {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0284c7;
+    margin-bottom: 0.4rem;
+}
+
+[data-theme="dark"] .cas-concrets-subtitle {
+    color: #38bdf8;
+}
+
+.cas-concrets-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 0.6rem 0;
+    line-height: 1.3;
+}
+
+.cas-concrets-intro {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0 auto;
+}
+
+.cas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.35rem;
+}
+
+@media (max-width: 900px) {
+    .cas-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cas-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.35rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cas-card:hover {
+    transform: translateY(-2px);
+    border-color: #0284c7;
+    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.1);
+}
+
+[data-theme="dark"] .cas-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .cas-card:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 6px 18px rgba(56, 189, 248, 0.15);
+}
+
+.cas-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #0284c7;
+    margin-bottom: 0.35rem;
+}
+
+[data-theme="dark"] .cas-tag {
+    color: #38bdf8;
+}
+
+.cas-card h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+    line-height: 1.35;
+}
+
+.cas-comparatif {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 0.95rem 1.05rem;
+    margin-bottom: 0.95rem;
+}
+
+[data-theme="dark"] .cas-comparatif {
+    background: #0f172a;
+    border-color: #475569;
+}
+
+.cas-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cas-step.initial {
+    text-align: left;
+}
+
+.cas-step.final {
+    text-align: right;
+}
+
+.step-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #64748b;
+    margin-bottom: 0.2rem;
+}
+
+[data-theme="dark"] .step-label {
+    color: #94a3b8;
+}
+
+.cas-step.initial .step-valeur {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #e11d48;
+}
+
+.cas-step.final .step-valeur {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #16a34a;
+}
+
+[data-theme="dark"] .cas-step.final .step-valeur {
+    color: #4ade80;
+}
+
+.step-detail {
+    font-size: 0.74rem;
+    line-height: 1.35;
+    color: #475569;
+    margin-top: 0.25rem;
+}
+
+[data-theme="dark"] .step-detail {
+    color: #cbd5e1;
+}
+
+.cas-arrow {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0284c7;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .cas-arrow {
+    color: #38bdf8;
+}
+
+.cas-footer {
+    padding-top: 0.65rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.78rem;
+    color: #334155;
+    line-height: 1.4;
+}
+
+[data-theme="dark"] .cas-footer {
+    border-top-color: #334155;
+    color: #cbd5e1;
+}
+
+.cas-prise-en-charge strong {
+    color: #0f172a;
+}
+
+[data-theme="dark"] .cas-prise-en-charge strong {
+    color: #f8fafc;
+}
+
+
+/* --- COMPOSANT COURRIER TYPE DYNAMIQUE --- */
+.mandant-letter-wrapper {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.mandant-label {
+  display: block;
+  font-size: 0.88rem;
+  color: #334155;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.mandant-select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.mandant-select:focus {
+  border-color: #0284c7;
+  background-color: #ffffff;
+}
+
+.letter-box {
+  margin-top: 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.85rem;
+}
+
+.letter-box-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  gap: 0.5rem;
+}
+
+.letter-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0369a1;
+  background: #e0f2fe;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.btn-copy-letter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-letter:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.letter-textarea {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #1e293b;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.75rem;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.letter-note {
+  font-size: 0.74rem;
+  color: #64748b;
+  margin: 0.5rem 0 0 0;
+}
+
+[data-theme="dark"] .mandant-letter-wrapper {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .mandant-label {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .mandant-select {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .mandant-select:focus {
+  border-color: #38bdf8;
+  background-color: #0f172a;
+}
+
+[data-theme="dark"] .letter-box {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .letter-badge {
+  color: #38bdf8;
+  background: rgba(3, 105, 161, 0.25);
+}
+
+[data-theme="dark"] .btn-copy-letter {
+  background: #0f172a;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .btn-copy-letter:hover {
+  background: #1e293b;
+  border-color: #64748b;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .letter-textarea {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .letter-note {
+  color: #94a3b8;
+}
+
+
+/* --- COMPOSANT SIMULATEUR D'ORIENTATION RAPIDE (@PO SEB) --- */
+.simulator-section {
+  padding: 3rem 1.5rem;
+  background: #f8fafc;
+}
+
+.simulator-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.simulator-header {
+  margin-bottom: 1.75rem;
+}
+
+.simulator-badge {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.simulator-header h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0.6rem 0 0.3rem 0;
+}
+
+.simulator-header p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.simulator-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.sim-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.45rem;
+}
+
+.sim-select {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.84rem;
+  color: #1e293b;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.sim-select:focus {
+  border-color: #0284c7;
+  background: #fff;
+}
+
+.simulator-result {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.result-icon {
+  font-size: 2rem;
+}
+
+.result-content {
+  flex: 1;
+  min-width: 260px;
+}
+
+.result-content h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #166534;
+  margin: 0 0 0.3rem 0;
+}
+
+.result-content p {
+  font-size: 0.85rem;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.result-badge-line {
+  font-size: 0.8rem;
+  color: #0f172a;
+}
+
+.result-badge-line span {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.btn-sim-action {
+  display: inline-block;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-sim-action:hover {
+  background: #1e293b;
+}
+
+/* Mode sombre */
+[data-theme="dark"] .simulator-section {
+  background: #0b1329;
+}
+
+[data-theme="dark"] .simulator-card {
+  background: #0f172a;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .simulator-header h2 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .simulator-header p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .sim-group label {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .sim-select {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .sim-select:focus {
+  border-color: #38bdf8;
+  background-color: #0f172a;
+}
+
+[data-theme="dark"] .simulator-result {
+  background: #052e16;
+  border-color: #166534;
+}
+
+[data-theme="dark"] .result-content h3 {
+  color: #86efac;
+}
+
+[data-theme="dark"] .result-content p {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .result-badge-line {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .result-badge-line span {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .btn-sim-action {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .btn-sim-action:hover {
+  background: #0369a1;
+}
+
+/* --- COMPOSANT ÉTAT DE SUCCÈS FORMULAIRE DE CONTACT (@PO SEB) --- */
+.form-success-wrapper {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.success-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.success-icon {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0 auto 0.75rem auto;
+}
+
+.success-header h3 {
+  font-size: 1.3rem;
+  color: #0f172a;
+  margin: 0 0 0.4rem 0;
+}
+
+.success-header p {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.success-checklist {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.success-checklist h4 {
+  font-size: 0.9rem;
+  color: #0f172a;
+  margin: 0 0 0.6rem 0;
+}
+
+.success-checklist ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.success-checklist li {
+  font-size: 0.83rem;
+  color: #334155;
+  margin-bottom: 0.35rem;
+  line-height: 1.35;
+}
+
+.success-urgency {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+  font-size: 0.82rem;
+  color: #b91c1c;
+  text-align: center;
+}
+
+.success-urgency a {
+  color: #b91c1c;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Mode sombre */
+[data-theme="dark"] .form-success-wrapper {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .success-header h3 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .success-header p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .success-checklist {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .success-checklist h4 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .success-checklist li {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .success-urgency {
+  border-color: #334155;
+  color: #f87171;
+}
+
+[data-theme="dark"] .success-urgency a {
+  color: #38bdf8;
+}
+
+/* --- COMPOSANT ZONES D'INTERVENTION GÉOGRAPHIQUE (@PO SEB) --- */
+.zones-section {
+  padding: 3.5rem 1.5rem;
+  background: #ffffff;
+}
+
+.zones-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.zones-header {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.zones-subtitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0284c7;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.zones-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.zones-header p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.zone-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.zone-card.primary {
+  border-color: #0284c7;
+  background: #f0f9ff;
+}
+
+.zone-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.zone-tag.swiss {
+  color: #b91c1c;
+}
+
+.zone-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.6rem 0;
+}
+
+.zone-card p {
+  font-size: 0.82rem;
+  color: #475569;
+  margin: 0 0 0.5rem 0;
+}
+
+.zone-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+}
+
+.zone-card li {
+  font-size: 0.82rem;
+  color: #334155;
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.zone-delai {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0f172a;
+  background: #ffffff;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  width: fit-content;
+}
+
+/* Mode sombre */
+[data-theme="dark"] .zones-section {
+  background: #0b1329;
+}
+
+[data-theme="dark"] .zones-header h2 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .zones-header p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .zone-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .zone-card.primary {
+  border-color: #0284c7;
+  background: #0c2340;
+}
+
+[data-theme="dark"] .zone-tag {
+  color: #38bdf8;
+}
+
+[data-theme="dark"] .zone-tag.swiss {
+  color: #f87171;
+}
+
+[data-theme="dark"] .zone-card h3 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .zone-card p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .zone-card li {
+  color: #cbd5e1;
+  border-bottom-color: #334155;
+}
+
+[data-theme="dark"] .zone-delai {
+  background: #1e293b;
+  border-color: #475569;
+  color: #f1f5f9;
+}
