@@ -5313,3 +5313,79 @@ div.logo-brand:hover .logo-img {
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+/* ==========================================================================
+   ICONES VECTORIELLES D'ILLUSTRATION ET HARMONISATION (@PO SEB)
+   ========================================================================== */
+.step-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 1.25rem !important;
+}
+
+.step-number-badge {
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    color: var(--expertise-accent-ink, #0284c7) !important;
+    background: rgba(2, 132, 199, 0.12) !important;
+    padding: 0.25rem 0.65rem !important;
+    border-radius: 999px !important;
+    letter-spacing: 0.05em !important;
+}
+
+[data-theme="dark"] .step-number-badge {
+    color: #38bdf8 !important;
+    background: rgba(56, 189, 248, 0.15) !important;
+}
+
+.step-icon-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 10px !important;
+    background: rgba(2, 132, 199, 0.06) !important;
+    border: 1px solid rgba(2, 132, 199, 0.15) !important;
+}
+
+[data-theme="dark"] .step-icon-wrap {
+    background: rgba(56, 189, 248, 0.08) !important;
+    border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
+.zone-card-top {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.zone-icon-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 8px !important;
+    background: rgba(2, 132, 199, 0.08) !important;
+}
+
+[data-theme="dark"] .zone-icon-wrap {
+    background: rgba(56, 189, 248, 0.12) !important;
+}
+
+/* Centrage global unifie pour les conteneurs methodes et pieces */
+.expertise-method-section .container,
+.visit-preparation-section .container {
+    max-width: 1100px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.fees-table-wrap {
+    max-width: 980px !important;
+    margin: 0 auto !important;
+}
