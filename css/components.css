@@ -3857,6 +3857,50 @@
     line-height: 1.35;
 }
 
+
+/* Badge de prise en charge financière */
+.badge-prise-en-charge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #1e3a5f; /* Bleu soutenu sobre */
+  background-color: #eef4ff; /* Fond bleu très pâle */
+  border: 1px solid #d0e1fd;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px; /* Forme pilule */
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.badge-prise-en-charge:hover {
+  background-color: #dbeafe;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.badge-prise-en-charge svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+[data-theme="dark"] .badge-prise-en-charge {
+  color: #93c5fd;
+  background-color: rgba(30, 58, 138, 0.25);
+  border-color: rgba(147, 197, 253, 0.3);
+}
+
+[data-theme="dark"] .badge-prise-en-charge:hover {
+  background-color: rgba(30, 58, 138, 0.45);
+  border-color: rgba(147, 197, 253, 0.6);
+  color: #bfdbfe;
+}
+
 .calc-pj-badge {
     background: rgba(16, 185, 129, 0.09);
     border: 1px solid rgba(16, 185, 129, 0.3);
