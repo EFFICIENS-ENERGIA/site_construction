@@ -5543,3 +5543,134 @@ div.logo-brand:hover .logo-img {
 [data-theme="dark"] .third-party-liability-block li strong {
     color: #ffffff !important;
 }
+
+
+/* ==========================================================================
+   SECTION PRÉPARATION VISITE : GRILLE DE CARTES ATTRACTIVES (@PO SEB)
+   ========================================================================== */
+.visit-prep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.visit-prep-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.visit-prep-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
+    border-color: #0284c7;
+}
+
+.visit-prep-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1.15rem;
+}
+
+.visit-prep-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(2, 132, 199, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    flex-shrink: 0;
+}
+
+.visit-prep-tag {
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #0284c7;
+    margin-bottom: 2px;
+}
+
+.visit-prep-title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.35;
+}
+
+.visit-prep-body {
+    flex-grow: 1;
+}
+
+.visit-prep-utilite {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #334155;
+    margin-bottom: 1rem;
+}
+
+.visit-prep-fallback {
+    background: rgba(2, 132, 199, 0.05);
+    border: 1px solid rgba(2, 132, 199, 0.22);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: #1e293b;
+    margin-top: auto;
+}
+
+.visit-prep-fallback strong {
+    color: #0284c7;
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+/* Dark theme */
+[data-theme="dark"] .visit-prep-card {
+    background: #111318 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .visit-prep-card:hover {
+    border-color: #38bdf8 !important;
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2) !important;
+}
+
+[data-theme="dark"] .visit-prep-icon-box {
+    background: rgba(56, 189, 248, 0.15) !important;
+}
+
+[data-theme="dark"] .visit-prep-tag {
+    color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .visit-prep-title {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .visit-prep-utilite {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .visit-prep-fallback {
+    background: rgba(15, 23, 42, 0.7) !important;
+    border-color: rgba(56, 189, 248, 0.25) !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .visit-prep-fallback strong {
+    color: #38bdf8 !important;
+}
