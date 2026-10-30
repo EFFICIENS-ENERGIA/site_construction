@@ -3614,17 +3614,25 @@
     box-shadow: 0 12px 30px rgba(0,0,0,0.06);
 }
 
+.calc-header {
+    text-align: center !important;
+    margin-bottom: 2rem !important;
+}
+
 .calc-header h3 {
-    margin: 0.35rem 0 0.5rem 0;
-    font-size: 1.45rem;
-    color: var(--text-primary);
+    text-align: center !important;
+    margin: 0.45rem auto 0.5rem auto !important;
+    font-size: 1.45rem !important;
+    color: var(--text-primary) !important;
 }
 
 .calc-header p {
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    line-height: 1.5;
-    margin: 0;
+    text-align: center !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+    max-width: 780px !important;
+    margin: 0 auto !important;
 }
 
 .calc-tag {
