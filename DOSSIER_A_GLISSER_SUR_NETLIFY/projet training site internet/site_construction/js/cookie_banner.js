@@ -9,15 +9,15 @@
 
         const banner = document.createElement('div');
         banner.className = 'cookie-banner';
-        banner.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;background:#0f172a;color:#f8fafc;padding:1rem 1.5rem;box-shadow:0 -4px 20px rgba(0,0,0,0.25);z-index:10000;font-size:0.88rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;box-sizing:border-box;border-top:2px solid #1e3a8a;';
+        banner.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;background:rgba(15,23,42,0.96);backdrop-filter:blur(8px);color:#f8fafc;padding:0.65rem 1.25rem;box-shadow:0 -4px 20px rgba(0,0,0,0.25);z-index:10000;font-size:0.82rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;box-sizing:border-box;border-top:1.5px solid #2563eb;';
 
         banner.innerHTML = `
-            <div style="flex:1;min-width:280px;line-height:1.5;">
-                🔒 <strong>Respect de votre vie privée</strong> : EFFICIENS ENERGIA utilise exclusivement des cookies techniques nécessaires au fonctionnement du site (mode hors-ligne PWA, simulateur et prise de rendez-vous). Aucun traceur publicitaire tiers n'est utilisé. <a href="informations-legales.html#cookies" style="color:#60a5fa;text-decoration:underline;">En savoir plus</a>.
+            <div style="flex:1;min-width:240px;line-height:1.4;">
+                🔒 <strong>Cookies techniques</strong> : strict minimum nécessaire (simulateur, PWA). Zéro traceur publicitaire. <a href="informations-legales.html#cookies" style="color:#60a5fa;text-decoration:underline;">Détails</a>.
             </div>
-            <div style="display:flex;gap:10px;align-items:center;">
-                <button id="btn-accept-cookies" style="background:#1e3a8a;color:#ffffff;border:none;padding:8px 18px;border-radius:6px;font-weight:600;font-size:0.86rem;cursor:pointer;">Accepter & Poursuivre</button>
-                <button id="btn-refuse-cookies" style="background:transparent;color:#94a3b8;border:1px solid #475569;padding:8px 14px;border-radius:6px;font-size:0.86rem;cursor:pointer;">Fermer</button>
+            <div style="display:flex;gap:8px;align-items:center;">
+                <button id="btn-accept-cookies" style="background:#2563eb;color:#ffffff;border:none;padding:6px 14px;border-radius:9999px;font-weight:700;font-size:0.82rem;cursor:pointer;box-shadow:0 2px 6px rgba(37,99,235,0.4);">Accepter</button>
+                <button id="btn-refuse-cookies" style="background:transparent;color:#cbd5e1;border:1px solid #475569;padding:6px 12px;border-radius:9999px;font-size:0.82rem;cursor:pointer;">Fermer</button>
             </div>
         `;
 

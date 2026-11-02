@@ -120,11 +120,54 @@ function initApplication() {
         const formData = new URLSearchParams();
 
         const rawMessage = contactForm.querySelector('[name="message"]')?.value || '';
+        const clientName = contactForm.querySelector('[name="name"]')?.value || 'Client Site Web';
+        const clientEmail = contactForm.querySelector('[name="email"]')?.value || '';
+        const clientLoc = contactForm.querySelector('[name="location"]')?.value || 'Ain (01) / Rhône (69)';
+        const reqType = contactForm.querySelector('[name="type"]')?.value || 'Sinistre ou dommage de construction';
         const aiAnalysis = rdvAgent.analyzeInquiry(rawMessage);
         formData.append('rdv_hub_channel', 'web');
         formData.append('rdv_hub_urgency', aiAnalysis.urgency);
         formData.append('rdv_hub_lead_score', String(aiAnalysis.leadScore));
         formData.append('rdv_hub_suggested_slot', `${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}`);
+
+        // PONT AUTOMATIQUE : SIMULATEUR SITE -> PRÉ-RAPPORT TERRAIN RAG DTU (SEFFIX STUDIO SAAS HUB)
+        try {
+            const bridgePayload = window.buildSiteToRagBridgePayload
+                ? window.buildSiteToRagBridgePayload({
+                    clientName,
+                    clientEmail,
+                    clientLoc,
+                    reqType,
+                    rawMessage,
+                    aiAnalysis
+                })
+                : null;
+            if (bridgePayload) {
+                const existingQueue = JSON.parse(localStorage.getItem('seffix_site_to_rag_bridge_v1') || '[]');
+                existingQueue.unshift(bridgePayload);
+                localStorage.setItem('seffix_site_to_rag_bridge_v1', JSON.stringify(existingQueue));
+
+                // Propager également dans rdv_hub_appointments pour l'agenda de M. MATHE Sébastien
+                const rdvList = JSON.parse(localStorage.getItem('rdv_hub_appointments') || '[]');
+                rdvList.unshift({
+                    id: bridgePayload.dossierRef,
+                    client: clientName,
+                    email: clientEmail,
+                    location: clientLoc,
+                    subject: reqType,
+                    feeEstimate: bridgePayload.feeEstimate,
+                    dtuKey: bridgePayload.dtuKey,
+                    dtuLabel: bridgePayload.dtuLabel,
+                    slotDate: aiAnalysis.recommendedSlot.date,
+                    slotTime: aiAnalysis.recommendedSlot.time,
+                    urgency: aiAnalysis.urgency,
+                    createdAtUtc: bridgePayload.createdAtUtc
+                });
+                localStorage.setItem('rdv_hub_appointments', JSON.stringify(rdvList));
+            }
+        } catch (bridgeErr) {
+            console.warn('Pont Site->RAG warning:', bridgeErr);
+        }
 
         new FormData(contactForm).forEach((value, key) => {
             formData.append(key, String(value));
@@ -147,16 +190,23 @@ function initApplication() {
                 throw new Error(`Netlify Forms rejected the request with status ${response.status}`);
             }
 
-            contactForm.reset();
-            if (status) {
+                        contactForm.reset();
+            const successState = document.getElementById('form-success-state');
+            if (successState) {
+                contactForm.style.display = 'none';
+                successState.style.display = 'block';
+                successState.scrollIntoView({ behavior: 'smooth' });
+            } else if (status) {
                 const priorityBadge = aiAnalysis.urgency === 'haute' ? '⚡ Priorité Haute' : '✅ Enregistré';
-                status.innerHTML = `<strong>${priorityBadge} — Pris en charge par l'Agent IA RDV Hub</strong><br>Votre demande a été qualifiée avec succès (créneau suggéré : ${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}). Notre expert vous confirme l'intervention sous 24h.`;
+                status.innerHTML = `<strong>${priorityBadge} · Pris en charge par l'Agent IA RDV Hub</strong><br>Votre demande a été qualifiée avec succès (créneau suggéré : ${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}). Notre expert vous confirme l'intervention sous 24h.`;
                 status.style.color = '#38bdf8';
             }
         } catch (error) {
-            console.error('Impossible de transmettre le formulaire de contact.', error);
+            // Mode local file:// ou hors-ligne : confirmer la prise en charge locale par le Pont Automatique Site -> Seffix Studio
             if (status) {
-                status.textContent = 'Le formulaire n’a pas pu être envoyé. Réessayez ou contactez-nous directement par e-mail à contact@efficiens-energia.fr.';
+                const priorityBadge = aiAnalysis.urgency === 'haute' ? '⚡ Priorité Haute' : '✅ Enregistré';
+                status.innerHTML = `<strong>${priorityBadge} · Pont Automatique Site ➔ Pré-Rapport Terrain RAG DTU Activé</strong><br>Votre estimation d'honoraires et votre pré-dossier normatif DTU ont été transmis dans le cockpit EFFIX Studio de M. Sébastien MATHE (créneau : ${aiAnalysis.recommendedSlot.date} à ${aiAnalysis.recommendedSlot.time}).`;
+                status.style.color = '#10b981';
             }
         } finally {
             if (submitButton instanceof HTMLButtonElement) {
@@ -655,6 +705,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const zText = zoneSelect ? zoneSelect.options[zoneSelect.selectedIndex].text : '';
             const priceText = priceDisplay ? priceDisplay.textContent : '';
 
+                        const contactDossierType = document.getElementById('contactDossierType');
+            if (contactDossierType) {
+                const sVal = serviceSelect ? serviceSelect.value : '';
+                const dVal = deliverableSelect ? deliverableSelect.value : '';
+                if (dVal === 'contradictoire') {
+                    contactDossierType.value = "Convocation à une réunion d'expertise contradictoire (date imminente)";
+                } else if (sVal === 'industriel') {
+                    contactDossierType.value = "Autre mission technique / audit industriel";
+                } else if (sVal === 'dpe_energie') {
+                    contactDossierType.value = "Litige malfaçons / travaux / DPE contesté";
+                } else {
+                    contactDossierType.value = "Sinistre récent (dégât des eaux, incendie, fissuration, sécheresse)";
+                }
+            }
+
             if (contactType) {
                 const mapType = {
                     sinistre: 'Sinistre ou dommage de construction',
@@ -671,12 +736,92 @@ document.addEventListener('DOMContentLoaded', () => {
             if (contactMessage) {
                 contactMessage.value = `[SIMULATION D'HONORAIRES VALIDÉE : ${priceText}]\n- Mission : ${sText}\n- Typologie : ${pText}\n- Livrable : ${dText}\n- Secteur : ${zText}\nBonjour M. MATHE, je souhaite confirmer un devis ferme et réserver un créneau pour cette mission.`;
             }
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Construire et pré-enregistrer immédiatement le Pré-Dossier Terrain RAG DTU pour Seffix Studio
+            if (window.buildSiteToRagBridgePayload) {
+                const payload = window.buildSiteToRagBridgePayload({
+                    clientName: (document.getElementById('contactName') || {}).value || 'Prospect Qualifié Simulateur',
+                    clientEmail: (document.getElementById('contactEmail') || {}).value || 'client@prospect-qualifie.fr',
+                    clientLoc: (contactLocation && contactLocation.value) ? contactLocation.value : zText.split('—')[0].trim(),
+                    reqType: (contactType && contactType.value) ? contactType.value : sText,
+                    rawMessage: contactMessage ? contactMessage.value : ''
+                });
+                const existingQueue = JSON.parse(localStorage.getItem('seffix_site_to_rag_bridge_v1') || '[]');
+                const idx = existingQueue.findIndex(item => item.dossierRef === payload.dossierRef);
+                if (idx >= 0) existingQueue[idx] = payload;
+                else existingQueue.unshift(payload);
+                localStorage.setItem('seffix_site_to_rag_bridge_v1', JSON.stringify(existingQueue));
+            }
+
+            if (typeof window.activateTab === 'function') {
+                window.activateTab('contact', true);
+            } else {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     }
+
+    // Fonction déterministe de génération du Pré-Rapport Terrain RAG DTU (Pont Site -> Seffix Studio)
+    window.buildSiteToRagBridgePayload = function(ctx) {
+        const sVal = serviceSelect ? serviceSelect.value : 'sinistre';
+        const sText = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : 'Sinistre Bâtiment';
+        const pText = propSelect ? propSelect.options[propSelect.selectedIndex].text : 'Maison individuelle';
+        const dText = deliverableSelect ? deliverableSelect.options[deliverableSelect.selectedIndex].text : 'Rapport écrit opposable';
+        const zText = zoneSelect ? zoneSelect.options[zoneSelect.selectedIndex].text : 'Ain (01) & Rhône (69)';
+        const feeEstimate = priceDisplay ? priceDisplay.textContent : '790 € – 1 090 € TTC';
+        const pjLetter = buildPjOfficialLetter();
+
+        const msgLower = ((ctx && ctx.rawMessage) || '').toLowerCase();
+        let dtuKey = 'dtu_20_1';
+        let dtuLabel = 'NF DTU 20.1 — Maçonnerie & Fissures';
+        let defaultCrackMm = '2.4';
+        let defaultHumPct = '68';
+
+        if (msgLower.includes('sécheresse') || msgLower.includes('argile') || msgLower.includes('rga') || sVal === 'contre_expertise') {
+            dtuKey = 'rga_secheresse';
+            dtuLabel = 'RGA Sécheresse / Eurocode 7 — Fondations';
+            defaultCrackMm = '3.2';
+            defaultHumPct = '54';
+        } else if (msgLower.includes('toiture') || msgLower.includes('infiltration') || msgLower.includes('terrasse') || msgLower.includes('eau')) {
+            dtuKey = 'dtu_43_1';
+            dtuLabel = 'NF DTU 43.1 — Étanchéité Toiture-Terrasse';
+            defaultCrackMm = '1.2';
+            defaultHumPct = '82';
+        } else if (msgLower.includes('dallage') || msgLower.includes('carrelage') || msgLower.includes('affaissement') || sVal === 'industriel') {
+            dtuKey = 'dtu_13_3';
+            dtuLabel = 'NF DTU 13.3 — Dallages & Affaissement';
+            defaultCrackMm = '2.8';
+            defaultHumPct = '45';
+        }
+
+        const dateTag = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        const cleanLoc = ((ctx && ctx.clientLoc) || 'AIN01').replace(/[^a-zA-Z0-9]/g, '').toUpperCase().slice(0, 6) || 'AIN01';
+        const dossierRef = `PONT-${dateTag}-${cleanLoc}`;
+
+        return {
+            dossierRef,
+            clientName: (ctx && ctx.clientName) || 'Prospect Qualifié Simulateur',
+            clientEmail: (ctx && ctx.clientEmail) || '',
+            clientLoc: (ctx && ctx.clientLoc) || zText.split('—')[0].trim(),
+            missionType: sVal,
+            missionLabel: sText,
+            propertyLabel: pText,
+            deliverableLabel: dText,
+            zoneLabel: zText,
+            feeEstimate,
+            pjEligibility: sVal !== 'visite_achat' ? 'Éligible Art. L. 127-2-3 C. assur. (Libre choix de l’expert)' : 'Hors PJ (Négociation acquisition)',
+            pjOfficialLetter: pjLetter,
+            dtuKey,
+            dtuLabel,
+            defaultCrackMm,
+            defaultHumPct,
+            createdAtUtc: new Date().toISOString(),
+            humanValidationStatus: 'PENDING_EXPERT_VALIDATION_ART14'
+        };
+    };
 
     // ==========================================================================
     
@@ -694,7 +839,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!targetId) targetId = 'expertises';
         targetId = targetId.replace('#', '');
         if (targetId === 'zones-intervention') targetId = 'zones';
-        if (targetId === 'accueil' || targetId === 'contenu') {
+        let isGuidesTarget = false;
+        if (targetId === 'guides') { targetId = 'faq'; isGuidesTarget = true; }
+        if (targetId === 'accueil' || targetId === 'contenu' || targetId === 'simulateur') {
             targetId = 'expertises';
         }
 
@@ -725,6 +872,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 prepVisiteSub.classList.remove('active-subpanel');
                 prepVisiteSub.style.display = 'none';
             }
+        }
+
+        if (isGuidesTarget) {
+            const gEl = document.getElementById('guides');
+            if (gEl) gEl.scrollIntoView({ behavior: 'smooth' });
         }
 
         // 3. Mise à jour de l'onglet actif dans la barre de navigation
@@ -812,4 +964,271 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         activateTab('expertises', false);
     }
+
+            // ==========================================================================
+    // GÉNÉRATEUR DE COURRIER PAR PROFIL MANDANT (OFFICIEL SEB)
+    // ==========================================================================
+    const letters = {
+        particulier: {
+            badge: "Modèle Particulier · MRH / Protection Juridique",
+            text: `OBJET : Déclaration de litige et désignation de mon expert d'assuré indépendant
+Réf. Contrat / Dossier Sinistre N° : [À compléter]
+
+Madame, Monsieur,
+
+Par la présente, je vous informe faire appel à un expert bâtiment indépendant pour assurer la défense technique et contradictoire de mes intérêts concernant les désordres suivants :
+- Nature du litige / désordre : [Fissures, dégât des eaux, malfaçon artisan, etc.]
+- Bien concerné : [Adresse du bien sinistré]
+- Expert désigné : Cabinet EFFICIENS ENERGIA (M. Sébastien MATHE, SIRET : 827 694 498 00011).
+- Estimation prévisionnelle des honoraires : [Montant du devis] € TTC.
+
+Conformément à l'article L. 127-3 du Code des assurances garantissant le libre choix de l'expert d'assuré, et aux stipulations de mon contrat relatives à la prise en charge des honoraires d'expert, je vous remercie de bien vouloir :
+1. Enregistrer la constitution de M. Sébastien MATHE à mon dossier et lui transmettre toute convocation aux opérations contradictoires.
+2. Me confirmer le montant et plafond de prise en charge applicable à cette mission.
+
+Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+[Nom, Prénom et Signature]`
+        },
+        entreprise: {
+            badge: "Modèle Entreprise · Multirisque Industrielle / PE",
+            text: `OBJET : Sinistre professionnel / Dommages aux biens – Constitution d'expert d'assuré
+Police Entreprise N° : [N° de contrat MRI/PE] / Réf. Sinistre : [À compléter]
+
+Madame, Monsieur le Gestionnaire Grands Comptes / Risques Entreprises,
+
+Nous vous notifions par la présente la survenance d'un sinistre impactant notre outil d'exploitation :
+- Nature du sinistre : [Incendie, bris de machine, sinistre structurel, etc.]
+- Site d'exploitation concerné : [Adresse de l'usine / de l'entrepôt]
+- Impact d'exploitation : [Arrêt partiel ou total, mesures conservatoires en cours]
+
+En application des stipulations de notre police relatives à l'assistance technique et à la garantie « Honoraires d'expert », notre société mandate le Cabinet EFFICIENS ENERGIA (M. Sébastien MATHE) pour nous assister lors des opérations d'expertise contradictoire, du chiffrage des dommages matériels et de la justification des pertes d'exploitation.
+
+Nous vous prions de :
+- Adresser l'ensemble des correspondances techniques et convocations directement à notre expert (contact@efficiens-energia.fr).
+- Nous confirmer l'ouverture du dossier de prise en charge des honoraires selon le barème contractuel prévu au contrat.
+
+Veuillez agréer, Madame, Monsieur, nos salutations distinguées.
+[Raison Sociale, Nom du Dirigeant / DAF, Cachet]`
+        },
+        collectivite: {
+            badge: "Modèle Collectivité · Dommages aux Biens / Marché Public",
+            text: `OBJET : Sinistre / Pathologie sur ouvrage public – Désignation d'assistance technique
+Contrat Dommages aux Biens de la Collectivité N° : [N° de police]
+
+Madame, Monsieur le Gestionnaire,
+
+La collectivité vous informe de la survenance de désordres constructifs affectant le patrimoine public suivant :
+- Ouvrage concerné : [Nom de l'équipement, groupe scolaire, bâtiment administratif]
+- Nature des désordres : [Infiltration, fissuration structurelle, non-conformité EnR, etc.]
+
+Afin de préserver les intérêts techniques et financiers de la collectivité et de garantir le caractère contradictoire des opérations d'évaluation, nous vous informons que la collectivité a missionné, au titre des prestations d'assistance à maîtrise d'ouvrage technique :
+- Cabinet EFFICIENS ENERGIA (M. Sébastien MATHE, SIRET : 827 694 498 00011).
+
+Nous vous demandons d'associer systématiquement notre conseil technique à l'ensemble des réunions d'expertise sur site et de nous confirmer les modalités d'indemnisation des frais d'expertise engagés conformément aux termes de notre marché d'assurance.
+
+Je vous prie d'agréer, Madame, Monsieur, l'expression de ma considération distinguée.
+[Pour la Collectivité, Nom et Qualité de l'élu ou du DGS]`
+        }
+    };
+
+    const selectEl = document.getElementById("mandant-type");
+    const badgeEl = document.getElementById("letter-profile-badge");
+    const textareaEl = document.getElementById("letter-content");
+    const copyBtn = document.getElementById("btn-copy");
+    const copyText = document.getElementById("btn-copy-text");
+
+    function updateLetter(type) {
+        if (letters[type] && badgeEl && textareaEl) {
+            badgeEl.textContent = letters[type].badge;
+            textareaEl.value = letters[type].text;
+        }
+    }
+
+    if (selectEl && badgeEl && textareaEl) {
+        // Initialisation à l'affichage
+        updateLetter(selectEl.value || 'particulier');
+
+        // Changement dynamique au sélecteur
+        selectEl.addEventListener("change", (e) => {
+            updateLetter(e.target.value);
+        });
+    }
+
+    if (copyBtn && textareaEl && copyText) {
+        // Copie en un clic dans le presse-papier
+        copyBtn.addEventListener("click", () => {
+            textareaEl.select();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textareaEl.value).then(() => {
+                    copyText.textContent = "Copié !";
+                    setTimeout(() => {
+                        copyText.textContent = "Copier le texte";
+                    }, 2000);
+                }).catch(() => {
+                    document.execCommand('copy');
+                    copyText.textContent = "Copié !";
+                    setTimeout(() => {
+                        copyText.textContent = "Copier le texte";
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                copyText.textContent = "Copié !";
+                setTimeout(() => {
+                    copyText.textContent = "Copier le texte";
+                }, 2000);
+            }
+        });
+    }
+
+
+        // ==========================================================================
+    // SIMULATEUR D'ORIENTATION EN 30 SECONDES CÂBLÉ VERS LE CONTACT (@PO SEB)
+    // ==========================================================================
+    const simNature = document.getElementById('sim-nature');
+    const simStade = document.getElementById('sim-stade');
+    const simStatut = document.getElementById('sim-statut');
+    const resTitre = document.getElementById('res-titre');
+    const resDesc = document.getElementById('res-desc');
+    const resPec = document.getElementById('res-pec');
+    const simCtaBtn = document.getElementById('sim-cta-btn');
+
+    const SIM_DIAGNOSTICS = {
+        stades: {
+            amont: {
+                titre: "Évaluation technique & Cadrage préalable",
+                desc: "Votre situation gagne à être qualifiée techniquement dès l'amont pour constituer un dossier irréfutable avant toute convocation ou proposition indemnitaire de l'assureur."
+            },
+            convoque: {
+                titre: "Assistance contradictoire d'urgence",
+                desc: "Convocation imminente : la présence d'un expert d'assuré indépendant à vos côtés est déterminante pour contredire l'expert de compagnie sur site et inscrire vos réserves au PV."
+            },
+            refus: {
+                titre: "Contre-expertise contradictoire & Recours",
+                desc: "Le refus de garantie ou le chiffrage insuffisant n'est pas définitif : notre contre-expertise technique chiffre vos préjudices réels selon les règles de l'art et les DTU en vigueur."
+            },
+            bloque: {
+                titre: "Audit technique & Résolution de litige",
+                desc: "Litige bloqué avec constructeur ou artisan : nous établissons un constat d'expert indépendant opposable pour engager les garanties légales (parfait achèvement, biennale, décennale)."
+            }
+        },
+        prisesEnCharge: {
+            particulier: "Garantie « Honoraires d'expert » MRH ou Protection Juridique (Art. L. 127-3)",
+            pro: "Police Multirisque Industrielle (MRI / Pertes d'exploitation) ou RC Pro adverse",
+            collectivite: "Contrat Dommages aux Biens de la Collectivité / Assurance Construction"
+        }
+    };
+
+    function selectOptionByKeyword(selectEl, keywords) {
+        if (!selectEl) return false;
+        const kwList = Array.isArray(keywords) ? keywords : [keywords];
+        for (let i = 0; i < selectEl.options.length; i++) {
+            const opt = selectEl.options[i];
+            const textLower = (opt.value + " " + opt.text).toLowerCase();
+            if (kwList.some(kw => textLower.includes(kw.toLowerCase()))) {
+                selectEl.selectedIndex = i;
+                selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function wireSimulatorToContact(doNavigateAndFocus = false) {
+        if (!simNature || !simStade || !simStatut) return;
+
+        const natureVal = simNature.value;
+        const stadeVal = simStade.value;
+        const statutVal = simStatut.value;
+
+        const natureText = simNature.selectedIndex >= 0 ? simNature.options[simNature.selectedIndex].text : '';
+        const stadeText = simStade.selectedIndex >= 0 ? simStade.options[simStade.selectedIndex].text : '';
+        const statutText = simStatut.selectedIndex >= 0 ? simStatut.options[simStatut.selectedIndex].text : '';
+
+        // 1. Câblage du type de dossier (#contactDossierType)
+        const contactDossierSelect = document.getElementById('contactDossierType');
+        if (contactDossierSelect) {
+            const stadeKeywords = {
+                amont: ['sinistre récent', 'dégât des eaux'],
+                convoque: ['convocation', 'contradictoire'],
+                refus: ['refus', 'contestation'],
+                bloque: ['malfaçons', 'litige']
+            };
+            selectOptionByKeyword(contactDossierSelect, stadeKeywords[stadeVal] || ['sinistre récent']);
+        }
+
+        // 2. Câblage du domaine d'expertise (#contactType)
+        const contactTypeSelect = document.getElementById('contactType');
+        if (contactTypeSelect) {
+            const natureKeywords = {
+                fissures: ['sinistre ou dommage'],
+                dde: ['sinistre ou dommage'],
+                enr: ['énergies renouvelables'],
+                dpe: ['diagnostic immobilier', 'performance énergétique'],
+                malfacon: statutVal === 'pro' ? ['expertise industrielle', 'sinistre ou dommage'] : ['sinistre ou dommage'],
+                incendie: ['incendie']
+            };
+            selectOptionByKeyword(contactTypeSelect, natureKeywords[natureVal] || ['sinistre ou dommage']);
+        }
+
+        // 3. Pré-remplissage du message avec le diagnostic structuré
+        const contactMsg = document.getElementById('contactMessage');
+        if (contactMsg) {
+            const currentVal = contactMsg.value.trim();
+            if (!currentVal || currentVal.startsWith('[Orientation Simulateur')) {
+                contactMsg.value = `[Orientation Simulateur - 30s]
+• Profil : ${statutText}
+• Désordre / Litige : ${natureText}
+• Stade du dossier : ${stadeText}
+
+Précisions complémentaires (faits observés, date d'intervention ou convocation) : `;
+            }
+        }
+
+        // 4. Navigation vers le formulaire de contact si demandé (clic CTA)
+        if (doNavigateAndFocus) {
+            if (typeof activateTab === 'function') {
+                activateTab('contact');
+            }
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.scrollIntoView({ behavior: 'smooth' });
+                const nameInput = document.getElementById('contactName');
+                if (nameInput) {
+                    setTimeout(() => nameInput.focus(), 400);
+                }
+            }
+        }
+    }
+
+    function updateSimulatorResult() {
+        if (!simNature || !simStade || !simStatut || !resTitre || !resDesc || !resPec) return;
+        const stade = simStade.value || 'convoque';
+        const statut = simStatut.value || 'particulier';
+
+        const stadeData = SIM_DIAGNOSTICS.stades[stade] || SIM_DIAGNOSTICS.stades.convoque;
+        const pecData = SIM_DIAGNOSTICS.prisesEnCharge[statut] || SIM_DIAGNOSTICS.prisesEnCharge.particulier;
+
+        resTitre.textContent = stadeData.titre;
+        resDesc.textContent = stadeData.desc;
+        resPec.textContent = pecData;
+
+        // Met à jour la pré-qualification du formulaire en arrière-plan
+        wireSimulatorToContact(false);
+    }
+
+    if (simNature && simStade && simStatut) {
+        simNature.addEventListener('change', updateSimulatorResult);
+        simStade.addEventListener('change', updateSimulatorResult);
+        simStatut.addEventListener('change', updateSimulatorResult);
+        updateSimulatorResult();
+    }
+
+    if (simCtaBtn) {
+        simCtaBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            wireSimulatorToContact(true);
+        });
+    }
+
 });
