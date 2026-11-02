@@ -6616,9 +6616,11 @@ html, body {
 
 .simulator-header {
   margin-bottom: 1.75rem;
+  text-align: center;
 }
 
 .simulator-badge {
+  display: inline-block;
   font-size: 0.72rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -6627,19 +6629,22 @@ html, body {
   background: #e0f2fe;
   padding: 0.25rem 0.6rem;
   border-radius: 9999px;
+  margin-bottom: 0.5rem;
 }
 
 .simulator-header h2 {
   font-size: 1.45rem;
   font-weight: 700;
   color: #0f172a;
-  margin: 0.6rem 0 0.3rem 0;
+  margin: 0.6rem auto 0.3rem auto;
+  text-align: center;
 }
 
 .simulator-header p {
   font-size: 0.9rem;
   color: #64748b;
-  margin: 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .simulator-body {
@@ -7489,4 +7494,93 @@ html, body {
 
 [data-theme="dark"] .guide-link {
   color: #38bdf8;
+}
+
+
+/* --- OPTIMISATION SMARTPHONE SIMULATEUR (@PO SEB) --- */
+@media (max-width: 768px) {
+  .simulator-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 8px !important;
+    margin: 0 0.25rem !important;
+  }
+
+  .simulator-header {
+    text-align: center !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .simulator-header h2 {
+    font-size: 1.2rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .simulator-header p {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .simulator-body {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .sim-group label {
+    font-size: 0.82rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .sim-select {
+    padding: 0.75rem 0.8rem !important;
+    font-size: 0.88rem !important;
+    min-height: 44px !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .simulator-result {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 1.15rem 1rem !important;
+    gap: 1rem !important;
+  }
+
+  .result-icon {
+    font-size: 1.75rem !important;
+    align-self: flex-start !important;
+  }
+
+  .result-content {
+    min-width: 100% !important;
+  }
+
+  .result-content h3 {
+    font-size: 1rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .result-content p {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .result-badge-line {
+    font-size: 0.78rem !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+  }
+
+  .btn-sim-action {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 0.85rem 1rem !important;
+    font-size: 0.88rem !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
 }

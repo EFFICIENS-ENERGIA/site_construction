@@ -1,22 +1,16 @@
-<<<<<<< HEAD
-﻿.env*.local
-.env
-.next/
-node_modules/
-*.log
-.DS_Store
 .github/
+.env*
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
 *.exe
 *.msix
 *.iso
 *.fdmdownload
 *.zip
-
-CNAME
-=======
-﻿.env*
-node_modules/
-.DS_Store
-Thumbs.db
-*.log
->>>>>>> 6c2805c (feat(site-efficiens-energia): initialize repository and replace Bati-Excellence Pro branding)
+scratch/
+*.png
+col2_extracted.txt
+apply_5_requests.py
+verify_5_updates.py
