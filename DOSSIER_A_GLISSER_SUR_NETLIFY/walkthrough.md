@@ -2,7 +2,7 @@
 
 **Société** : EFFICIENS ENERGIA  
 **Fondateur & Dirigeant** : **Sébastien Mathe** (Expert Bâtiment, Conseil & AMO)  
-**Coordonnées** : 480 Route du Belvédère, 01250 Hautecourt-Romaneche • 📞 07 78 24 65 67 • ✉️ contact@efficiens-energia.fr  
+**Coordonnées** : 480 Route du Belvédère, 01250 Hautecourt-Romaneche • 📞 07 67 58 31 80 • ✉️ efficiens.energia@outlook.com  
 **SIRET** : 827 694 498 00011  
 **Lead Orchestrator** : **@CE** (Chef d'Équipe)  
 **Équipe Mobilisée** : **@coach**, **@DEV**, **@UIX**, **@OPS**, **@AUD**, **@DOC**  
@@ -53,8 +53,8 @@ Conformément à la directive d'**Autonomie Totale** (Règle 16 : *Habilitation 
 - Affichée uniquement sur smartphone (`@media (max-width: 768px)`).
 - Reste fixée en bas d'écran avec flou d'arrière-plan moderne (*backdrop blur*).
 - Deux actions instantanées à fort taux de conversion :
-  - 📞 **Appeler l'expert** : lien direct `tel:+33778246567`.
-  - 💬 **WhatsApp direct** : lien direct `wa.me/33778246567` avec message pré-rempli adapté : *"Bonjour Sébastien, je souhaite un renseignement pour une expertise technique."*
+  - 📞 **Appeler l'expert** : lien direct `tel:+33767583180`.
+  - 💬 **WhatsApp direct** : lien direct `wa.me/33767583180` avec message pré-rempli adapté : *"Bonjour Sébastien, je souhaite un renseignement pour une expertise technique."*
 
 ### 🛡️ 2. Badge de Réassurance & Indépendance d'Assurance
 - Positionné sous les boutons d'action du Hero d'accueil.

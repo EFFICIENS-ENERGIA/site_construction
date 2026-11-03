@@ -62,7 +62,7 @@ if old_service_links in code:
 # 3. Ajout de l'assertion WhatsApp et Domaine Personnalisé
 wa_assertion = """    # --- TEST WHATSAPP & DOMAINE ---
     has_whatsapp_and_cname = (
-        ('wa.me/33778246567' in index_html or '07 78 24 65 67' in index_html)
+        ('wa.me/33767583180' in index_html or '07 67 58 31 80' in index_html)
         and 'api.whatsapp.com/send' in index_html
         and os.path.isfile(os.path.join(base_dir, 'CNAME'))
         and 'efficiens-energia.fr' in index_html

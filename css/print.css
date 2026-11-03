@@ -65,7 +65,7 @@
 
     /* En-tête officiel d'impression */
     body::before {
-        content: "EFFICIENS ENERGIA · Cabinet d'Expertise Technique Indépendant · Particuliers, Entreprises, Collectivités & Institutionnels · SIRET 82769449800011 · Tél : 07 78 24 65 67";
+        content: "EFFICIENS ENERGIA · Cabinet d'Expertise Technique Indépendant · Particuliers, Entreprises, Collectivités & Institutionnels · SIRET 82769449800011 · Tél : 07 67 58 31 80";
         display: block;
         font-size: 8.5pt;
         color: #475569;

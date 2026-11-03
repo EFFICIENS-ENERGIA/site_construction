@@ -2,11 +2,11 @@
 
 <<<<<<< HEAD
 > **Site officiel, catalogue d'expertises & portail d'ingénierie technique indépendante**  
-> Dirigeant : **Sébastien Mathe** • 📞 07 78 24 65 67 • ✉️ contact@efficiens-energia.fr  
+> Dirigeant : **Sébastien Mathe** • 📞 07 67 58 31 80 • ✉️ efficiens.energia@outlook.com  
 > Siège : 480 Route du Belvédère, 01250 Hautecourt-Romanèche • SIRET : 827 694 498 00011  
 =======
 > **Site vitrine officiel, catalogue d'expertises & portail de qualification d'expertise indépendante**  
-> Dirigeant : **Sébastien Mathe** • 📞 07 78 24 65 67 • ✉️ contact@efficiens-energia.fr  
+> Dirigeant : **Sébastien Mathe** • 📞 07 67 58 31 80 • ✉️ efficiens.energia@outlook.com  
 > Siège : 480 Route du Belvédère, 01250 Hautecourt-Romaneche • SIRET : 827 694 498 00011  
 >>>>>>> 6c2805c (feat(site-efficiens-energia): initialize repository and replace Bati-Excellence Pro branding)
 > 🌐 **Production Vercel** : [https://siteconstruction.vercel.app/](https://siteconstruction.vercel.app/)  
@@ -57,7 +57,7 @@ Le site repose sur une architecture statique moderne, ultra-rapide (**< 300 ms**
 
 ### 📱 PWA, Ergonomie & Résilience Réseau
 * **Pied de page corporate style Kapia-RGI** : 5 colonnes thématiques (Solutions & Expertises, Méthodologie, Société, Services & Outils, Contacts) avec 100% de liens vérifiés (0 lien mort).
-* **Barre d'action mobile persistante** : appel direct (`07 78 24 65 67`) et contact WhatsApp prioritaire.
+* **Barre d'action mobile persistante** : appel direct (`07 67 58 31 80`) et contact WhatsApp prioritaire.
 * **PWA Service Worker (Cache v40+)** : navigation hors-ligne complète, alerte visuelle de mise à jour (`js/pwa_update.js`) et Background Sync (`js/pwa_background_sync.js`).
 * **Feuille de style d'impression** : `css/print.css` (@media print) masquant la navigation et les éléments interactifs pour un rendu papier sobre.
 * **Fil d'Ariane & temps de lecture** : `js/breadcrumb.js` sémantique et `js/toc_reading_time.js`.
@@ -113,7 +113,7 @@ Le site repose sur une architecture statique moderne, ultra-rapide (**< 300 ms**
 ### 📱 Expérience Mobile-First & PWA Résiliente
 * **Navigation linéaire épurée** : `Nos expertises` ➔ `Notre méthode` ➔ `Tarifs` ➔ `Zones` ➔ `FAQ` ➔ `Contact`.
 * **Filtre d'intention 1-clic** : sélection instantanée (*Tous*, *Particuliers & Sinistres*, *Entreprises & Énergie*).
-* **Barre d'action persistante** : contact téléphonique direct (`tel:+33778246567`) et bouton WhatsApp.
+* **Barre d'action persistante** : contact téléphonique direct (`tel:+33767583180`) et bouton WhatsApp.
 * **Service Worker PWA (Cache v40)** : mode hors-ligne complet avec détection de mise à jour (`js/pwa_update.js`) et Background Sync (`js/pwa_background_sync.js`).
 * **Impression Pro** : feuille de style dédiée `css/print.css` masquant les éléments interactifs.
 

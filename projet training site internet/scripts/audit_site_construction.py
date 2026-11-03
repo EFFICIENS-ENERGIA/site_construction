@@ -161,7 +161,7 @@ def run_audits():
         'id="contactForm"' in index_html
         and 'name="contact"' in index_html
         and 'netlify-honeypot="bot-field"' in index_html
-        and 'mailto:contact@efficiens-energia.fr' in index_html
+        and 'mailto:efficiens.energia@outlook.com' in index_html
     )
     assertions_count += 1
     if not log_test('Formulaire de contact avec protection anti-spam bot-field et repli direct', has_contact_form):
@@ -191,9 +191,9 @@ def run_audits():
 
     # WhatsApp & Coordonnees
     has_whatsapp = (
-        'wa.me/33778246567' in index_html
+        'wa.me/33767583180' in index_html
         and 'api.whatsapp.com/send' in index_html
-        and '07 78 24 65 67' in index_html
+        and '07 67 58 31 80' in index_html
     )
     assertions_count += 1
     if not log_test('Canaux WhatsApp directs & de partage operationnels', has_whatsapp):

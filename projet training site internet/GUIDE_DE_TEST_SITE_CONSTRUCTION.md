@@ -44,7 +44,7 @@ Pour tester immédiatement le site dans votre navigateur :
 
 ### 5. 🌙 Le Mode Sombre / Clair & Formulaire Sécurisé
 - Cliquez sur **🌙 Sombre / ☀️ Clair** dans la barre de navigation.
-- Testez le formulaire de demande d'étude préliminaire (filtrage anti-XSS et coordonnées complètes d'EFFICIENS ENERGIA : 480 Route du Belvédère, 01250 Hautecourt-Romaneche, 07 78 24 65 67, SIRET : 827 694 498 00011).
+- Testez le formulaire de demande d'étude préliminaire (filtrage anti-XSS et coordonnées complètes d'EFFICIENS ENERGIA : 480 Route du Belvédère, 01250 Hautecourt-Romaneche, 07 67 58 31 80, SIRET : 827 694 498 00011).
 
 ---
 

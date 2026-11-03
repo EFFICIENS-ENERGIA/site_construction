@@ -313,7 +313,7 @@ function initApplication() {
                 if (data) {
                     resultTitle.textContent = data.title;
                     resultDesc.textContent = data.desc;
-                    whatsAppBtn.href = "https://wa.me/33778246567?text=" + encodeURIComponent(prefill);
+                    whatsAppBtn.href = "https://wa.me/33767583180?text=" + encodeURIComponent(prefill);
                 }
 
                 // Activer automatiquement le filtre correspondant pour adapter la grille
@@ -1004,7 +1004,7 @@ Nous vous notifions par la présente la survenance d'un sinistre impactant notre
 En application des stipulations de notre police relatives à l'assistance technique et à la garantie « Honoraires d'expert », notre société mandate le Cabinet EFFICIENS ENERGIA (M. Sébastien MATHE) pour nous assister lors des opérations d'expertise contradictoire, du chiffrage des dommages matériels et de la justification des pertes d'exploitation.
 
 Nous vous prions de :
-- Adresser l'ensemble des correspondances techniques et convocations directement à notre expert (contact@efficiens-energia.fr).
+- Adresser l'ensemble des correspondances techniques et convocations directement à notre expert (efficiens.energia@outlook.com).
 - Nous confirmer l'ouverture du dossier de prise en charge des honoraires selon le barème contractuel prévu au contrat.
 
 Veuillez agréer, Madame, Monsieur, nos salutations distinguées.

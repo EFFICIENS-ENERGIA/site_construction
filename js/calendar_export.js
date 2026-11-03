@@ -6,7 +6,7 @@
 
     window.exportAppointmentToCalendar = function(rdv) {
         const title = rdv.title || "Rendez-vous Expertise Technique — EFFICIENS ENERGIA";
-        const description = rdv.description || "Rendez-vous préparatoire d'expertise technique avec Sébastien Mathe (EFFICIENS ENERGIA). Tél : 07 78 24 65 67.";
+        const description = rdv.description || "Rendez-vous préparatoire d'expertise technique avec Sébastien Mathe (EFFICIENS ENERGIA). Tél : 07 67 58 31 80.";
         const location = rdv.location || "480 Route du Belvédère, 01250 Hautecourt-Romanèche / Visio";
         const startDate = new Date(rdv.startISO || Date.now() + 86400000);
         const endDate = new Date(startDate.getTime() + (rdv.durationMinutes || 45) * 60000);
@@ -44,7 +44,7 @@
 
     window.getGoogleCalendarLink = function(rdv) {
         const title = encodeURIComponent(rdv.title || "Rendez-vous Expertise Technique — EFFICIENS ENERGIA");
-        const description = encodeURIComponent(rdv.description || "Échange technique avec Sébastien Mathe (07 78 24 65 67).");
+        const description = encodeURIComponent(rdv.description || "Échange technique avec Sébastien Mathe (07 67 58 31 80).");
         const location = encodeURIComponent(rdv.location || "Visio / Téléphone");
         const startDate = new Date(rdv.startISO || Date.now() + 86400000);
         const endDate = new Date(startDate.getTime() + (rdv.durationMinutes || 45) * 60000);
