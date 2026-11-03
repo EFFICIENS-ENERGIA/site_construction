@@ -1,7 +1,7 @@
 /**
  * Service Worker Network-First — EFFICIENS ENERGIA
  */
-const CACHE_NAME = 'efficiens-expertise-cache-v49';
+const CACHE_NAME = 'efficiens-expertise-cache-v50';
 const ASSETS_TO_CACHE = [
     './',
     './index.html?v=31',
